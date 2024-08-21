@@ -37,5 +37,4 @@ function LoginPage({ setUserRole }) {
 		</div>
 	);
 }
-
 export default LoginPage;
