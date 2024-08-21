@@ -20,7 +20,7 @@ function LoginPage({ setUserRole }) {
 
 	return (
 		<div>
-			<h2>Login</h2>
+			<h2>Login: </h2>
 			<input
 				type="text"
 				placeholder="Username"
