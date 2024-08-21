@@ -9,5 +9,4 @@ function HomePage({ userRole }) {
 		</div>
 	);
 }
-
 export default HomePage;
