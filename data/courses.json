@@ -1,0 +1,38 @@
+[{
+  "_id": {
+    "$oid": "5f8a7b2d1c9d440000a1e771"
+  },
+  "courseCode": "CS101",
+  "name": "Introduction to Programming",
+  "description": "Fundamentals of programming using Python",
+  "credits": 3,
+  "instructor": {
+    "$oid": "5f8a7b2d1c9d440000a1e764"
+  },
+  "schedule": [
+    {
+      "day": "Monday",
+      "startTime": "09:00",
+      "endTime": "10:30",
+      "location": "Tech Building, Room 101"
+    },
+    {
+      "day": "Wednesday",
+      "startTime": "09:00",
+      "endTime": "10:30",
+      "location": "Tech Building, Room 101"
+    }
+  ],
+  "enrolledStudents": [
+    {
+      "$oid": "5f8a7b2d1c9d440000a1e761"
+    }
+  ],
+  "assignments": [
+    {
+      "title": "Hello World Program",
+      "description": "Write a simple Hello World program in Python",
+      "weight": 5
+    }
+  ]
+}]
