@@ -5,7 +5,7 @@ function HomePage({ userRole }) {
     <div>
       <h2>Welcome Home Page</h2>
       {userRole === "student" && <p>This content is for students.</p>}
-      {userRole === "admin" && <p>This content is for admins.</p>}
+      {userRole === "admin" && <p>Content for admins.</p>}
     </div>
   );
 }
