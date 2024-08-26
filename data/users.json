@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "5f8a7b2d1c9d440000a1e753"
+  },
+  "username": "tlee2022",
+  "password": "hashed_password_here",
+  "role": "student",
+  "personalInfo": {
+    "firstName": "Tiffany",
+    "lastName": "Lee",
+    "email": "tlee2022@unihub.edu",
+    "phoneNumber": "555-345-6789",
+    "address": "789 College Blvd, Collegetown, ST 12345",
+    "emergencyContact": {
+      "name": "William Lee",
+      "relationship": "Brother",
+      "phoneNumber": "555-765-4321"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "5f8a7b2d1c9d440000a1e754"
+  },
+  "username": "profwilson",
+  "password": "hashed_password_here",
+  "role": "staff",
+  "personalInfo": {
+    "firstName": "Robert",
+    "lastName": "Wilson",
+    "email": "rwilson@unihub.edu",
+    "phoneNumber": "555-456-7890",
+    "address": "101 Faculty Row, Collegetown, ST 12345",
+    "emergencyContact": {
+      "name": "Emily Wilson",
+      "relationship": "Spouse",
+      "phoneNumber": "555-654-3210"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "5f8a7b2d1c9d440000a1e751"
+  },
+  "username": "jsmith2023",
+  "password": "hashed_password_here",
+  "role": "student",
+  "personalInfo": {
+    "firstName": "John",
+    "lastName": "Smith",
+    "email": "jsmith2023@unihub.edu",
+    "phoneNumber": "555-123-4567",
+    "address": "123 Campus Drive, Collegetown, ST 12345",
+    "emergencyContact": {
+      "name": "Jane Smith",
+      "relationship": "Mother",
+      "phoneNumber": "555-987-6543"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "5f8a7b2d1c9d440000a1e752"
+  },
+  "username": "agarcia2024",
+  "password": "hashed_password_here",
+  "role": "student",
+  "personalInfo": {
+    "firstName": "Ana",
+    "lastName": "Garcia",
+    "email": "agarcia2024@unihub.edu",
+    "phoneNumber": "555-234-5678",
+    "address": "456 University Ave, Collegetown, ST 12345",
+    "emergencyContact": {
+      "name": "Carlos Garcia",
+      "relationship": "Father",
+      "phoneNumber": "555-876-5432"
+    }
+  }
+}]

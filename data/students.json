@@ -1,0 +1,149 @@
+[{
+  "_id": {
+    "$oid": "5f8a7b2d1c9d440000a1e762"
+  },
+  "userId": {
+    "$oid": "5f8a7b2d1c9d440000a1e752"
+  },
+  "studentId": "S23456789",
+  "faculty": "Business",
+  "major": "Marketing",
+  "enrollmentStatus": "Full-time",
+  "academicStanding": "Good",
+  "advisor": {
+    "$oid": "5f8a7b2d1c9d440000a1e755"
+  },
+  "courses": [
+    {
+      "courseId": {
+        "$oid": "5f8a7b2d1c9d440000a1e773"
+      },
+      "status": "enrolled",
+      "grade": null
+    },
+    {
+      "courseId": {
+        "$oid": "5f8a7b2d1c9d440000a1e774"
+      },
+      "status": "enrolled",
+      "grade": null
+    }
+  ],
+  "financialAid": {
+    "status": "Pending",
+    "awards": []
+  },
+  "housing": {
+    "status": "Off-campus",
+    "buildingId": null,
+    "roomNumber": null
+  },
+  "mealPlan": {
+    "planType": "Commuter",
+    "balance": 200
+  }
+},
+{
+  "_id": {
+    "$oid": "5f8a7b2d1c9d440000a1e763"
+  },
+  "userId": {
+    "$oid": "5f8a7b2d1c9d440000a1e753"
+  },
+  "studentId": "S34567890",
+  "faculty": "Medicine",
+  "major": "Pre-Med",
+  "enrollmentStatus": "Full-time",
+  "academicStanding": "Excellent",
+  "advisor": {
+    "$oid": "5f8a7b2d1c9d440000a1e756"
+  },
+  "courses": [
+    {
+      "courseId": {
+        "$oid": "5f8a7b2d1c9d440000a1e775"
+      },
+      "status": "enrolled",
+      "grade": null
+    },
+    {
+      "courseId": {
+        "$oid": "5f8a7b2d1c9d440000a1e776"
+      },
+      "status": "enrolled",
+      "grade": null
+    }
+  ],
+  "financialAid": {
+    "status": "Awarded",
+    "awards": [
+      {
+        "name": "Future Doctors Grant",
+        "amount": 10000
+      }
+    ]
+  },
+  "housing": {
+    "status": "On-campus",
+    "buildingId": {
+      "$oid": "5f8a7b2d1c9d440000a1e782"
+    },
+    "roomNumber": "205B"
+  },
+  "mealPlan": {
+    "planType": "Full Board",
+    "balance": 750
+  }
+},
+{
+  "_id": {
+    "$oid": "5f8a7b2d1c9d440000a1e761"
+  },
+  "userId": {
+    "$oid": "5f8a7b2d1c9d440000a1e751"
+  },
+  "studentId": "S12345678",
+  "faculty": "Engineering",
+  "major": "Computer Science",
+  "enrollmentStatus": "Full-time",
+  "academicStanding": "Good",
+  "advisor": {
+    "$oid": "5f8a7b2d1c9d440000a1e754"
+  },
+  "courses": [
+    {
+      "courseId": {
+        "$oid": "5f8a7b2d1c9d440000a1e771"
+      },
+      "status": "enrolled",
+      "grade": null
+    },
+    {
+      "courseId": {
+        "$oid": "5f8a7b2d1c9d440000a1e772"
+      },
+      "status": "enrolled",
+      "grade": null
+    }
+  ],
+  "financialAid": {
+    "status": "Awarded",
+    "awards": [
+      {
+        "name": "Merit Scholarship",
+        "amount": 5000
+      }
+    ]
+  },
+  "housing": {
+    "status": "On-campus",
+    "buildingId": {
+      "$oid": "5f8a7b2d1c9d440000a1e781"
+    },
+    "roomNumber": "301A"
+  },
+  "mealPlan": {
+    "planType": "Full Board",
+    "balance": 500
+  }
+}]
