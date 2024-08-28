@@ -85,6 +85,7 @@ function HomePage({ userRole }) {
       {/* Added a topbar that changes depending on which page youre on and which user youre logged in as */}
       <Topbar currentPage={"Dashboard"} userRole={userRole} />
 
+      {/* Things were added */}
       <div className="dashboard">
         <nav className="sidebar">
           <div className="sidebar-content topnav">
