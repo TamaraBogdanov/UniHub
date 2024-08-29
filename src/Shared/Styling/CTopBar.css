@@ -1,10 +1,10 @@
 .topbar {
-	background-color: #d5def3;
+	background-color: #1b065e;
 	color: #000000;
 	padding: 1rem;
 	display: flex;
 	align-items: center;
-	justify-content: space-between; /* Ensures space between logo, content, and icons */
+	justify-content: space-between;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -13,7 +13,7 @@
 }
 
 .logo img {
-	width: 180px;
+	width: 200px;
 	height: 80px;
 	border-radius: 50%;
 	transition: transform 0.3s ease;
@@ -72,7 +72,7 @@
 	font-size: 1.8rem;
 	margin-left: 1.5rem;
 
-	color: #000;
+	color: #dfe4f1;
 	transition: color 0.3s ease;
 }
 
@@ -134,4 +134,5 @@
 .user-role {
 	margin-left: 0.5rem; /* Space between profile icon and role text */
 	font-weight: bold;
+	color: #dfe4f1;
 }

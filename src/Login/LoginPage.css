@@ -1,0 +1,121 @@
+/* LoginPage.css */
+
+.logologin {
+	padding-top: 1.5rem;
+	padding-left: 1.5rem;
+}
+.login-container {
+	display: flex;
+	height: 100vh;
+	width: 100vw;
+}
+
+.left-section {
+	background-color: #1b065e;
+	flex: 1;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: left;
+	padding: 20px;
+}
+
+.left-section .logologin {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+.left-section .text-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 60px;
+}
+
+.left-section h1 {
+	font-size: 90px;
+	font-weight: bold;
+	color: #ffffff;
+	margin: 0;
+}
+
+.left-section h2 {
+	font-size: 40px;
+	font-weight: bold;
+	color: #dfe4f1;
+	margin: 0;
+}
+
+.left-section p {
+	font-size: 20px;
+	color: #dfe4f1;
+	margin-top: 40px;
+}
+
+.right-section {
+	background-color: #f4f4f4;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+}
+
+.login-heading {
+	margin-bottom: 20px;
+	font-size: 24px;
+	font-weight: bold;
+	color: #333;
+	text-align: center;
+}
+
+.login-box {
+	width: 100%;
+	max-width: 260px;
+	background-color: white;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+}
+
+.login-box label {
+	display: block;
+	text-align: left;
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: #555;
+}
+
+.login-box input {
+	display: block;
+	width: 100%;
+	margin: 10px 0 20px 0;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+.login-box button {
+	display: block;
+	width: 100%;
+	padding: 12px;
+	margin-top: 30px;
+	border: none;
+	border-radius: 5px;
+	background-color: #1b065e;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+	box-sizing: border-box;
+}
+
+.login-box button:hover {
+	background-color: #0f0433;
+}

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.png";
+import { useNavigate } from "react-router-dom";
+import logo from "./logouni.png";
 import "../Shared/Styling/CTopBar.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-// allow the Topbar component to display the current date, manage dropdown visibility, and change login based on user role.
+// Allow the Topbar component to display the current date, manage dropdown visibility, and change login based on user role.
 function Topbar({ currentPage, userRole }) {
 	const [date, setDate] = useState("");
 	const [dropdownOpen, setDropdownOpen] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		const updateDate = () => {
+		function updateDate() {
 			const now = new Date();
 			const optionsDay = { weekday: "long" };
 			const optionsDate = { day: "numeric", month: "long", year: "numeric" };
@@ -19,25 +21,25 @@ function Topbar({ currentPage, userRole }) {
 
 			const formattedDate = `${day}, ${rest}`;
 			setDate(formattedDate);
-		};
+		}
 
 		updateDate(); // Set the initial date
 		const timer = setInterval(updateDate, 1000); // Update the date every second
 		return () => clearInterval(timer);
 	}, []);
 
-	//The toggleDropdown function toggles the state of dropdownOpen between true and false each time it is called
+	// Toggle the state of dropdownOpen between true and false
 	function toggleDropdown() {
 		setDropdownOpen(!dropdownOpen);
 	}
 
 	function handleLogout() {
-		// in future add an actual logout
-		alert("Logging out");
+		// Navigate to the login page
+		navigate("/login");
 	}
 
 	return (
-		<div className="topbar">
+		<nav className="topbar">
 			<div className="logo">
 				<img src={logo} alt="Logo" />
 			</div>
@@ -68,7 +70,7 @@ function Topbar({ currentPage, userRole }) {
 					)}
 				</div>
 			</div>
-		</div>
+		</nav>
 	);
 }
 
