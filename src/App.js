@@ -13,8 +13,7 @@ function App() {
 				<Route
 					path="/login"
 					element={<LoginPage setUserRole={setUserRole} />}
-				/>{" "}
-				{/* Added route for login */}
+				/>
 				<Route path="/home" element={<HomePage userRole={userRole} />} />
 			</Routes>
 		</Router>
