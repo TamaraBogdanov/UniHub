@@ -12,6 +12,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LoginPage setUserRole={setUserRole} />} />
+          <Route
+            path="/login?"
+            element={<LoginPage setUserRole={setUserRole} />}
+          />
           <Route path="/home" element={<HomePage userRole={userRole} />} />
         </Routes>
       </Router>
