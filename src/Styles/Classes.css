@@ -1,112 +1,116 @@
 .classes-content {
-  padding: 20px;
+	padding: 20px;
 }
 
 .classes-content h2 {
-  margin-bottom: 20px;
-  color: #2c3e50;
+	color: #2c3e50;
+}
+
+.classes-heading {
+	color: #2c3e50;
+	padding-bottom: 20px;
 }
 
 .search-bar {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  background-color: white;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	background-color: white;
+	border-radius: 8px;
+	padding: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .search-bar input {
-  border: none;
-  flex-grow: 1;
-  margin-left: 10px;
-  font-size: 16px;
+	border: none;
+	flex-grow: 1;
+	margin-left: 10px;
+	font-size: 16px;
 }
 
 .search-bar input:focus {
-  outline: none;
+	outline: none;
 }
 
 .classes-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
 
 .class-card {
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+	background-color: white;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s ease;
 }
 
 .class-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .class-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  cursor: pointer;
-  background-color: #f8f9fa;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px;
+	cursor: pointer;
+	background-color: #f8f9fa;
 }
 
 .class-title h3 {
-  margin: 0;
-  color: #2c3e50;
+	margin: 0;
+	color: #2c3e50;
 }
 
 .class-title p {
-  margin: 5px 0 0;
-  color: #7f8c8d;
-  font-size: 14px;
+	margin: 5px 0 0;
+	color: #7f8c8d;
+	font-size: 14px;
 }
 
 .class-details {
-  padding: 15px;
-  border-top: 1px solid #e0e0e0;
+	padding: 15px;
+	border-top: 1px solid #e0e0e0;
 }
 
 .class-details p {
-  margin: 10px 0;
-  color: #34495e;
+	margin: 10px 0;
+	color: #34495e;
 }
 
 .class-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
+	display: flex;
+	gap: 10px;
+	margin-top: 15px;
 }
 
 .btn-primary,
 .btn-secondary {
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+	padding: 8px 16px;
+	border-radius: 4px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
 }
 
 .btn-primary {
-  background-color: #3498db;
-  color: white;
-  border: none;
+	background-color: #3498db;
+	color: white;
+	border: none;
 }
 
 .btn-primary:hover {
-  background-color: #2980b9;
+	background-color: #2980b9;
 }
 
 .btn-secondary {
-  background-color: white;
-  color: #3498db;
-  border: 1px solid #3498db;
+	background-color: white;
+	color: #3498db;
+	border: 1px solid #3498db;
 }
 
 .btn-secondary:hover {
-  background-color: #f8f9fa;
+	background-color: #f8f9fa;
 }
