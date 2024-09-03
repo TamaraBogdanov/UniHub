@@ -1,3 +1,7 @@
+.topbar-page {
+	text-transform: capitalize;
+}
+
 .topbar {
 	background-color: #1b065e;
 	color: #000000;
@@ -84,11 +88,11 @@
 	display: flex;
 	align-items: center;
 	position: relative;
-	margin-left: 1.5rem; /* Space between notification icon and profile */
+	margin-left: 1.5rem;
 }
 
 .profile-container .student-name {
-	margin-left: 1rem; /* Space between profile icon and name */
+	margin-left: 1rem;
 	cursor: pointer;
 }
 
@@ -132,7 +136,7 @@
 }
 
 .user-role {
-	margin-left: 0.5rem; /* Space between profile icon and role text */
+	margin-left: 0.5rem;
 	font-weight: bold;
 	color: #dfe4f1;
 }

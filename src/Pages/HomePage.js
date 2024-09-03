@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp, Search } from "lucide-react";
+
 import {
 	Home,
 	Users,
@@ -8,11 +8,6 @@ import {
 	Video,
 	CheckSquare,
 	BookOpen,
-	Calculator,
-	Globe,
-	Brain,
-	Beaker,
-	DollarSign,
 	X,
 } from "lucide-react";
 import Topbar from "../Shared/CTopBar";
@@ -21,7 +16,6 @@ import ScheduleContent from "../Components/ScheduleContent";
 import ResourcesContent from "../Components/ResourcesContent";
 import ClassesContent from "../Components/ClassesContent";
 import GradesContent from "../Components/GradesContent";
-import { courses } from "./mockData";
 import { TodoProvider, useTodo } from "../Components/TodoContext";
 
 function TaskModal({ task, onClose }) {

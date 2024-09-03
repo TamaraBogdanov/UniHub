@@ -12,7 +12,6 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-	/* justify-content: space-between; */
 }
 
 .sidebar-content {
@@ -22,7 +21,7 @@
 	border-radius: 10px;
 	flex-direction: column;
 	align-items: start;
-	/* margin-bottom: 1rem; */
+
 	padding: 0.5rem 0.5rem;
 }
 .nav-button {
@@ -36,7 +35,7 @@
 	width: 185px;
 	margin-bottom: 0.5rem;
 	transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-	border-radius: 8px; /* Adding rounded corners */
+	border-radius: 8px;
 }
 
 .nav-button h3 {
@@ -46,22 +45,13 @@
 .nav-button:hover,
 .nav-button.active {
 	color: #0f0433;
-	background-color: rgb(
-		182,
-		196,
-		228
-	); /* Light background on hover and active */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow to make it stand out */
+	background-color: rgb(182, 196, 228);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .nav-button.active {
-	background-color: rgba(
-		182,
-		196,
-		228,
-		0.56
-	); /* Slightly darker background when active */
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Stronger shadow for active state */
+	background-color: rgba(182, 196, 228, 0.56);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .main-content {
@@ -79,7 +69,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	position: relative; /* Added */
+	position: relative;
 }
 
 .hero-text {
@@ -95,8 +85,8 @@
 }
 
 .hero-image img {
-	position: absolute; /* Added */
-	top: -25px; /* Adjust this value to control how much it sticks out */
+	position: absolute;
+	top: -25px;
 }
 
 .hero h1 {
@@ -128,8 +118,8 @@
 }
 
 .primary-button:hover {
-	background-color: #1b065e; /* Slightly lighter shade on hover */
-	transform: translateY(-2px); /* Adds a subtle lift effect */
+	background-color: #1b065e;
+	transform: translateY(-2px);
 }
 
 .secondary-button {
@@ -144,8 +134,8 @@
 
 .secondary-button:hover {
 	background-color: #1b065e;
-	color: white; /* Text color changes to white on hover */
-	transform: translateY(-2px); /* Adds a subtle lift effect */
+	color: white;
+	transform: translateY(-2px);
 }
 .hero-image {
 	width: 300px;
@@ -342,10 +332,10 @@
 .search-bar {
 	display: flex;
 	align-items: center;
-	background-color: #f1f3f5; /* Light background color for contrast */
-	border-radius: 20px; /* Rounded corners */
-	padding: 0.25rem 0.75rem; /* Smaller padding */
-	max-width: 250px; /* Smaller width */
+	background-color: #f1f3f5;
+	border-radius: 20px;
+	padding: 0.25rem 0.75rem;
+	max-width: 250px;
 	margin-top: 1rem;
 }
 
@@ -358,26 +348,26 @@
 }
 
 .search-bar input::placeholder {
-	color: #6c757d; /* Placeholder color */
-	font-size: 0.875rem; /* Smaller font size */
+	color: #6c757d;
+	font-size: 0.875rem;
 }
 
 .alert-box {
-	border-radius: 10px; /* Rounded corners */
+	border-radius: 10px;
 	padding: 1rem;
 	margin-bottom: 1rem;
 	background-color: #f9f9f9;
 	cursor: pointer;
-	transition: transform 0.2s, background-color 0.2s; /* Smooth transitions */
+	transition: transform 0.2s, background-color 0.2s;
 }
 
 .alert-box:hover {
-	background-color: #b6c4e4; /* Change background on hover */
-	transform: scale(1.02); /* Slightly enlarge on hover */
+	background-color: #b6c4e4;
+	transform: scale(1.02);
 }
 
 .alert-box:active {
-	transform: scale(0.98); /* Slightly shrink on click */
+	transform: scale(0.98);
 }
 
 .alert-header h3 {
