@@ -1,120 +1,72 @@
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp, Search } from "lucide-react";
 import "../Styles/Classes.css";
-
+import { courses } from "../Pages/mockData";
+import {
+	Home,
+	BookOpen,
+	Calculator,
+	Globe,
+	Brain,
+	Beaker,
+	DollarSign,
+} from "lucide-react";
 function ClassesContent() {
-  const [expandedClass, setExpandedClass] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
+	const [filter, setFilter] = useState("All");
 
-  const classesData = [
-    {
-      id: 1,
-      code: "CS101",
-      name: "Introduction to Computer Science",
-      instructor: "Dr. John Doe",
-      schedule: "Mon, Wed 10:00 AM - 11:30 AM",
-      room: "Tech Building 101",
-      credits: 3,
-    },
-    {
-      id: 2,
-      code: "MATH201",
-      name: "Calculus I",
-      instructor: "Prof. Jane Smith",
-      schedule: "Tue, Thu 1:00 PM - 2:30 PM",
-      room: "Science Hall 305",
-      credits: 4,
-    },
-    {
-      id: 3,
-      code: "HIST150",
-      name: "World History",
-      instructor: "Dr. Bob Johnson",
-      schedule: "Mon, Wed, Fri 9:00 AM - 10:00 AM",
-      room: "Humanities 210",
-      credits: 3,
-    },
-    {
-      id: 4,
-      code: "PSYCH101",
-      name: "Introduction to Psychology",
-      instructor: "Dr. Alice Williams",
-      schedule: "Tue, Thu 3:00 PM - 4:30 PM",
-      room: "Social Sciences 102",
-      credits: 3,
-    },
-    {
-      id: 5,
-      code: "CHEM202",
-      name: "Organic Chemistry",
-      instructor: "Prof. Charlie Brown",
-      schedule: "Mon, Wed, Fri 11:00 AM - 12:00 PM",
-      room: "Science Hall 405",
-      credits: 4,
-    },
-  ];
+	// Our filters, filters courses based on their major
+	const filters = [
+		{ name: "All", icon: BookOpen },
+		{ name: "Computer Science", icon: Home },
+		{ name: "Mathematics", icon: Calculator },
+		{ name: "History", icon: Globe },
+		{ name: "Psychology", icon: Brain },
+		{ name: "Chemistry", icon: Beaker },
+		{ name: "Economics", icon: DollarSign },
+	];
 
-  const filteredClasses = classesData.filter(
-    (cls) =>
-      cls.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      cls.code.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+	// Filters courses based on their major
+	const filteredCourses =
+		filter === "All"
+			? courses
+			: courses.filter((course) => course.department === filter);
 
-  return (
-    <div className="classes-content">
-      <h2>My Classes</h2>
-      <div className="search-bar">
-        <Search size={20} />
-        <input
-          type="text"
-          placeholder="Search for a class..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-      <div className="classes-list">
-        {filteredClasses.map((cls) => (
-          <div key={cls.id} className="class-card">
-            <div
-              className="class-header"
-              onClick={() =>
-                setExpandedClass(expandedClass === cls.id ? null : cls.id)
-              }
-            >
-              <div className="class-title">
-                <h3>
-                  {cls.code}: {cls.name}
-                </h3>
-                <p>{cls.instructor}</p>
-              </div>
-              {expandedClass === cls.id ? (
-                <ChevronUp size={24} />
-              ) : (
-                <ChevronDown size={24} />
-              )}
-            </div>
-            {expandedClass === cls.id && (
-              <div className="class-details">
-                <p>
-                  <strong>Schedule:</strong> {cls.schedule}
-                </p>
-                <p>
-                  <strong>Room:</strong> {cls.room}
-                </p>
-                <p>
-                  <strong>Credits:</strong> {cls.credits}
-                </p>
-                <div className="class-actions">
-                  <button className="btn-primary">View Syllabus</button>
-                  <button className="btn-secondary">Contact Instructor</button>
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+	return (
+		<>
+			<section className="courses">
+				{/* The grid of courses that will be displayed */}
+				<div className="course-grid">
+					{/* Map over the courses array and render a card for each course */}
+					{filteredCourses.map((course) => (
+						<div key={course.id} className="course-card">
+							<img
+								src={course.image}
+								alt={course.title}
+								className="course-image"
+							/>
+
+							{/* Course info */}
+							<div className="course-info">
+								<h4>{course.title}</h4>
+								<p>{course.instructor}</p>
+								<p>
+									{course.department} • {course.credits} credits
+								</p>
+								<div className="course-progress">
+									<div
+										className="progress-bar"
+										style={{ width: `${course.progress}%` }}
+									></div>
+								</div>
+								<span className="progress-text">
+									{course.progress}% Complete
+								</span>
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+		</>
+	);
 }
 
 export default ClassesContent;

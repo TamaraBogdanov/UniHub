@@ -1,3 +1,7 @@
+.topbar-page {
+	text-transform: capitalize;
+}
+
 .topbar {
 	background-color: #1b065e;
 	color: #000000;
@@ -26,7 +30,7 @@
 .topbar-content {
 	display: flex;
 	flex-direction: column;
-	margin-left: 15rem;
+	margin-left: 4.4rem;
 	align-items: flex-start;
 	justify-content: center;
 	padding: 0.5rem 1rem;
@@ -72,23 +76,23 @@
 	font-size: 1.8rem;
 	margin-left: 1.5rem;
 
-	color: #dfe4f1;
+	color: white;
 	transition: color 0.3s ease;
 }
 
 .icons i:hover {
-	color: #555;
+	color: rgb(182, 196, 228);
 }
 
 .profile-container {
 	display: flex;
 	align-items: center;
 	position: relative;
-	margin-left: 1.5rem; /* Space between notification icon and profile */
+	margin-left: 1.5rem;
 }
 
 .profile-container .student-name {
-	margin-left: 1rem; /* Space between profile icon and name */
+	margin-left: 1rem;
 	cursor: pointer;
 }
 
@@ -132,7 +136,7 @@
 }
 
 .user-role {
-	margin-left: 0.5rem; /* Space between profile icon and role text */
+	margin-left: 0.5rem;
 	font-weight: bold;
 	color: #dfe4f1;
 }
