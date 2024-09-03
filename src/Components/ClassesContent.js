@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../Styles/Classes.css";
 import { courses } from "../Pages/mockData";
+
 import {
 	Home,
 	BookOpen,
@@ -32,6 +33,7 @@ function ClassesContent() {
 
 	return (
 		<>
+			<h2 className="classes-heading">My Courses </h2>
 			<section className="courses">
 				{/* The grid of courses that will be displayed */}
 				<div className="course-grid">
