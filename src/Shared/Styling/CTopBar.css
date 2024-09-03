@@ -26,7 +26,7 @@
 .topbar-content {
 	display: flex;
 	flex-direction: column;
-	margin-left: 15rem;
+	margin-left: 4.4rem;
 	align-items: flex-start;
 	justify-content: center;
 	padding: 0.5rem 1rem;
@@ -72,12 +72,12 @@
 	font-size: 1.8rem;
 	margin-left: 1.5rem;
 
-	color: #dfe4f1;
+	color: white;
 	transition: color 0.3s ease;
 }
 
 .icons i:hover {
-	color: #555;
+	color: rgb(182, 196, 228);
 }
 
 .profile-container {
