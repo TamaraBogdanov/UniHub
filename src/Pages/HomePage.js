@@ -166,7 +166,7 @@ function HomePage({ userRole }) {
 		switch (activeSection) {
 			case "dashboard":
 				return <DashboardContent />;
-			case "classes":
+			case "courses":
 				return <ClassesContent />;
 			case "grades":
 				return <GradesContent />;
@@ -209,9 +209,9 @@ function HomePage({ userRole }) {
 							</button>
 							<button
 								className={`nav-button ${
-									activeSection === "classes" ? "active" : ""
+									activeSection === "courses" ? "active" : ""
 								}`}
-								onClick={() => setActiveSection("classes")}
+								onClick={() => setActiveSection("courses")}
 							>
 								<Users size={25} />
 								<h3>Courses</h3>
