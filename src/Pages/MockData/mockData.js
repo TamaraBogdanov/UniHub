@@ -1,4 +1,6 @@
-export const courses = [
+// Pages/MockData/mockData.js
+
+const courses = [
 	{
 		id: 1,
 		title: "Introduction to Computer Science",
@@ -55,3 +57,5 @@ export const courses = [
 		image: "/images/online-learning.png",
 	},
 ];
+
+export default courses;

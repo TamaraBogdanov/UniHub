@@ -17,6 +17,7 @@ import ResourcesContent from "../Components/ResourcesContent";
 import ClassesContent from "../Components/ClassesContent";
 import GradesContent from "../Components/GradesContent";
 import { TodoProvider, useTodo } from "../Components/TodoContext";
+import classesData from "./MockData/announceData";
 
 function TaskModal({ task, onClose }) {
 	if (!task) return null;
@@ -49,41 +50,6 @@ function DashboardContent() {
 		{ name: "Newest", icon: Calendar },
 		{ name: "Oldest", icon: Calendar },
 	];
-
-	const classesData = [
-		{
-			id: 1,
-			title: "System Maintenance",
-			message: "The system will be down for maintenance on 9th Sept.",
-			date: "2024-09-09",
-			alertType: "newest",
-		},
-		{
-			id: 2,
-			title: "Exam Results",
-			message: "Your exam results are now available.",
-			date: "2024-09-02",
-			alertType: "oldest",
-		},
-		{
-			id: 3,
-			title: "New Course Enrollment",
-			message: "Enrollment for the new courses is now open.",
-			date: "2024-09-05",
-			alertType: "newest",
-		},
-		{
-			id: 4,
-			title: "Library Due Date",
-			message: "Your library book is due on 15th Sept.",
-			date: "2024-09-01",
-			alertType: "oldest",
-		},
-	];
-
-	classesData.forEach((alert, index) => {
-		alert.alertType = index % 2 === 0 ? "newest" : "oldest";
-	});
 
 	const filteredClasses = classesData
 		.filter(

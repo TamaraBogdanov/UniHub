@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../Styles/Classes.css";
-import { courses } from "../Pages/mockData";
+import courses from "../Pages/MockData/mockData";
 
 import {
 	Home,
@@ -11,6 +11,7 @@ import {
 	Beaker,
 	DollarSign,
 } from "lucide-react";
+
 function ClassesContent() {
 	const [filter, setFilter] = useState("All");
 
