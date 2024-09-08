@@ -7,7 +7,7 @@ export const courses = [
 		progress: 60,
 		department: "Computer Science",
 		credits: 3,
-		image: "/images/online-learning.png",
+		image: "/images/image1.jpg",
 	},
 	{
 		id: 2,
@@ -16,7 +16,7 @@ export const courses = [
 		progress: 30,
 		department: "Mathematics",
 		credits: 4,
-		image: "/images/online-learning.png",
+		image: "/images/image2.jpg",
 	},
 	{
 		id: 3,
@@ -25,7 +25,7 @@ export const courses = [
 		progress: 45,
 		department: "History",
 		credits: 3,
-		image: "/images/online-learning.png",
+		image: "/images/image3.jpg",
 	},
 	{
 		id: 4,
@@ -34,7 +34,7 @@ export const courses = [
 		progress: 20,
 		department: "Psychology",
 		credits: 3,
-		image: "/images/online-learning.png",
+		image: "/images/image4.jpg",
 	},
 	{
 		id: 5,
@@ -43,7 +43,7 @@ export const courses = [
 		progress: 70,
 		department: "Chemistry",
 		credits: 4,
-		image: "/images/online-learning.png",
+		image: "/images/image5.jpg",
 	},
 	{
 		id: 6,
@@ -52,6 +52,6 @@ export const courses = [
 		progress: 50,
 		department: "Economics",
 		credits: 3,
-		image: "/images/online-learning.png",
+		image: "/images/image6.jpg",
 	},
 ];
