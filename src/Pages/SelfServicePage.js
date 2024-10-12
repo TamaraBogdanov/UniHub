@@ -157,7 +157,7 @@ function AlertBox({ alert }) {
   );
 }
 
-function HomePage({ userRole }) {
+function SelfServicePage({ userRole }) {
   const [activeSection, setActiveSection] = useState("dashboard");
   const [selectedTask, setSelectedTask] = useState(null);
   const { todos, toggleTodo } = useTodo();
@@ -181,8 +181,8 @@ function HomePage({ userRole }) {
   };
 
   const handleNavigation = (page) => {
-    if (page === "self-service") {
-      navigate("/self-service");
+    if (page === "home") {
+      navigate("/home");
     } else if (page === "student-hub") {
       navigate("/student-hub");
     } else {
@@ -200,10 +200,10 @@ function HomePage({ userRole }) {
             <div className="sidebar-content topnav">
               <button
                 className="nav-button"
-                onClick={() => handleNavigation("self-service")}
+                onClick={() => handleNavigation("home")}
               >
                 <Home size={25} />
-                <h3>Self-Service</h3>
+                <h3>Student-Dash</h3>
               </button>
               <button
                 className="nav-button"
@@ -290,4 +290,4 @@ function HomePage({ userRole }) {
   );
 }
 
-export default HomePage;
+export default SelfServicePage;
