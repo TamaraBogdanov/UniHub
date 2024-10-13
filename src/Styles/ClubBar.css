@@ -1,0 +1,44 @@
+/* ClubBar.css */
+.club-bar {
+	position: fixed; /* Keep it fixed on the left */
+	top: 135px;
+	right: 0;
+	margin-right: 1.5rem;
+	width: 400px; /* Adjust width as necessary */
+	height: 100vh; /* Full height */
+	background-color: #d5def3; /* Background color */
+	border-radius: 10px; /* Rounded corners */
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+	overflow-y: auto; /* Enable vertical scrolling if needed */
+	transition: all 0.3s ease; /* Smooth transition */
+}
+
+.club-bar-header {
+	padding: 15px;
+	text-align: center;
+	background-color: #c0c9e6; /* Optional background for header */
+	border-top-left-radius: 10px; /* Rounded top left */
+	border-top-right-radius: 10px; /* Rounded top right */
+}
+
+.club-bar-content {
+	padding: 15px;
+}
+
+.club-bar-content h4 {
+	margin-top: 20px;
+}
+
+.club-bar-content ul {
+	list-style-type: none; /* Remove default list styling */
+	padding: 0;
+}
+
+.club-bar-content li {
+	padding: 5px 0; /* Add some padding */
+	transition: transform 0.2s; /* Transition effect for hover */
+}
+
+.club-bar-content li:hover {
+	transform: scale(1.05); /* Scale up on hover for effect */
+}

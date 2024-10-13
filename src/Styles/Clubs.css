@@ -1,0 +1,126 @@
+:root {
+	--primary-color: #6c63ff;
+	--background-color: #f0f2f5;
+	--card-background: #ffffff;
+	--text-primary: #333333;
+	--text-secondary: #666666;
+	--border-radius: 12px;
+}
+
+.clubs-content {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.clubs-header {
+	margin-bottom: 50px;
+}
+
+.search-bar {
+	margin-left: 30px;
+	margin-top: 3rem;
+}
+.clubs-header h1 {
+	font-size: 2.5rem;
+	color: var(--text-primary);
+}
+
+.clubs-filters {
+	display: flex; /* Use flexbox to align buttons in a row */
+	margin-top: 2rem;
+	gap: 10px; /* Add space between the buttons */
+	margin-bottom: 30px; /* Space below the filter section */
+}
+
+.filter-button {
+	background-color: var(--card-background);
+	border: none;
+	border-radius: 20px;
+	padding: 10px 20px;
+	font-size: 14px;
+	color: var(--text-secondary);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.filter-button.active,
+.filter-button:hover {
+	background-color: var(--primary-color);
+	color: white;
+}
+
+.clubs-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr; /* Ensure two equal-width columns */
+	gap: 20px; /* Consistent gap between cards, both horizontally and vertically */
+	max-width: 1100px; /* Limit the width of the grid to bring the cards closer together */
+}
+
+.club-card {
+	background-color: var(--card-background);
+	border-radius: var(--border-radius);
+	padding: 40px; /* Increase padding for larger size */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	font-size: 1.1rem; /* Larger text */
+	min-height: 150px;
+}
+
+.club-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.club-card h3 {
+	margin: 0 0 15px 0;
+	color: var(--text-primary);
+	font-size: 2rem; /* Slightly larger heading */
+}
+
+.club-card p {
+	color: var(--text-secondary);
+	font-size: 1.2rem; /* Slightly larger paragraph text */
+}
+
+/* JoinableClubs.css */
+.joinable-clubs-section {
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.joinable-clubs-section h2 {
+	margin-bottom: 20px; /* Space below the heading */
+	margin-left: 30px;
+}
+
+.joinable-clubs-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr); /* Four columns layout */
+	gap: 20px; /* Space between the cards */
+	max-width: 1000px;
+	margin-left: 30px;
+}
+
+.joinable-club-card {
+	background-color: var(--card-background);
+	border-radius: var(--border-radius);
+	padding: 15px; /* Adjust padding as needed */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.joinable-club-card:hover {
+	transform: translateY(-5px); /* Slightly raise the card on hover */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.joinable-club-card h3 {
+	color: var(--text-primary);
+	font-size: 1.2rem; /* Adjust the font size */
+}
+
+.joinable-club-card p {
+	color: var(--text-secondary);
+	font-size: 0.9rem; /* Smaller font size for overview */
+}
