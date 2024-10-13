@@ -1,29 +1,29 @@
 .club-bar {
-	position: fixed; /* Fix the club bar to the right side of the screen */
+	position: fixed;
 	right: 0;
 	top: 0;
-	width: 40px; /* Initially small width when collapsed */
-	height: 100vh; /* Full height of the viewport */
+	width: 40px;
+	height: 100vh;
 	margin-top: 116px;
 	background-color: #d5def3;
 	padding: 1rem;
 	transition: width 0.3s ease-in-out;
-	z-index: 1000; /* Ensure it's on top of other elements */
+	z-index: 1000;
 	box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .club-bar:hover {
-	width: 250px; /* Expand width when hovered */
+	width: 250px;
 }
 
 .club-bar.closed {
-	width: 40px; /* Maintain collapsed width when not hovered */
+	width: 40px;
 }
 
 .club-bar-toggle {
 	position: absolute;
 	top: 10px;
-	left: -40px; /* Adjusted to place the toggle on the left edge */
+	left: -40px;
 
 	color: #fff;
 	width: 40px;
@@ -32,16 +32,16 @@
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
-	z-index: 1001; /* Ensures the toggle is always clickable */
+	z-index: 1001;
 }
 
 .club-bar-content {
 	transition: opacity 0.3s ease-in-out;
-	opacity: 0; /* Initially hidden */
+	opacity: 0;
 }
 
 .club-bar:hover .club-bar-content {
-	opacity: 1; /* Show content when hovered */
+	opacity: 1;
 }
 
 .club-bar-header,

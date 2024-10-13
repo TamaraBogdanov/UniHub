@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Newspaper } from "lucide-react";
 import "../Styles/Home2.css";
-import { enhancedMockNewsData, newsCategories } from "../detailedMockData";
+import {
+	enhancedMockNewsData,
+	newsCategories,
+} from "../Mockdata/detailedMockData";
 // import { eventsMockData, eventCategories } from "../eventsMockData";
 
 function HomeContent() {

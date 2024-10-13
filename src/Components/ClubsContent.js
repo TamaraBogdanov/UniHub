@@ -1,24 +1,19 @@
 // ClubsContent.js
 import React, { useState } from "react";
 import "../Styles/Clubs.css";
-import ClubBar from "./SideBarComp"; // Adjust the import path as necessary
-import { clubsData } from "../Mockdata/ClubData"; // Ensure clubsData has categories
+import ClubBar from "./SideBarComp";
+import { clubsData } from "../Mockdata/ClubData";
 import JoinableClubs from "./JoinableClubs";
 
-const colors = [
-	"#F49595", // Color for the first club
-	"#FFDAB9", // Color for the second club
-	"#CDB4DB", // Color for the third club
-	"#A9D4EE", // Color for the fourth club
-];
+const colors = ["#F49595", "#FFDAB9", "#CDB4DB", "#A9D4EE"];
 
 const ClubsContent = () => {
-	const [selectedFilter, setSelectedFilter] = useState("all"); // Initialize filter state
+	const [selectedFilter, setSelectedFilter] = useState("all");
 
 	// Function to filter clubs based on the selected category
 	const filteredClubs = clubsData.filter((club) => {
-		if (selectedFilter === "all") return true; // Show all clubs
-		return club.category === selectedFilter; // Filter by selected category
+		if (selectedFilter === "all") return true;
+		return club.category === selectedFilter;
 	});
 
 	return (
@@ -69,7 +64,7 @@ const ClubsContent = () => {
 						<div
 							key={club.id}
 							className="club-card"
-							style={{ backgroundColor: colors[index % colors.length] }} // Assign color based on index
+							style={{ backgroundColor: colors[index % colors.length] }}
 						>
 							<h3>{club.name}</h3>
 							<p>{club.overview}</p>
@@ -77,8 +72,8 @@ const ClubsContent = () => {
 					))}
 				</div>
 			</div>
-			<JoinableClubs /> {/* Include the Joinable Clubs component here */}
-			<ClubBar /> {/* Include the Sidebar component here */}
+			<JoinableClubs />
+			<ClubBar />
 		</div>
 	);
 };

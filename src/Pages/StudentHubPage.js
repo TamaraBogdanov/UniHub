@@ -10,7 +10,7 @@ import {
 	Newspaper,
 } from "lucide-react";
 import Topbar from "../Shared/CTopBar";
-// import "../Styles/Home.css";
+
 import "../Styles/Home2.css";
 import HomeContent from "../Components/HomeContent";
 import NewsContent from "../Components/NewsContent";

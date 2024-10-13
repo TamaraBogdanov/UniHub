@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../Styles/Classes.css";
-import { courses } from "../Pages/mockData";
-
+import { courses } from "../Mockdata/mockData";
 import {
 	Home,
 	BookOpen,
@@ -11,10 +10,10 @@ import {
 	Beaker,
 	DollarSign,
 } from "lucide-react";
+
 function ClassesContent() {
 	const [filter, setFilter] = useState("All");
 
-	// Our filters, filters courses based on their major
 	const filters = [
 		{ name: "All", icon: BookOpen },
 		{ name: "Computer Science", icon: Home },
@@ -33,7 +32,22 @@ function ClassesContent() {
 
 	return (
 		<>
-			<h2 className="classes-heading">My Courses </h2>
+			<h2 className="classes-heading">My Courses</h2>
+
+			{/* Filter Buttons */}
+			<div className="filter-buttons">
+				{filters.map((f) => (
+					<button
+						key={f.name}
+						className={`filter-button ${filter === f.name ? "active" : ""}`}
+						onClick={() => setFilter(f.name)}
+					>
+						<f.icon size={20} />
+						<span>{f.name}</span>
+					</button>
+				))}
+			</div>
+
 			<section className="courses">
 				{/* The grid of courses that will be displayed */}
 				<div className="course-grid">

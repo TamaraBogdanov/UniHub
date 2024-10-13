@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import "../Styles/ClubBar.css"; // Ensure the correct path for your CSS file
+import "../Styles/ClubBar.css";
 
 const ClubBar = () => {
-	const [isOpen, setIsOpen] = useState(true); // Toggle state for the sidebar
-	const studentName = "John Doe"; // Example student name
-	const clubs = ["Art Club", "Science Club"]; // Example clubs
+	const [isOpen, setIsOpen] = useState(true);
+	const studentName = "John Doe";
+	const clubs = ["Art Club", "Science Club"];
 	const notifications = [
 		"New event in Art Club",
 		"Science Club meeting tomorrow",
-	]; // Example notifications
+	];
 
 	const toggleClubBar = () => {
-		setIsOpen(!isOpen); // Toggle the open state
+		setIsOpen(!isOpen);
 	};
 
 	return (

@@ -9,7 +9,7 @@ import {
 	Share2,
 	X,
 } from "lucide-react";
-import { eventsMockData, eventCategories } from "../eventsMockData";
+import { eventsMockData, eventCategories } from "../Mockdata/eventsMockData";
 
 function EventModal({ event, onClose }) {
 	if (!event) return null;
