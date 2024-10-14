@@ -17,6 +17,7 @@
 		"recharts": "^2.12.7",
 		"web-vitals": "^2.1.4"
 	},
+	"homepage": "https://TamaraBogdanov.github.io/UniHub",
 	"scripts": {
 		"predeploy": "npm run build",
 		"deploy": "gh-pages -d build",
