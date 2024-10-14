@@ -17,7 +17,7 @@ function App() {
 
 	return (
 		<TodoProvider>
-			<BrowserRouter basename="/UniHub">
+			<BrowserRouter>
 				<Router>
 					<Routes>
 						<Route path="/" element={<LoginPage setUserRole={setUserRole} />} />
