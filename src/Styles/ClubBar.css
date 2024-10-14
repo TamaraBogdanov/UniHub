@@ -1,0 +1,61 @@
+.club-bar {
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 40px;
+	height: 100vh;
+	margin-top: 116px;
+	background-color: #d5def3;
+	padding: 1rem;
+	transition: width 0.3s ease-in-out;
+	z-index: 1000;
+	box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.club-bar:hover {
+	width: 250px;
+}
+
+.club-bar.closed {
+	width: 40px;
+}
+
+.club-bar-toggle {
+	position: absolute;
+	top: 10px;
+	left: -40px;
+
+	color: #fff;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	z-index: 1001;
+}
+
+.club-bar-content {
+	transition: opacity 0.3s ease-in-out;
+	opacity: 0;
+}
+
+.club-bar:hover .club-bar-content {
+	opacity: 1;
+}
+
+.club-bar-header,
+.club-bar-content h4,
+.club-bar-content ul {
+	margin: 0;
+	padding: 0;
+}
+
+.club-bar-content ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+.club-bar-content li {
+	padding: 0.5rem 0;
+}
