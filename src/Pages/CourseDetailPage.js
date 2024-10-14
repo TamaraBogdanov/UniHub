@@ -12,7 +12,7 @@ import {
   CheckCircle,
   XCircle,
 } from "lucide-react";
-import { courses } from "../Pages/mockData";
+import { courses } from "../Mockdata/mockData";
 import "../Styles/CourseDetail.css";
 
 function CourseDetailPage() {

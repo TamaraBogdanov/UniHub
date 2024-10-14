@@ -1,291 +1,178 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-	Home,
-	Users,
-	CreditCard,
-	Calendar,
-	Video,
-	CheckSquare,
-	BookOpen,
-	X,
+  Home,
+  Users,
+  BookOpen,
+  DollarSign,
+  User,
+  Calendar,
+  FileText,
+  Settings,
+  HelpCircle,
 } from "lucide-react";
 import Topbar from "../Shared/CTopBar";
-import "../Shared/Styling/dashboard.css";
-import ScheduleContent from "../Components/ScheduleContent";
-import ResourcesContent from "../Components/ResourcesContent";
-import ClassesContent from "../Components/ClassesContent";
-import GradesContent from "../Components/GradesContent";
-import { TodoProvider, useTodo } from "../Components/TodoContext";
+import "../Styles/Home2.css";
 
-function TaskModal({ task, onClose }) {
-	if (!task) return null;
-
-	return (
-		<div className="modal-overlay">
-			<div className="modal-content">
-				<button className="modal-close" onClick={onClose}>
-					<X size={24} />
-				</button>
-				<h2>{task.title}</h2>
-				<p>
-					<strong>Due Date:</strong> {task.dueDate}
-				</p>
-				<p>
-					<strong>Details:</strong> {task.details}
-				</p>
-			</div>
-		</div>
-	);
-}
-
-function DashboardContent() {
-	const [filter, setFilter] = useState("All");
-
-	const filters = [
-		{ name: "All", icon: BookOpen },
-		{ name: "Newest", icon: Calendar },
-		{ name: "Oldest", icon: Calendar },
-	];
-
-	const classesData = [
-		{
-			id: 1,
-			title: "System Maintenance",
-			message: "The system will be down for maintenance on 9th Sept.",
-			date: "2024-09-09",
-			alertType: "newest",
-		},
-		{
-			id: 2,
-			title: "Exam Results",
-			message: "Your exam results are now available.",
-			date: "2024-09-02",
-			alertType: "oldest",
-		},
-		{
-			id: 3,
-			title: "New Course Enrollment",
-			message: "Enrollment for the new courses is now open.",
-			date: "2024-09-05",
-			alertType: "newest",
-		},
-		{
-			id: 4,
-			title: "Library Due Date",
-			message: "Your library book is due on 15th Sept.",
-			date: "2024-09-01",
-			alertType: "oldest",
-		},
-	];
-
-	classesData.forEach((alert, index) => {
-		alert.alertType = index % 2 === 0 ? "newest" : "oldest";
-	});
-
-	const filteredClasses = classesData
-		.filter(
-			(alert) =>
-				filter === "All" ||
-				(filter === "Newest" && alert.alertType === "newest") ||
-				(filter === "Oldest" && alert.alertType === "oldest")
-		)
-		.sort((a, b) => {
-			if (filter === "Newest") {
-				return new Date(b.date) - new Date(a.date);
-			}
-			if (filter === "Oldest") {
-				return new Date(a.date) - new Date(b.date);
-			}
-			return 0;
-		});
-
-	return (
-		<>
-			<section className="hero">
-				<div className="hero-text">
-					<h1>Welcome, Student!</h1>
-					<h2>Ready to continue your academic journey?</h2>
-					<div className="hero-buttons">
-						<button className="primary-button">View Schedule</button>
-						<button className="secondary-button">Explore Courses</button>
-					</div>
-				</div>
-				<div className="hero-image">
-					<img src="./images/portal.png" alt="Hero" />
-				</div>
-			</section>
-			<div>
-				<div className="filter-system">
-					{filters.map(({ name, icon: Icon }) => (
-						<button
-							key={name}
-							className={`filter-button ${filter === name ? "active" : ""}`}
-							onClick={() => setFilter(name)}
-						>
-							<Icon size={16} /> {name}
-						</button>
-					))}
-				</div>
-				<div className="classes-list">
-					{filteredClasses.map((alert) => (
-						<AlertBox key={alert.id} alert={alert} />
-					))}
-				</div>
-			</div>
-		</>
-	);
-}
-
-function AlertBox({ alert }) {
-	const [isExpanded, setIsExpanded] = useState(false);
-
-	return (
-		<div className="alert-box" onClick={() => setIsExpanded(!isExpanded)}>
-			<h3>{alert.title}</h3>
-			{isExpanded && (
-				<div className="alert-details">
-					<p>{alert.message}</p>
-					<p>
-						<strong>Date:</strong> {alert.date}
-					</p>
-				</div>
-			)}
-		</div>
-	);
-}
+// Import content components (to be created)
+import SelfServiceHomeContent from "../Components/SelfServiceHomeContent";
+import AcademicRecordsContent from "../Components/AcademicRecordsContent";
+import FinancialInformationContent from "../Components/FinancialInformationContent";
+import PersonalInformationContent from "../Components/PersonalInformationContent";
+import RegistrationContent from "../Components/RegistrationContent";
+import FormsAndRequestsContent from "../Components/FormsAndRequestsContent";
+import SettingsContent from "../Components/SettingsContent";
+import HelpAndSupportContent from "../Components/HelpAndSupportContent";
 
 function SelfServicePage({ userRole }) {
-	const [activeSection, setActiveSection] = useState("dashboard");
-	const [selectedTask, setSelectedTask] = useState(null);
-	const { todos, toggleTodo } = useTodo();
-	const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState("home");
+  const [topbarColor, setTopbarColor] = useState("#1b065e");
+  const navigate = useNavigate();
 
-	const renderContent = () => {
-		switch (activeSection) {
-			case "dashboard":
-				return <DashboardContent />;
-			case "courses":
-				return <ClassesContent />;
-			case "grades":
-				return <GradesContent />;
-			case "schedule":
-				return <ScheduleContent />;
-			case "resources":
-				return <ResourcesContent />;
-			default:
-				return <DashboardContent />;
-		}
-	};
+  useEffect(() => {
+    setTopbarColor("#1b065e"); // Default color for Self-Service
+  }, [activeSection]);
 
-	const handleNavigation = (page) => {
-		if (page === "home") {
-			navigate("/home");
-		} else if (page === "student-hub") {
-			navigate("/student-hub");
-		} else {
-			setActiveSection(page);
-		}
-	};
+  const renderContent = () => {
+    switch (activeSection) {
+      case "home":
+        return <SelfServiceHomeContent />;
+      case "academic-records":
+        return <AcademicRecordsContent />;
+      case "financial-information":
+        return <FinancialInformationContent />;
+      case "personal-information":
+        return <PersonalInformationContent />;
+      case "registration":
+        return <RegistrationContent />;
+      case "forms-and-requests":
+        return <FormsAndRequestsContent />;
+      case "settings":
+        return <SettingsContent />;
+      case "help-and-support":
+        return <HelpAndSupportContent />;
+      default:
+        return <SelfServiceHomeContent />;
+    }
+  };
 
-	return (
-		<TodoProvider>
-			<div className="HomePage">
-				<Topbar currentPage="Self Service" userRole={userRole} />
+  const handleNavigation = (page) => {
+    if (page === "dashboard") {
+      navigate("/home");
+    } else if (page === "student-hub") {
+      navigate("/student-hub");
+    } else {
+      setActiveSection(page);
+    }
+  };
 
-				<div className="dashboard">
-					<nav className="sidebar">
-						<div className="sidebar-content topnav">
-							<button
-								className="nav-button"
-								onClick={() => handleNavigation("home")}
-							>
-								<Home size={25} />
-								<h3>Dashboard</h3>
-							</button>
-							<button
-								className="nav-button"
-								onClick={() => handleNavigation("student-hub")}
-							>
-								<Users size={25} />
-								<h3>Student-Hub</h3>
-							</button>
-						</div>
+  return (
+    <div className="SelfServicePage">
+      <Topbar
+        currentPage="Self-Service"
+        userRole={userRole}
+        topbarColor={topbarColor}
+      />
 
-						<div className="sidebar-content midnav">
-							<button
-								className={`nav-button ${
-									activeSection === "dashboard" ? "active" : ""
-								}`}
-								onClick={() => setActiveSection("dashboard")}
-							>
-								<Home size={25} />
-								<h3>Dashboard</h3>
-							</button>
-							<button
-								className={`nav-button ${
-									activeSection === "courses" ? "active" : ""
-								}`}
-								onClick={() => setActiveSection("courses")}
-							>
-								<Users size={25} />
-								<h3>Courses</h3>
-							</button>
-							<button
-								className={`nav-button ${
-									activeSection === "grades" ? "active" : ""
-								}`}
-								onClick={() => setActiveSection("grades")}
-							>
-								<CreditCard size={25} />
-								<h3>Grades</h3>
-							</button>
-							<button
-								className={`nav-button ${
-									activeSection === "schedule" ? "active" : ""
-								}`}
-								onClick={() => setActiveSection("schedule")}
-							>
-								<Calendar size={25} />
-								<h3>Schedule</h3>
-							</button>
-							<button
-								className={`nav-button ${
-									activeSection === "resources" ? "active" : ""
-								}`}
-								onClick={() => setActiveSection("resources")}
-							>
-								<Video size={25} />
-								<h3>Resources</h3>
-							</button>
-						</div>
+      <div className="dashboard">
+        <nav className="sidebar">
+          <div className="sidebar-content topnav">
+            <button
+              className="nav-button"
+              onClick={() => handleNavigation("dashboard")}
+            >
+              <Home size={25} />
+              <h3>Dashboard</h3>
+            </button>
+            <button
+              className="nav-button"
+              onClick={() => handleNavigation("student-hub")}
+            >
+              <Users size={25} />
+              <h3>Student Hub</h3>
+            </button>
+          </div>
 
-						<div className="sidebar-content todo-list">
-							<h3>
-								<CheckSquare size={20} /> To-Do List
-							</h3>
+          <div className="sidebar-content midnav">
+            <button
+              className={`nav-button ${
+                activeSection === "home" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("home")}
+            >
+              <Home size={25} />
+              <h3>Self-Service Home</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "academic-records" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("academic-records")}
+            >
+              <BookOpen size={25} />
+              <h3>Academic Records</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "financial-information" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("financial-information")}
+            >
+              <DollarSign size={25} />
+              <h3>Financial Information</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "personal-information" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("personal-information")}
+            >
+              <User size={25} />
+              <h3>Personal Information</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "registration" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("registration")}
+            >
+              <Calendar size={25} />
+              <h3>Registration</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "forms-and-requests" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("forms-and-requests")}
+            >
+              <FileText size={25} />
+              <h3>Forms and Requests</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "settings" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("settings")}
+            >
+              <Settings size={25} />
+              <h3>Settings</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "help-and-support" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("help-and-support")}
+            >
+              <HelpCircle size={25} />
+              <h3>Help and Support</h3>
+            </button>
+          </div>
+        </nav>
 
-							{todos.map((task) => (
-								<button
-									key={task.id}
-									className={`nav-button todo-item ${
-										task.completed ? "completed" : ""
-									}`}
-									onClick={() => toggleTodo(task.id)}
-								>
-									{task.title}
-								</button>
-							))}
-						</div>
-					</nav>
-
-					<main className="main-content">{renderContent()}</main>
-				</div>
-
-				<TaskModal task={selectedTask} onClose={() => setSelectedTask(null)} />
-			</div>
-		</TodoProvider>
-	);
+        <main className="main-content">{renderContent()}</main>
+      </div>
+    </div>
+  );
 }
 
 export default SelfServicePage;
