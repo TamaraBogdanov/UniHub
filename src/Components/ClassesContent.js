@@ -11,6 +11,7 @@ import {
 	DollarSign,
 } from "lucide-react";
 
+// This is the Course Page on Dashboard
 function ClassesContent() {
 	const [filter, setFilter] = useState("All");
 

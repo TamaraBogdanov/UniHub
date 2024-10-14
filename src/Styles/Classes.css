@@ -1,3 +1,5 @@
+/* Course Page Classes*/
+
 .classes-content {
 	padding: 20px;
 }
@@ -64,6 +66,8 @@
 	gap: 10px;
 	margin-top: 15px;
 }
+
+/* Filters*/
 
 .filter-buttons {
 	display: flex;
