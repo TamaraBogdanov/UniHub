@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styles/Classes.css";
-import { courses } from "../Pages/mockData";
+import { courses } from "../Mockdata/mockData";
 import {
   Home,
   BookOpen,
@@ -12,6 +12,7 @@ import {
   DollarSign,
 } from "lucide-react";
 
+// This is the Course Page on Dashboard
 function ClassesContent() {
   const [filter, setFilter] = useState("All");
   const navigate = useNavigate();
