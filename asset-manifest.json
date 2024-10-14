@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/UniHub/static/css/main.f155e85c.css",
+    "main.js": "/UniHub/static/js/main.1a145910.js",
+    "static/media/fa-solid-900.ttf": "/UniHub/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
+    "static/media/fa-brands-400.ttf": "/UniHub/static/media/fa-brands-400.0ff70dcbf135d859ebf3.ttf",
+    "static/media/fa-solid-900.woff2": "/UniHub/static/media/fa-solid-900.93f719f4d62bfa3e748c.woff2",
+    "static/media/fa-brands-400.woff2": "/UniHub/static/media/fa-brands-400.bb8d5a145e22822103fb.woff2",
+    "static/media/fa-regular-400.ttf": "/UniHub/static/media/fa-regular-400.17a6e1aebccdbaa39e78.ttf",
+    "static/media/logouni.png": "/UniHub/static/media/logouni.4b36e834fc6500e9d513.png",
+    "static/media/fa-regular-400.woff2": "/UniHub/static/media/fa-regular-400.bc3722686635b5f86132.woff2",
+    "static/media/fa-v4compatibility.ttf": "/UniHub/static/media/fa-v4compatibility.0f6cb412603527bda691.ttf",
+    "static/media/fa-v4compatibility.woff2": "/UniHub/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
+    "index.html": "/UniHub/index.html",
+    "main.f155e85c.css.map": "/UniHub/static/css/main.f155e85c.css.map",
+    "main.1a145910.js.map": "/UniHub/static/js/main.1a145910.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f155e85c.css",
+    "static/js/main.1a145910.js"
+  ]
+}
