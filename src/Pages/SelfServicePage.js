@@ -57,10 +57,11 @@ function SelfServicePage({ userRole }) {
 	};
 
 	const handleNavigation = (page) => {
-		if (page === "dashboard") {
-			navigate("/home");
-		} else if (page === "student-hub") {
+		if (page === "student-hub") {
 			navigate("/student-hub");
+		} else if (page === "home") {
+			setActiveSection("home");
+			navigate("/home");
 		} else {
 			setActiveSection(page);
 		}
