@@ -1,0 +1,272 @@
+.wellness-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.wellness-hero {
+  display: flex;
+  align-items: center;
+  background-color: #f0f4f8;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.wellness-hero-text {
+  flex: 1;
+  padding: 2rem;
+}
+
+.wellness-hero-text h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.wellness-hero-text p {
+  font-size: 1.1rem;
+  color: #34495e;
+  margin-bottom: 1.5rem;
+}
+
+.wellness-hero-image {
+  display: flex;
+  justify-content: center;
+}
+
+.wellness-hero-image img {
+  width: 40%;
+  /* height: 100%; */
+  margin-right: 30px;
+  object-fit: cover;
+}
+
+.wellness-primary-button,
+.wellness-secondary-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wellness-primary-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.wellness-primary-button:hover {
+  background-color: #2980b9;
+}
+
+.wellness-secondary-button {
+  background-color: white;
+  color: #3498db;
+  border: 2px solid #3498db;
+}
+
+.wellness-secondary-button:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+.wellness-resources,
+.wellness-events,
+.wellness-support {
+  margin-bottom: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+.wellness-resources-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.wellness-search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #f0f4f8;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  width: 300px;
+}
+
+.wellness-search-bar input {
+  border: none;
+  background: transparent;
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.wellness-category-filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.wellness-category-button {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #f0f4f8;
+  border: none;
+  color: #34495e;
+}
+
+.wellness-category-button.active {
+  background-color: #3498db;
+  color: white;
+}
+
+.wellness-resources-grid,
+.wellness-events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.wellness-resource-card,
+.wellness-event-card,
+.support-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.wellness-resource-card:hover,
+.wellness-event-card:hover,
+.support-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.wellness-resource-card h3,
+.wellness-event-card h3,
+.support-card h3 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin: 1rem 0 0.5rem;
+}
+
+.wellness-resource-card p,
+.wellness-event-card p,
+.support-card p {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.wellness-event-details {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.wellness-event-details > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.support-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.appointment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #bdc3c7;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .wellness-hero {
+    flex-direction: column;
+  }
+
+  .wellness-hero-image {
+    width: 100%;
+    height: 200px;
+  }
+
+  .wellness-resources-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .wellness-search-bar {
+    width: 100%;
+  }
+
+  .wellness-category-filters {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
