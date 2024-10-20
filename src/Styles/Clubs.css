@@ -44,12 +44,6 @@
 	transition: all 0.3s ease;
 }
 
-.filter-button.active,
-.filter-button:hover {
-	background-color: var(--primary-color);
-	color: white;
-}
-
 .clubs-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr; /* Ensure two equal-width columns */
