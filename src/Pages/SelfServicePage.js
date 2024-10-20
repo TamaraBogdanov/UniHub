@@ -101,7 +101,7 @@ function SelfServicePage({ userRole }) {
               onClick={() => setActiveSection("home")}
             >
               <Home size={25} />
-              <h3>Self-Service Home</h3>
+              <h3>Self</h3>
             </button>
             <button
               className={`nav-button ${
@@ -110,7 +110,7 @@ function SelfServicePage({ userRole }) {
               onClick={() => setActiveSection("academic-records")}
             >
               <BookOpen size={25} />
-              <h3>Academic Records</h3>
+              <h3>Records</h3>
             </button>
             <button
               className={`nav-button ${
@@ -119,7 +119,7 @@ function SelfServicePage({ userRole }) {
               onClick={() => setActiveSection("financial-information")}
             >
               <DollarSign size={25} />
-              <h3>Financial Information</h3>
+              <h3>Finances</h3>
             </button>
             <button
               className={`nav-button ${
@@ -128,7 +128,7 @@ function SelfServicePage({ userRole }) {
               onClick={() => setActiveSection("personal-information")}
             >
               <User size={25} />
-              <h3>Personal Information</h3>
+              <h3>Personal</h3>
             </button>
             <button
               className={`nav-button ${
@@ -146,7 +146,7 @@ function SelfServicePage({ userRole }) {
               onClick={() => setActiveSection("forms-and-requests")}
             >
               <FileText size={25} />
-              <h3>Forms and Requests</h3>
+              <h3>Forms</h3>
             </button>
             <button
               className={`nav-button ${
@@ -164,7 +164,7 @@ function SelfServicePage({ userRole }) {
               onClick={() => setActiveSection("help-and-support")}
             >
               <HelpCircle size={25} />
-              <h3>Help and Support</h3>
+              <h3>Help</h3>
             </button>
           </div>
         </nav>
