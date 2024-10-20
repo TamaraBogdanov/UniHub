@@ -157,6 +157,7 @@ function AlertBox({ alert }) {
 
 function HomePage({ userRole }) {
 	const [activeSection, setActiveSection] = useState("dashboard"); // Manages subpages (Courses, Grades, etc.)
+	const [activeTopLevel, setActiveTopLevel] = useState("dashboard"); // Manages top-level navigation state
 
 	const [selectedTask, setSelectedTask] = useState(null);
 	const { todos, toggleTodo } = useTodo();
@@ -164,10 +165,11 @@ function HomePage({ userRole }) {
 
 	const handleTopLevelNavigation = (page) => {
 		if (page === "self-service") {
+			setActiveTopLevel("self-service"); // Set active state for self-service
 			navigate("/self-service");
 		} else if (page === "student-hub") {
+			setActiveTopLevel("student-hub"); // Set active state for student hub
 			navigate("/student-hub");
-		} else {
 		}
 	};
 
@@ -197,20 +199,31 @@ function HomePage({ userRole }) {
 				<div className="dashboard">
 					<nav className="sidebar">
 						<div className="sidebar-content topnav">
-							{/* Only changes activeTopPage */}
+							{/* New Dashboard Button */}
+							{/* Keep Dashboard Button Active */}
 							<button
-								className="nav-button"
-								onClick={() => handleTopLevelNavigation("self-service")}
+								className="nav-button active" // Always active
+								onClick={() => setActiveSection("dashboard")}
 							>
 								<Home size={25} />
-								<h3>Self-Service</h3>
+								<h3>Dashboard</h3>
 							</button>
+
+							{/* Only changes activeTopPage */}
+
 							<button
 								className="nav-button"
 								onClick={() => handleTopLevelNavigation("student-hub")}
 							>
 								<Users size={25} />
 								<h3>Student Hub</h3>
+							</button>
+							<button
+								className="nav-button"
+								onClick={() => handleTopLevelNavigation("self-service")}
+							>
+								<Home size={25} />
+								<h3>Self-Service</h3>
 							</button>
 						</div>
 
@@ -265,26 +278,30 @@ function HomePage({ userRole }) {
 
 						<div className="sidebar-content todo-list">
 							<h3>
-								<CheckSquare size={20} /> To-Do List
+								<CheckSquare size={25} /> Tasks
 							</h3>
-
-							{todos.map((task) => (
-								<button
-									key={task.id}
-									className={`nav-button todo-item ${
-										task.completed ? "completed" : ""
-									}`}
-									onClick={() => toggleTodo(task.id)}
-								>
-									{task.title}
-								</button>
-							))}
+							<ul>
+								{todos.map((task) => (
+									<div key={task.id} className="todo-item">
+										<input
+											type="checkbox"
+											checked={task.completed}
+											onChange={() => toggleTodo(task.id)}
+										/>
+										<span className={task.completed ? "completed" : ""}>
+											{task.title}
+										</span>
+									</div>
+								))}
+							</ul>
 						</div>
 					</nav>
 
+					{/* Main content area */}
 					<main className="main-content">{renderContent()}</main>
 				</div>
 
+				{/* Modal for tasks */}
 				<TaskModal task={selectedTask} onClose={() => setSelectedTask(null)} />
 			</div>
 		</TodoProvider>

@@ -82,17 +82,24 @@ function StudentHubPage({ userRole }) {
 					<div className="sidebar-content topnav">
 						<button
 							className="nav-button"
-							onClick={() => handleNavigation("self-service")}
+							onClick={() => handleNavigation("home")}
 						>
 							<Home size={25} />
-							<h3>Self-Service</h3>
+							<h3>Dashboard</h3>
+						</button>
+						<button
+							className="nav-button active" // Always active
+							onClick={() => setActiveSection("student-hub")}
+						>
+							<Home size={25} />
+							<h3>Student Hub</h3>
 						</button>
 						<button
 							className="nav-button"
-							onClick={() => handleNavigation("home")}
+							onClick={() => handleNavigation("self-service")}
 						>
 							<Users size={25} />
-							<h3>Dashboard</h3>
+							<h3>Self Service</h3>
 						</button>
 					</div>
 
