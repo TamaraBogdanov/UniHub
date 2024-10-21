@@ -1,12 +1,31 @@
 import React, { useState } from "react";
 import { Newspaper } from "lucide-react";
 import "../Styles/Home2.css";
+import "../Styles/Carousel.css";
 import {
 	enhancedMockNewsData,
 	newsCategories,
 } from "../Mockdata/detailedMockData";
-// import { eventsMockData, eventCategories } from "../eventsMockData";
+import Carousel from "./Carousel"; // Import the Carousel component
 
+// Sample images for the carousel
+const carouselImages = [
+	"./images/student-unsplash.jpg", // Replace with actual paths
+	"./images/image2.png",
+	"./images/image3.png",
+];
+
+const carouselTitles = [
+	"Welcome to the Student Hub",
+	"Explore Your Courses",
+	"Join Community Events",
+];
+
+const carouselParagraphs = [
+	"Here you can find resources to enhance your learning experience. Stay updated and get involved!",
+	"Discover a variety of courses tailored to your interests.",
+	"Participate in events that connect you with peers and professionals.",
+];
 function HomeContent() {
 	const [filter, setFilter] = useState("All");
 
@@ -17,7 +36,6 @@ function HomeContent() {
 
 	const combinedUpdates = [
 		...enhancedMockNewsData.map((news) => ({ ...news, type: "news" })),
-		// ...eventsMockData.map((event) => ({ ...event, type: "event" })),
 	].sort((a, b) => new Date(b.date) - new Date(a.date));
 
 	const filteredUpdates = combinedUpdates.filter(
@@ -26,24 +44,11 @@ function HomeContent() {
 
 	return (
 		<>
-			<section className="student-hero">
-				<div className="student-hero-text">
-					<h1>Welcome to Student Hub!</h1>
-					<h2>Get to explore your student experience</h2>
-					<div className="student-hero-buttons">
-						<button className="student-primary-button">
-							Update Preferences
-						</button>
-						<button className="student-secondary-button">
-							View Hub Profile
-						</button>
-					</div>
-				</div>
-				<div className="student-hero-image">
-					<img src="./images/online-learning.png" alt="Student-Hero" />
-				</div>
-			</section>
-
+			<Carousel
+				images={carouselImages}
+				titles={carouselTitles}
+				paragraphs={carouselParagraphs}
+			/>
 			<section className="updates-section">
 				<h2>Latest Updates</h2>
 				<div className="filter-system">
