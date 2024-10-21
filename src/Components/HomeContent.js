@@ -6,11 +6,10 @@ import {
 	enhancedMockNewsData,
 	newsCategories,
 } from "../Mockdata/detailedMockData";
-import Carousel from "./Carousel"; // Import the Carousel component
+import Carousel from "../Shared/Carousel";
 
-// Sample images for the carousel
 const carouselImages = [
-	"./images/student-unsplash.jpg", // Replace with actual paths
+	"./images/student-unsplash.jpg",
 	"./images/image2.png",
 	"./images/image3.png",
 ];
