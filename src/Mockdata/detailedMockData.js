@@ -113,11 +113,18 @@ export const enhancedMockNewsData = [
 
 export const newsCategories = [
 	{ name: "All", icon: <Newspaper size={20} /> },
-	{ name: "Academic", icon: <BookOpen size={20} /> },
-	{ name: "News", icon: <Newspaper size={20} /> },
+	{ name: "News", icon: <Newspaper size={20} /> }, // This now reflects all news items
 	{ name: "Clubs", icon: <Users size={20} /> },
 	{ name: "Wellness", icon: <Heart size={20} /> },
 	{ name: "Community", icon: <MessageCircle size={20} /> },
+];
+
+export const Categories = [
+	{ name: "All", icon: <Newspaper size={20} /> },
+	{ name: "News", icon: <Newspaper size={20} /> }, // This now reflects all news items
+	{ name: "Clubs", icon: <Users size={20} /> },
+	{ name: "Wellness", icon: <Heart size={20} /> },
+	{ name: "Events", icon: <MessageCircle size={20} /> },
 ];
 
 export const newsSubcategories = [

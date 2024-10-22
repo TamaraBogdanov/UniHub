@@ -51,7 +51,7 @@
 
 .carousel-arrow:hover {
 	transform: translateY(-50%) scale(1.2);
-	color: #000000;
+	color: #1b065e;
 }
 
 .carousel-arrow.left {
