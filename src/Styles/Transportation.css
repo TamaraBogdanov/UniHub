@@ -1,0 +1,142 @@
+/* Inside src/Pages/Transportation.css */
+.transportation-page {
+	padding: 2rem;
+	background-color: #f5f5f5;
+}
+
+/* Transportation.css */
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.current-time {
+	margin-left: auto; /* Pushes the time to the right */
+	font-size: 20px;
+	margin-bottom: 0.5rem;
+}
+
+/* Real-time info section */
+.real-time-info {
+	background-color: #e8f1fd;
+	padding: 1.5rem;
+	border-radius: 10px;
+	margin-bottom: 2rem;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.real-time-info ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+.real-time-info li {
+	font-size: 1.1rem;
+	color: #333;
+	margin-bottom: 0.5rem;
+}
+
+.real-time-info h1 {
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+.day-filter {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1.5rem;
+}
+
+.day-button {
+	background-color: #ffffff;
+	border: 2px solid #1b065e;
+	padding: 0.5rem 1rem;
+	margin: 0 0.5rem;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.2s;
+}
+
+.day-button.active {
+	background-color: #1b065e;
+	color: white;
+}
+
+.day-button:hover {
+	background-color: #e0e0e0;
+}
+
+.transport-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	justify-content: center;
+}
+
+.transport-card {
+	background-color: #ffffff;
+	border-radius: 8px;
+	padding: 1rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	width: 300px;
+	text-align: center;
+}
+
+.transport-card p {
+	font-size: 1rem;
+	margin: 0.25rem 0;
+}
+
+.book-btn {
+	background-color: #1b065e;
+	color: white;
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 1rem;
+}
+
+.book-btn:hover {
+	background-color: #e0e0e0;
+	color: #1b065e;
+}
+
+/* Collapsible Schedule */
+.schedule {
+	margin-top: 1rem;
+}
+
+.schedule h3 {
+	font-size: 1.1rem;
+	margin-bottom: 0.5rem;
+}
+
+.schedule ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.schedule ul li {
+	margin-bottom: 0.5rem;
+}
+
+.order-cab {
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.order-cab-btn {
+	background-color: #ff4e00;
+	color: white;
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.order-cab-btn:hover {
+	background-color: #ff751a;
+}

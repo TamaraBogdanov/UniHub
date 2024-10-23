@@ -1,255 +1,251 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/Events.css";
-import {
-  Search,
-  Calendar,
-  MapPin,
-  Clock,
-  Users,
-  Share2,
-  X,
-} from "lucide-react";
-import { eventsMockData, eventCategories } from "../Mockdata/eventsMockData";
+import { transportData } from "../Mockdata/TransportData";
+import "../Styles/Transportation.css";
 
-function EventModal({ event, onClose }) {
-  if (!event) return null;
-
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: event.title,
-          text: event.description,
-          url: window.location.href,
-        })
-        .then(() => {
-          console.log("Thanks for sharing!");
-        })
-        .catch(console.error);
-    } else {
-      // Fallback for browsers that don't support navigator.share
-      alert(
-        `Share this event: ${event.title}\n${event.description}\n${window.location.href}`
-      );
-    }
-  };
-
-  return (
-    <div className="event-modal-overlay">
-      <div className="event-modal">
-        <button className="close-modal" onClick={onClose}>
-          <X size={24} />
-        </button>
-        <img src={event.image} alt={event.title} className="modal-image" />
-        <div className="modal-content">
-          <h2>{event.title}</h2>
-          <p className="event-category">{event.category}</p>
-          <div className="event-details">
-            <div className="detail">
-              <Calendar size={16} /> <span>{event.date}</span>
-            </div>
-            <div className="detail">
-              <Clock size={16} /> <span>{event.time}</span>
-            </div>
-            <div className="detail">
-              <MapPin size={16} /> <span>{event.location}</span>
-            </div>
-            <div className="detail">
-              <Users size={16} /> <span>{event.attendees} attending</span>
-            </div>
-          </div>
-          <p className="event-description">{event.description}</p>
-          <button className="share-button" onClick={handleShare}>
-            <Share2 size={16} /> Share Event
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
+const getToday = () => {
+	const days = [
+		"Sunday",
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+	];
+	const today = new Date();
+	return {
+		day: days[today.getDay()],
+		date: today.toLocaleDateString(),
+	};
+};
 
 function TransportationContent() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [visibleEvents, setVisibleEvents] = useState(6);
-  const [rsvpedEvents, setRsvpedEvents] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+	const { day: currentDay, date: currentDate } = getToday();
+	const [selectedDay, setSelectedDay] = useState(currentDay);
+	const [expandedCard, setExpandedCard] = useState(null);
+	const [currentTime, setCurrentTime] = useState(new Date());
+	const [availableNow, setAvailableNow] = useState([]);
+	const [comingNext, setComingNext] = useState([]);
 
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
+	// Update current time every minute
+	useEffect(() => {
+		const timer = setInterval(() => {
+			setCurrentTime(new Date());
+		}, 60000);
+		return () => clearInterval(timer);
+	}, []);
 
-  const filteredEvents = eventsMockData.filter(
-    (event) =>
-      event.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (selectedCategory === "All" || event.category === selectedCategory)
-  );
+	// Helper function to check if a vehicle is available now
+	const isVehicleAvailableNow = (startTime, endTime) => {
+		const [startHour, startMinute] = startTime.split(":").map(Number);
+		const [endHour, endMinute] = endTime.split(":").map(Number);
+		const currentHour = currentTime.getHours();
+		const currentMinute = currentTime.getMinutes();
 
-  const loadMoreEvents = () => {
-    setVisibleEvents((prevVisible) => prevVisible + 3);
-  };
+		const isAfterStart =
+			currentHour > startHour ||
+			(currentHour === startHour && currentMinute >= startMinute);
+		const isBeforeEnd =
+			currentHour < endHour ||
+			(currentHour === endHour && currentMinute <= endMinute);
 
-  const handleRSVP = (eventId) => {
-    setRsvpedEvents((prev) =>
-      prev.includes(eventId)
-        ? prev.filter((id) => id !== eventId)
-        : [...prev, eventId]
-    );
-  };
+		return isAfterStart && isBeforeEnd;
+	};
 
-  const openEventModal = (event) => {
-    setSelectedEvent(event);
-  };
+	// Update available vehicles and coming next based on current time and current day only
+	useEffect(() => {
+		const currentHour = currentTime.getHours();
+		const currentMinute = currentTime.getMinutes();
 
-  const closeEventModal = () => {
-    setSelectedEvent(null);
-  };
+		// Filter vehicles available now for current day only
+		const nowAvailable = transportData.filter(
+			(item) =>
+				item.days.includes(currentDay) &&
+				item.routes.some((route) =>
+					isVehicleAvailableNow(route.startTime, route.endTime)
+				)
+		);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight
-      ) {
-        loadMoreEvents();
-      }
-    };
+		// Filter vehicles coming next for current day only
+		const upcomingVehicles = [];
+		transportData.forEach((item) => {
+			if (item.days.includes(currentDay)) {
+				item.routes.forEach((route) => {
+					if (!isVehicleAvailableNow(route.startTime, route.endTime)) {
+						const [startHour, startMinute] = route.startTime
+							.split(":")
+							.map(Number);
+						if (
+							startHour > currentHour ||
+							(startHour === currentHour && startMinute > currentMinute)
+						) {
+							upcomingVehicles.push({ ...item, nextRoute: route });
+						}
+					}
+				});
+			}
+		});
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+		// Sort upcoming vehicles by time
+		upcomingVehicles.sort((a, b) => {
+			const [hourA, minuteA] = a.nextRoute.startTime.split(":").map(Number);
+			const [hourB, minuteB] = b.nextRoute.startTime.split(":").map(Number);
+			return hourA - hourB || minuteA - minuteB;
+		});
 
-  return (
-    <div className="events-content">
-      <h1 className="events-title">Upcoming University Events</h1>
+		setAvailableNow(nowAvailable);
+		setComingNext(upcomingVehicles);
+	}, [currentTime, currentDay]);
 
-      <div className="events-controls">
-        <div className="search-bar">
-          <Search size={20} />
-          <input
-            type="text"
-            placeholder="Search events..."
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-        </div>
-        <div className="category-filters">
-          {eventCategories.map((category) => (
-            <button
-              key={category.name}
-              className={`category-button ${
-                selectedCategory === category.name ? "active" : ""
-              }`}
-              onClick={() => setSelectedCategory(category.name)}
-            >
-              {category.icon}
-              <span>{category.name}</span>
-            </button>
-          ))}
-        </div>
-      </div>
+	const handleDayChange = (day) => {
+		setSelectedDay(day);
+	};
 
-      <div className="featured-events">
-        {filteredEvents
-          .filter((event) => event.featured)
-          .map((event) => (
-            <div
-              key={event.id}
-              className="featured-event-card"
-              onClick={() => openEventModal(event)}
-            >
-              <div
-                className="featured-event-image"
-                style={{ backgroundImage: `url(${event.image})` }}
-              >
-                <div className="featured-event-overlay">
-                  <h3>{event.title}</h3>
-                  <p>{event.description}</p>
-                </div>
-              </div>
-              <div className="featured-event-details">
-                <div className="event-info">
-                  <Calendar size={16} />
-                  <span>{event.date}</span>
-                </div>
-                <div className="event-info">
-                  <MapPin size={16} />
-                  <span>{event.location}</span>
-                </div>
-                <div className="event-info">
-                  <Users size={16} />
-                  <span>{event.attendees} attending</span>
-                </div>
-              </div>
-              <button
-                className={`event-rsvp ${
-                  rsvpedEvents.includes(event.id) ? "rsvped" : ""
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleRSVP(event.id);
-                }}
-              >
-                {rsvpedEvents.includes(event.id) ? "Cancel RSVP" : "RSVP"}
-              </button>
-            </div>
-          ))}
-      </div>
+	const toggleExpandCard = (id) => {
+		setExpandedCard(expandedCard === id ? null : id);
+	};
 
-      <h2 className="section-title">All Events</h2>
-      <div className="events-grid">
-        {filteredEvents.slice(0, visibleEvents).map((event) => (
-          <div
-            key={event.id}
-            className="event-card"
-            onClick={() => openEventModal(event)}
-          >
-            <div
-              className="event-image"
-              style={{ backgroundImage: `url(${event.image})` }}
-            ></div>
-            <div className="event-content">
-              <h3>{event.title}</h3>
-              <p className="event-category">{event.category}</p>
-              <div className="event-details">
-                <div className="detail">
-                  <Calendar size={16} />
-                  <span>{event.date}</span>
-                </div>
-                <div className="detail">
-                  <MapPin size={16} />
-                  <span>{event.location}</span>
-                </div>
-                <div className="detail">
-                  <Users size={16} />
-                  <span>{event.attendees} attending</span>
-                </div>
-              </div>
-              <button
-                className={`event-rsvp ${
-                  rsvpedEvents.includes(event.id) ? "rsvped" : ""
-                }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleRSVP(event.id);
-                }}
-              >
-                {rsvpedEvents.includes(event.id) ? "Cancel RSVP" : "RSVP"}
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+	const getTimeRemaining = (startTime) => {
+		const [startHour, startMinute] = startTime.split(":").map(Number);
+		const startDateTime = new Date();
+		startDateTime.setHours(startHour, startMinute, 0, 0);
+		const timeDiff = startDateTime - currentTime;
+		const totalMinutes = Math.floor(timeDiff / (1000 * 60));
+		const hours = Math.floor(totalMinutes / 60);
+		const minutes = totalMinutes % 60;
+		return [hours, minutes];
+	};
 
-      {visibleEvents < filteredEvents.length && (
-        <button className="load-more-button" onClick={loadMoreEvents}>
-          Load More Events
-        </button>
-      )}
+	return (
+		<div className="transportation-page">
+			<div className="header">
+				<h1>Transportation Arrivals</h1>
+				<p className="current-time">
+					Current time:{" "}
+					{currentTime.toLocaleTimeString([], {
+						hour: "2-digit",
+						minute: "2-digit",
+					})}
+				</p>
+				<p className="current-date">{currentDate}</p>
+			</div>
 
-      <EventModal event={selectedEvent} onClose={closeEventModal} />
-    </div>
-  );
+			{/* Real-time info section - Shows data only for current day */}
+			<div className="real-time-info">
+				<h2>Today's Schedule ({currentDay})</h2>
+				{availableNow.length > 0 ? (
+					<div>
+						<h3>Available Now</h3>
+						<ul>
+							{availableNow.map((item, index) => (
+								<li key={index}>
+									{item.vehicle} -{" "}
+									{
+										item.routes.find((route) =>
+											isVehicleAvailableNow(route.startTime, route.endTime)
+										).startTime
+									}{" "}
+									to{" "}
+									{
+										item.routes.find((route) =>
+											isVehicleAvailableNow(route.startTime, route.endTime)
+										).endTime
+									}{" "}
+									-{" "}
+									{
+										item.routes.find((route) =>
+											isVehicleAvailableNow(route.startTime, route.endTime)
+										).location
+									}
+								</li>
+							))}
+						</ul>
+					</div>
+				) : (
+					<p>No vehicles available right now.</p>
+				)}
+
+				{comingNext.length > 0 && (
+					<div>
+						<h3>Coming Next</h3>
+						<ul>
+							{comingNext.slice(0, 1).map((item, index) => {
+								const [hours, minutes] = getTimeRemaining(
+									item.nextRoute.startTime
+								);
+								return (
+									<li key={index}>
+										{item.vehicle} - {item.nextRoute.startTime} to{" "}
+										{item.nextRoute.endTime} at {item.nextRoute.location} in{" "}
+										{hours > 0 ? `${hours} hour(s) ` : ""}
+										{minutes} minute(s)
+									</li>
+								);
+							})}
+						</ul>
+					</div>
+				)}
+			</div>
+
+			{/* Day filter section - Controls only the transport cards below */}
+			<div className="day-filter">
+				{[
+					"Sunday",
+					"Monday",
+					"Tuesday",
+					"Wednesday",
+					"Thursday",
+					"Friday",
+					"Saturday",
+				].map((day) => (
+					<button
+						key={day}
+						className={`day-button ${day === selectedDay ? "active" : ""}`}
+						onClick={() => handleDayChange(day)}
+					>
+						{day}
+					</button>
+				))}
+			</div>
+
+			{/* Transport cards - Filtered by selected day */}
+			<div className="transport-list">
+				{transportData
+					.filter((item) => item.days.includes(selectedDay))
+					.map((item) => (
+						<div key={item.id} className="transport-card">
+							<h2>{item.vehicle}</h2>
+							<p>Type: {item.type}</p>
+							<p>Arrival Time: {item.arrivalTime}</p>
+							<button
+								className="book-btn"
+								onClick={() => toggleExpandCard(item.id)}
+							>
+								{expandedCard === item.id ? "Hide Schedule" : "Show Schedule"}
+							</button>
+
+							{expandedCard === item.id && (
+								<div className="schedule">
+									<h3>Schedule:</h3>
+									<ul>
+										{item.routes.map((route, index) => (
+											<li key={index}>
+												{route.startTime} to {route.endTime} - {route.location}
+											</li>
+										))}
+									</ul>
+								</div>
+							)}
+						</div>
+					))}
+			</div>
+
+			<div className="order-cab">
+				<button className="order-cab-btn">Order Cab</button>
+			</div>
+		</div>
+	);
 }
 
 export default TransportationContent;
