@@ -300,3 +300,33 @@ label {
 .w-full {
 	width: 100%;
 }
+
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000; /* Ensure it’s above other elements */
+}
+
+.modal-content {
+	background: #fff;
+	padding: 2rem;
+	border-radius: 8px;
+	width: 90%;
+	max-width: 400px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	text-align: center;
+}
+
+.modal-actions {
+	margin-top: 1rem;
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+}
