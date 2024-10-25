@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/Events.css";
-import { transportData } from "../Mockdata/TransportData";
 import "../Styles/Transportation.css";
+import CampusControl from "./CampusControl"; // Import the CampusControl component
+import { transportData } from "../Mockdata/TransportData";
 
 const getToday = () => {
 	const days = [
@@ -23,104 +24,103 @@ const getToday = () => {
 function TransportationContent() {
 	const { day: currentDay, date: currentDate } = getToday();
 	const [selectedDay, setSelectedDay] = useState(currentDay);
-	const [expandedCard, setExpandedCard] = useState(null);
 	const [currentTime, setCurrentTime] = useState(new Date());
 	const [availableNow, setAvailableNow] = useState([]);
 	const [comingNext, setComingNext] = useState([]);
+	const [scheduleModal, setScheduleModal] = useState(null);
 
-	// Update current time every minute
+	const timeToMinutes = (timeStr) => {
+		const [hours, minutes] = timeStr.split(":").map(Number);
+		return hours * 60 + minutes;
+	};
+
+	const isVehicleAvailableNow = (startTime, endTime) => {
+		const currentMinutes =
+			currentTime.getHours() * 60 + currentTime.getMinutes();
+		const startMinutes = timeToMinutes(startTime);
+		const endMinutes = timeToMinutes(endTime);
+
+		return currentMinutes >= startMinutes && currentMinutes <= endMinutes;
+	};
+
 	useEffect(() => {
+		setCurrentTime(new Date());
 		const timer = setInterval(() => {
 			setCurrentTime(new Date());
-		}, 60000);
+		}, 1000);
+
 		return () => clearInterval(timer);
 	}, []);
 
-	// Helper function to check if a vehicle is available now
-	const isVehicleAvailableNow = (startTime, endTime) => {
-		const [startHour, startMinute] = startTime.split(":").map(Number);
-		const [endHour, endMinute] = endTime.split(":").map(Number);
-		const currentHour = currentTime.getHours();
-		const currentMinute = currentTime.getMinutes();
-
-		const isAfterStart =
-			currentHour > startHour ||
-			(currentHour === startHour && currentMinute >= startMinute);
-		const isBeforeEnd =
-			currentHour < endHour ||
-			(currentHour === endHour && currentMinute <= endMinute);
-
-		return isAfterStart && isBeforeEnd;
-	};
-
-	// Update available vehicles and coming next based on current time and current day only
 	useEffect(() => {
-		const currentHour = currentTime.getHours();
-		const currentMinute = currentTime.getMinutes();
+		const updateVehicles = () => {
+			const currentMinutes =
+				currentTime.getHours() * 60 + currentTime.getMinutes();
 
-		// Filter vehicles available now for current day only
-		const nowAvailable = transportData.filter(
-			(item) =>
-				item.days.includes(currentDay) &&
-				item.routes.some((route) =>
-					isVehicleAvailableNow(route.startTime, route.endTime)
-				)
-		);
+			const nowAvailable = transportData.filter(
+				(item) =>
+					item.days.includes(currentDay) &&
+					item.routes.some((route) =>
+						isVehicleAvailableNow(route.startTime, route.endTime)
+					)
+			);
 
-		// Filter vehicles coming next for current day only
-		const upcomingVehicles = [];
-		transportData.forEach((item) => {
-			if (item.days.includes(currentDay)) {
-				item.routes.forEach((route) => {
-					if (!isVehicleAvailableNow(route.startTime, route.endTime)) {
-						const [startHour, startMinute] = route.startTime
-							.split(":")
-							.map(Number);
-						if (
-							startHour > currentHour ||
-							(startHour === currentHour && startMinute > currentMinute)
-						) {
-							upcomingVehicles.push({ ...item, nextRoute: route });
+			const upcomingVehicles = [];
+			transportData.forEach((item) => {
+				if (item.days.includes(currentDay)) {
+					item.routes.forEach((route) => {
+						const startMinutes = timeToMinutes(route.startTime);
+
+						if (startMinutes > currentMinutes) {
+							upcomingVehicles.push({
+								...item,
+								nextRoute: route,
+								minutesUntilStart: startMinutes - currentMinutes,
+							});
 						}
-					}
-				});
-			}
-		});
+					});
+				}
+			});
 
-		// Sort upcoming vehicles by time
-		upcomingVehicles.sort((a, b) => {
-			const [hourA, minuteA] = a.nextRoute.startTime.split(":").map(Number);
-			const [hourB, minuteB] = b.nextRoute.startTime.split(":").map(Number);
-			return hourA - hourB || minuteA - minuteB;
-		});
+			upcomingVehicles.sort(
+				(a, b) => a.minutesUntilStart - b.minutesUntilStart
+			);
 
-		setAvailableNow(nowAvailable);
-		setComingNext(upcomingVehicles);
+			setAvailableNow(nowAvailable);
+			setComingNext(upcomingVehicles);
+		};
+
+		updateVehicles();
 	}, [currentTime, currentDay]);
 
 	const handleDayChange = (day) => {
 		setSelectedDay(day);
 	};
 
-	const toggleExpandCard = (id) => {
-		setExpandedCard(expandedCard === id ? null : id);
+	const formatTimeRemaining = (minutesUntilStart) => {
+		const hours = Math.floor(minutesUntilStart / 60);
+		const minutes = minutesUntilStart % 60;
+
+		if (hours > 0) {
+			return `${hours} hour${hours > 1 ? "s" : ""} and ${minutes} minute${
+				minutes !== 1 ? "s" : ""
+			}`;
+		}
+		return `${minutes} minute${minutes !== 1 ? "s" : ""}`;
 	};
 
-	const getTimeRemaining = (startTime) => {
-		const [startHour, startMinute] = startTime.split(":").map(Number);
-		const startDateTime = new Date();
-		startDateTime.setHours(startHour, startMinute, 0, 0);
-		const timeDiff = startDateTime - currentTime;
-		const totalMinutes = Math.floor(timeDiff / (1000 * 60));
-		const hours = Math.floor(totalMinutes / 60);
-		const minutes = totalMinutes % 60;
-		return [hours, minutes];
+	const openScheduleModal = (item) => {
+		setScheduleModal(item);
+	};
+
+	const closeScheduleModal = () => {
+		setScheduleModal(null);
 	};
 
 	return (
 		<div className="transportation-page">
 			<div className="header">
-				<h1>Transportation Arrivals</h1>
+				<h2>Transportation Schedule ({currentDay})</h2>
 				<p className="current-time">
 					Current time:{" "}
 					{currentTime.toLocaleTimeString([], {
@@ -128,12 +128,9 @@ function TransportationContent() {
 						minute: "2-digit",
 					})}
 				</p>
-				<p className="current-date">{currentDate}</p>
 			</div>
 
-			{/* Real-time info section - Shows data only for current day */}
 			<div className="real-time-info">
-				<h2>Today's Schedule ({currentDay})</h2>
 				{availableNow.length > 0 ? (
 					<div>
 						<h3>Available Now</h3>
@@ -170,25 +167,18 @@ function TransportationContent() {
 					<div>
 						<h3>Coming Next</h3>
 						<ul>
-							{comingNext.slice(0, 1).map((item, index) => {
-								const [hours, minutes] = getTimeRemaining(
-									item.nextRoute.startTime
-								);
-								return (
-									<li key={index}>
-										{item.vehicle} - {item.nextRoute.startTime} to{" "}
-										{item.nextRoute.endTime} at {item.nextRoute.location} in{" "}
-										{hours > 0 ? `${hours} hour(s) ` : ""}
-										{minutes} minute(s)
-									</li>
-								);
-							})}
+							{comingNext.slice(0, 1).map((item, index) => (
+								<li key={index}>
+									{item.vehicle} - {item.nextRoute.startTime} to{" "}
+									{item.nextRoute.endTime} at {item.nextRoute.location} in{" "}
+									{formatTimeRemaining(item.minutesUntilStart)}
+								</li>
+							))}
 						</ul>
 					</div>
 				)}
 			</div>
 
-			{/* Day filter section - Controls only the transport cards below */}
 			<div className="day-filter">
 				{[
 					"Sunday",
@@ -209,7 +199,6 @@ function TransportationContent() {
 				))}
 			</div>
 
-			{/* Transport cards - Filtered by selected day */}
 			<div className="transport-list">
 				{transportData
 					.filter((item) => item.days.includes(selectedDay))
@@ -220,30 +209,33 @@ function TransportationContent() {
 							<p>Arrival Time: {item.arrivalTime}</p>
 							<button
 								className="book-btn"
-								onClick={() => toggleExpandCard(item.id)}
+								onClick={() => openScheduleModal(item)}
 							>
-								{expandedCard === item.id ? "Hide Schedule" : "Show Schedule"}
+								Show Schedule
 							</button>
-
-							{expandedCard === item.id && (
-								<div className="schedule">
-									<h3>Schedule:</h3>
-									<ul>
-										{item.routes.map((route, index) => (
-											<li key={index}>
-												{route.startTime} to {route.endTime} - {route.location}
-											</li>
-										))}
-									</ul>
-								</div>
-							)}
 						</div>
 					))}
 			</div>
 
-			<div className="order-cab">
-				<button className="order-cab-btn">Order Cab</button>
-			</div>
+			{scheduleModal && (
+				<div className="modal-overlay" onClick={closeScheduleModal}>
+					<div className="modal-content" onClick={(e) => e.stopPropagation()}>
+						<h2>{scheduleModal.vehicle} Schedule</h2>
+						<ul>
+							{scheduleModal.routes.map((route, index) => (
+								<li key={index}>
+									{route.startTime} to {route.endTime} - {route.location}
+								</li>
+							))}
+						</ul>
+						<button className="close-btn" onClick={closeScheduleModal}>
+							Close
+						</button>
+					</div>
+				</div>
+			)}
+			{/* Display CampusControl component */}
+			<CampusControl />
 		</div>
 	);
 }
