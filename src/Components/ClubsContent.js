@@ -1,7 +1,7 @@
 // ClubsContent.js
 import React, { useState } from "react";
 import "../Styles/Clubs.css";
-import ClubBar from "./SideBarComp";
+
 import { clubsData } from "../Mockdata/ClubData";
 import JoinableClubs from "./JoinableClubs";
 
@@ -73,7 +73,6 @@ const ClubsContent = () => {
 				</div>
 			</div>
 			<JoinableClubs />
-			<ClubBar />
 		</div>
 	);
 };

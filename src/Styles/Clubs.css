@@ -48,7 +48,8 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr; /* Ensure two equal-width columns */
 	gap: 20px; /* Consistent gap between cards, both horizontally and vertically */
-	max-width: 1100px; /* Limit the width of the grid to bring the cards closer together */
+	max-width: 1500px; /* Limit the width of the grid to bring the cards closer together */
+	align-content: center;
 }
 
 .club-card {
@@ -77,44 +78,256 @@
 	font-size: 1.2rem; /* Slightly larger paragraph text */
 }
 
-/* JoinableClubs.css */
-.joinable-clubs-section {
-	margin: 0 auto;
-	padding: 20px;
-}
-
-.joinable-clubs-section h2 {
-	margin-bottom: 20px; /* Space below the heading */
-	margin-left: 30px;
-}
-
 .joinable-clubs-grid {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr); /* Four columns layout */
-	gap: 20px; /* Space between the cards */
-	max-width: 1000px;
-	margin-left: 30px;
+	grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+	gap: 25px;
+	margin: 0 auto;
 }
 
 .joinable-club-card {
 	background-color: var(--card-background);
 	border-radius: var(--border-radius);
-	padding: 15px; /* Adjust padding as needed */
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	border: 1px solid #e0e0e0;
+	padding: 25px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.joinable-club-card::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 4px;
+	background: var(--primary-color);
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.3s ease;
 }
 
 .joinable-club-card:hover {
-	transform: translateY(-5px); /* Slightly raise the card on hover */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 8px 24px rgba(108, 99, 255, 0.12);
+	transform: translateY(-2px);
+	border-color: var(--primary-color);
+}
+
+.joinable-club-card:hover::before {
+	transform: scaleX(1);
 }
 
 .joinable-club-card h3 {
+	font-size: 1.5rem;
 	color: var(--text-primary);
-	font-size: 1.2rem; /* Adjust the font size */
+	margin-bottom: 15px;
+	font-weight: 600;
+	transition: color 0.3s ease;
+}
+
+.joinable-club-card:hover h3 {
+	color: var(--primary-color);
 }
 
 .joinable-club-card p {
+	font-size: 1rem;
 	color: var(--text-secondary);
-	font-size: 0.9rem; /* Smaller font size for overview */
+	line-height: 1.6;
+	margin-bottom: 20px;
+}
+
+/* Add category tag styling */
+.club-category {
+	display: inline-block;
+	padding: 6px 12px;
+	background-color: rgba(108, 99, 255, 0.1);
+	color: var(--primary-color);
+	border-radius: 20px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	margin-bottom: 15px;
+}
+
+/* Add member count and status indicators */
+.club-meta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+	padding-top: 15px;
+	border-top: 1px solid #eee;
+}
+
+.member-count {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	color: var(--text-secondary);
+	font-size: 0.875rem;
+}
+
+.club-status {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 0.875rem;
+}
+
+.status-active {
+	color: #10b981;
+}
+
+/* Add focus styles for accessibility */
+.joinable-club-card:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.3);
+}
+
+/* Active state for click feedback */
+.joinable-club-card:active {
+	transform: translateY(0);
+	box-shadow: 0 4px 12px rgba(108, 99, 255, 0.08);
+}
+
+/* Modal overlay and panel styles */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.club-details-panel {
+	background: white;
+	padding: 30px;
+	border-radius: 8px;
+	width: 95%;
+	max-width: 1000px; /* Increased from 500px for wider panel */
+	max-height: 80vh;
+	overflow-y: auto;
+	position: relative;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close-button {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	font-size: 24px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	padding: 5px 10px;
+	color: #666;
+}
+
+.close-button:hover {
+	color: #333;
+}
+
+.club-details-panel h2 {
+	font-size: 24px;
+	margin-bottom: 20px;
+	color: #333;
+}
+
+.club-details-panel h4 {
+	font-size: 18px;
+	margin-bottom: 8px;
+	color: #333;
+}
+
+.club-description {
+	margin-bottom: 20px;
+	line-height: 1.5;
+	color: #666;
+}
+
+/* Updated styles for the panel content */
+.overview-section {
+	font-size: 16px;
+	color: #666;
+	margin-bottom: 20px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #eee;
+	display: grid;
+	grid-template-columns: repeat(
+		auto-fit,
+		minmax(300px, 1fr)
+	); /* Makes overview items wider */
+	gap: 30px;
+}
+
+.meeting-info {
+	background: #f8f9fa;
+	padding: 20px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr); /* Shows 3 items per row */
+	gap: 20px;
+}
+
+.info-row {
+	margin-bottom: 15px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr); /* Shows 3 items per row */
+	gap: 25px;
+}
+
+.info-row:last-child {
+	margin-bottom: 0;
+}
+
+.info-row h4 {
+	font-size: 14px;
+	text-transform: uppercase;
+	color: #666;
+	margin-bottom: 4px;
+}
+
+.info-row p {
+	font-size: 16px;
+	color: #333;
+}
+
+.description-section {
+	margin-bottom: 20px;
+	columns: 2; /* Split description into 2 columns */
+	column-gap: 30px;
+}
+
+.requirements-section {
+	background: #f8f9fa;
+	padding: 20px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr); /* Shows 2 items per row */
+	gap: 20px;
+}
+
+.join-button {
+	width: 100%;
+	padding: 12px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	margin-top: 10px;
+}
+
+.join-button:hover {
+	background-color: #0056b3;
 }
