@@ -17,8 +17,8 @@ import VolunteerTracking from "./VolunteerTracking";
 
 const VolunteerPage = () => {
 	const [selectedCategory, setSelectedCategory] = useState("all");
-	const [searchQuery, setSearchQuery] = useState("");
-	const [activeView, setActiveView] = useState("opportunities"); // 'opportunities' or 'tracking'
+	const [searchQuery] = useState("");
+	const [activeView, setActiveView] = useState("opportunities");
 
 	const categories = [
 		{ id: "all", name: "All Opportunities", icon: Globe },
@@ -161,13 +161,11 @@ const VolunteerPage = () => {
 		.filter(
 			(opp) =>
 				searchQuery === "" ||
-				opp.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-				opp.description.toLowerCase().includes(searchQuery.toLowerCase())
+				opp.title.toLowerCase().includes(searchQuery.toLowerCase())
 		);
 
 	return (
 		<div className="container">
-			{/* Header Section */}
 			<div className="header">
 				<h1>Wits Volunteer Hub</h1>
 				<p>
@@ -175,8 +173,21 @@ const VolunteerPage = () => {
 				</p>
 			</div>
 
-			{/* View Toggle Buttons */}
-			{/* View Toggle Buttons */}
+			{/* Benefits Section - Always Visible */}
+			<div className="benefits-section">
+				<h2>Why Volunteer at Wits?</h2>
+				<div className="benefits-grid">
+					{benefits.map((benefit, index) => (
+						<div key={index} className="benefit-card">
+							<benefit.icon className="benefit-icon" />
+							<h3>{benefit.title}</h3>
+							<p>{benefit.description}</p>
+						</div>
+					))}
+				</div>
+			</div>
+
+			{/* View Toggle Buttons - Always Visible */}
 			<div className="view-toggle">
 				<button
 					className={`view-button ${
@@ -194,22 +205,9 @@ const VolunteerPage = () => {
 				</button>
 			</div>
 
+			{/* Conditional Rendering of Main Content */}
 			{activeView === "opportunities" ? (
 				<>
-					{/* Benefits Section */}
-					<div className="benefits-section">
-						<h2>Why Volunteer at Wits?</h2>
-						<div className="benefits-grid">
-							{benefits.map((benefit, index) => (
-								<div key={index} className="benefit-card">
-									<benefit.icon className="benefit-icon" />
-									<h3>{benefit.title}</h3>
-									<p>{benefit.description}</p>
-								</div>
-							))}
-						</div>
-					</div>
-
 					{/* Categories */}
 					<div className="categories">
 						{categories.map((category) => (
@@ -269,20 +267,20 @@ const VolunteerPage = () => {
 							</div>
 						))}
 					</div>
-
-					{/* Bottom CTA Section */}
-					<div className="cta-section">
-						<h2>Can't find what you're looking for?</h2>
-						<p>
-							Contact the Wits Citizenship and Outreach Programme to discuss
-							creating new volunteer opportunities.
-						</p>
-						<button className="button-secondary">Contact WCCO</button>
-					</div>
 				</>
 			) : (
 				<VolunteerTracking />
 			)}
+
+			{/* Bottom CTA Section - Always Visible */}
+			<div className="cta-section">
+				<h2>Can't find what you're looking for?</h2>
+				<p>
+					Contact the Wits Citizenship and Outreach Programme to discuss
+					creating new volunteer opportunities.
+				</p>
+				<button className="button-secondary">Contact WCCO</button>
+			</div>
 		</div>
 	);
 };
