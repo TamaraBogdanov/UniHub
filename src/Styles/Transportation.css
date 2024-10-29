@@ -182,7 +182,6 @@
 	line-height: 1.5;
 }
 
-/* Button Styles */
 .button {
 	display: inline-flex;
 	align-items: center;
@@ -195,6 +194,7 @@
 	transition: background-color 0.2s, opacity 0.2s;
 	border: none;
 	text-align: center;
+	min-width: 100px; /* Base minimum width */
 }
 
 .button:disabled {
@@ -212,6 +212,15 @@
 	background-color: #1d4ed8;
 }
 
+.button-secondary {
+	background-color: #6b7280;
+	color: white;
+}
+
+.button-secondary:hover {
+	background-color: #4b5563;
+}
+
 .button-destructive {
 	background-color: #dc2626;
 	color: white;
@@ -221,6 +230,24 @@
 	background-color: #b91c1c;
 }
 
+.modal-actions .button {
+	flex: 1;
+	max-width: 150px; /* Equal width for modal buttons */
+}
+
+/* Booking List specific styles */
+.booking-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/* Add any other booking item styles you need */
+}
+
+.booking-item .button-destructive {
+	width: auto;
+	min-width: 80px; /* Smaller minimum width for the booking list cancel button */
+	max-width: 100px; /* Maximum width to prevent it from becoming too wide */
+}
 /* Form Elements */
 .select-container {
 	margin-bottom: 1rem;

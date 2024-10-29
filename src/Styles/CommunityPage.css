@@ -1,0 +1,444 @@
+/* Scoped community page styles */
+.community-page {
+	--primary-color: #3b82f6;
+	--primary-hover: #2563eb;
+	--background-color: #f0f2f5;
+	--card-background: #ffffff;
+	--border-color: #e5e7eb;
+	--text-primary: #1f2937;
+	--text-secondary: #6b7280;
+	--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	--radius-md: 8px;
+	--radius-lg: 12px;
+	--radius-full: 9999px;
+}
+
+.community-page {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 2rem;
+	background-color: var(--background-color);
+	min-height: 100vh;
+}
+
+/* Header styles */
+.community-page header {
+	margin-bottom: 2.5rem;
+
+	padding: 1.5rem;
+}
+
+.community-page .page-title {
+	font-size: 2.25rem;
+	font-weight: 700;
+	margin-bottom: 1.5rem;
+	color: var(--text-primary);
+}
+
+/* Navigation */
+.community-page .nav-tabs {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	border-bottom: 2px solid var(--border-color);
+	margin-top: 3rem;
+}
+
+.community-page .nav-button {
+	padding: 0.75rem 1.5rem;
+	border: none;
+	background: none;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--text-secondary);
+	transition: all 0.2s ease;
+	position: relative;
+}
+
+.community-page .nav-button.active {
+	color: var(--primary-color);
+}
+
+.community-page .nav-button.active::after {
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background-color: var(--primary-color);
+}
+
+.community-page .nav-button:hover {
+	color: var(--primary-color);
+}
+
+/* Section headers */
+.community-page .section-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+	padding: 0 1rem;
+}
+
+.community-page .section-title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: var(--text-primary);
+}
+
+/* Buttons */
+.community-page .create-button {
+	background-color: var(--primary-color);
+	color: white;
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	font-size: 0.875rem;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.community-page .create-button:hover {
+	background-color: var(--primary-hover);
+	transform: translateY(-1px);
+	box-shadow: var(--shadow-md);
+}
+
+/* Marketplace listings */
+.community-page .listings-container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.community-page .listing-card {
+	background-color: var(--card-background);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-lg);
+	margin-bottom: 1.5rem;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	box-shadow: var(--shadow-sm);
+}
+
+.community-page .listing-card:hover {
+	box-shadow: var(--shadow-lg);
+	transform: translateY(-2px);
+}
+
+.community-page .listing-content {
+	display: flex;
+	align-items: flex-start;
+	padding: 1.5rem;
+	gap: 1.5rem;
+}
+
+.community-page .listing-image {
+	width: 280px;
+	height: 280px;
+	object-fit: cover;
+	border-radius: var(--radius-md);
+	flex-shrink: 0;
+}
+
+.community-page .listing-details {
+	flex-grow: 1;
+}
+
+.community-page .listing-title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin-bottom: 1rem;
+	color: var(--text-primary);
+}
+
+.community-page .listing-seller {
+	color: var(--text-secondary);
+	font-size: 0.875rem;
+	margin-bottom: 1rem;
+}
+
+.community-page .listing-price {
+	color: var(--primary-color);
+	font-weight: 600;
+	font-size: 1.75rem;
+	margin-bottom: 1rem;
+}
+
+.community-page .listing-tag {
+	display: inline-block;
+	background-color: #f3f4f6;
+	padding: 0.5rem 1rem;
+	border-radius: var(--radius-full);
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--text-secondary);
+}
+
+.community-page .listing-actions {
+	margin-top: 1.5rem;
+	display: flex;
+	gap: 1rem;
+}
+
+.community-page .contact-seller {
+	background-color: var(--primary-color);
+	color: white;
+	padding: 0.75rem 1.5rem;
+	border-radius: var(--radius-md);
+	font-weight: 500;
+	cursor: pointer;
+	border: none;
+	transition: all 0.2s ease;
+}
+
+.community-page .contact-seller:hover {
+	background-color: var(--primary-hover);
+}
+
+.community-page .save-listing {
+	padding: 0.75rem 1.5rem;
+	border-radius: var(--radius-md);
+	font-weight: 500;
+	cursor: pointer;
+	border: 1px solid var(--border-color);
+	background: transparent;
+	color: var(--text-secondary);
+	transition: all 0.2s ease;
+}
+
+.community-page .save-listing:hover {
+	background-color: var(--background-color);
+}
+
+/* Discussion section specific styles */
+.community-page .discussions-section {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.community-page .discussion-container {
+	margin-bottom: 1.5rem;
+}
+
+.community-page .discussion-card {
+	background-color: var(--card-background);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-lg);
+	padding: 1.5rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	box-shadow: var(--shadow-sm);
+}
+
+.community-page .discussion-card:hover {
+	box-shadow: var(--shadow-md);
+	transform: translateY(-2px);
+}
+
+.community-page .discussion-card.expanded {
+	cursor: default;
+	box-shadow: var(--shadow-lg);
+}
+
+.community-page .discussion-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 1rem;
+}
+
+.community-page .discussion-title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--text-primary);
+	margin: 0;
+}
+
+.community-page .discussion-meta {
+	display: flex;
+	gap: 1rem;
+	font-size: 0.875rem;
+	color: var(--text-secondary);
+}
+
+.community-page .discussion-expanded {
+	margin-top: 1.5rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--border-color);
+}
+
+.community-page .discussion-content {
+	font-size: 1rem;
+	line-height: 1.6;
+	color: var(--text-primary);
+	margin-bottom: 1.5rem;
+}
+
+.community-page .tips-section,
+.community-page .locations-section {
+	margin-bottom: 2rem;
+}
+
+.community-page .tips-list,
+.community-page .locations-list {
+	list-style: none;
+	padding: 0;
+	margin: 1rem 0;
+}
+
+.community-page .tip-item,
+.community-page .location-item {
+	background-color: var(--background-color);
+	padding: 0.75rem 1rem;
+	margin-bottom: 0.5rem;
+	border-radius: var(--radius-md);
+	font-size: 0.875rem;
+	color: var(--text-primary);
+}
+
+.community-page .comments-section {
+	margin-top: 2rem;
+}
+
+.community-page .comment-input-container {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+}
+
+.community-page .comment-input {
+	flex-grow: 1;
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-md);
+	font-size: 0.875rem;
+	transition: all 0.2s ease;
+}
+
+.community-page .comment-input:focus {
+	outline: none;
+	border-color: var(--primary-color);
+	box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.community-page .comment-submit {
+	padding: 0.75rem 1.5rem;
+	background-color: var(--primary-color);
+	color: white;
+	border: none;
+	border-radius: var(--radius-md);
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.community-page .comment-submit:hover {
+	background-color: var(--primary-hover);
+}
+
+.community-page .comment-card {
+	background-color: var(--background-color);
+	padding: 1rem;
+	border-radius: var(--radius-md);
+	margin-bottom: 1rem;
+}
+
+.community-page .comment-header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0.5rem;
+	font-size: 0.875rem;
+}
+
+.community-page .comment-author {
+	font-weight: 500;
+	color: var(--text-primary);
+}
+
+.community-page .comment-timestamp {
+	color: var(--text-secondary);
+}
+
+.community-page .comment-text {
+	font-size: 0.875rem;
+	line-height: 1.5;
+	color: var(--text-primary);
+	margin: 0.5rem 0;
+}
+
+.community-page .comment-footer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.community-page .comment-likes {
+	font-size: 0.875rem;
+	color: var(--text-secondary);
+	cursor: pointer;
+}
+
+/* Responsive styles for discussions */
+@media (max-width: 768px) {
+	.community-page .discussion-header {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.community-page .discussion-meta {
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.community-page .comment-input-container {
+		flex-direction: column;
+	}
+
+	.community-page .comment-submit {
+		width: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.community-page {
+		padding: 1rem;
+	}
+
+	.community-page .listing-content {
+		flex-direction: column;
+	}
+
+	.community-page .listing-image {
+		width: 100%;
+		height: 240px;
+	}
+
+	.community-page .listing-actions {
+		flex-direction: column;
+	}
+
+	.community-page .nav-tabs {
+		gap: 0.5rem;
+	}
+
+	.community-page .nav-button {
+		padding: 0.5rem 1rem;
+		font-size: 0.875rem;
+	}
+
+	.community-page .section-header {
+		flex-direction: column;
+		gap: 1rem;
+		align-items: flex-start;
+	}
+}

@@ -15,7 +15,7 @@ export const transportData = [
 		vehicle: "Bus B",
 		type: "Bus",
 		arrivalTime: "11:30",
-		days: ["Tuesday", "Thursday"],
+		days: ["Tuesday", "Thursday", "Sunday"],
 		routes: [
 			{ startTime: "11:30", endTime: "11:50", location: "Suburbs" },
 			{ startTime: "14:00", endTime: "14:20", location: "University" },
@@ -59,7 +59,7 @@ export const transportData = [
 		vehicle: "Cab D",
 		type: "Cab",
 		arrivalTime: "16:00",
-		days: ["Monday", "Wednesday", "Friday"],
+		days: ["Monday", "Friday", "Sunday"],
 		routes: [
 			{ startTime: "16:00", endTime: "16:20", location: "Airport" },
 			{ startTime: "18:00", endTime: "18:20", location: "Downtown" },
@@ -70,7 +70,7 @@ export const transportData = [
 		vehicle: "Taxi Y",
 		type: "Taxi",
 		arrivalTime: "18:30",
-		days: ["Monday", "Wednesday", "Saturday"],
+		days: ["Wednesday", "Saturday"],
 		routes: [
 			{ startTime: "18:30", endTime: "18:50", location: "City Center" },
 			{ startTime: "21:00", endTime: "21:20", location: "Suburbs" },
@@ -81,7 +81,7 @@ export const transportData = [
 		vehicle: "Bus D",
 		type: "Bus",
 		arrivalTime: "19:00",
-		days: ["Tuesday", "Thursday"],
+		days: ["Tuesday", "Thursday", "Sunday"],
 		routes: [
 			{ startTime: "19:00", endTime: "19:20", location: "Downtown" },
 			{ startTime: "21:00", endTime: "21:20", location: "University" },

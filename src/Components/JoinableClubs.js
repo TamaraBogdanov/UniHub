@@ -1,34 +1,48 @@
 import React, { useState } from "react";
-import { joinableClubsData } from "../Mockdata/JoinableClubs";
 import "../Styles/Clubs.css";
 
-const JoinableClubs = () => {
-	const [searchTerm, setSearchTerm] = useState("");
+const JoinableClubs = ({ clubs, onJoinClub }) => {
 	const [selectedClub, setSelectedClub] = useState(null);
 	const [showPanel, setShowPanel] = useState(false);
-
-	const handleSearch = (event) => {
-		setSearchTerm(event.target.value);
-	};
+	const [showForm, setShowForm] = useState(false);
+	const [formData, setFormData] = useState({
+		name: "",
+		surname: "",
+		studentNumber: "",
+	});
+	const [formSubmitted, setFormSubmitted] = useState(false);
 
 	const handleClubClick = (club) => {
 		setSelectedClub(club);
 		setShowPanel(true);
-	};
-
-	const handleJoinClub = (clubId) => {
-		console.log(`Joined club ${clubId}`);
-		setShowPanel(false);
+		setShowForm(false); // Reset the form state when a new club is selected
+		setFormSubmitted(false); // Reset the form submitted state
 	};
 
 	const handleClosePanel = () => {
 		setShowPanel(false);
+		setShowForm(false);
+		setFormData({ name: "", surname: "", studentNumber: "" });
+		setFormSubmitted(false);
 	};
 
 	const handleOverlayClick = (e) => {
 		if (e.target.className === "modal-overlay") {
-			setShowPanel(false);
+			handleClosePanel();
 		}
+	};
+
+	const handleInputChange = (event) => {
+		const { name, value } = event.target;
+		setFormData({ ...formData, [name]: value });
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		console.log(`Joined club ${selectedClub.id} with data:`, formData);
+		setFormSubmitted(true); // Set form submitted state to true
+		setShowForm(false); // Hide form after submission
+		onJoinClub(selectedClub); // Call the join club handler
 	};
 
 	return (
@@ -38,30 +52,16 @@ const JoinableClubs = () => {
 				<p>Explore and join the clubs that interest you!</p>
 			</div>
 
-			<input
-				type="text"
-				placeholder="Search clubs..."
-				value={searchTerm}
-				onChange={handleSearch}
-				className="search-bar"
-			/>
-
-			<div className="joinable-clubs-grid">
-				{joinableClubsData
-					.filter((club) =>
-						club.name.toLowerCase().includes(searchTerm.toLowerCase())
-					)
-					.map((club) => (
-						<div
-							key={club.id}
-							className="joinable-club-card"
-							onClick={() => handleClubClick(club)}
-						>
-							<h3>{club.name}</h3>
-							<p>{club.overview}</p>
-						</div>
-					))}
-			</div>
+			{clubs.map((club) => (
+				<div
+					key={club.id}
+					className="joinable-club-card"
+					onClick={() => handleClubClick(club)}
+				>
+					<h3>{club.name}</h3>
+					<p>{club.overview}</p>
+				</div>
+			))}
 
 			{showPanel && selectedClub && (
 				<div className="modal-overlay" onClick={handleOverlayClick}>
@@ -72,43 +72,65 @@ const JoinableClubs = () => {
 
 						<h2>{selectedClub.name}</h2>
 
-						<div className="overview-section">
-							<p>{selectedClub.overview}</p>
-						</div>
+						{!showForm ? (
+							<>
+								<div className="overview-section">
+									<p>{selectedClub.overview}</p>
+								</div>
 
-						<div className="meeting-info">
-							<div className="info-row">
-								<h4>Schedule</h4>
-								<p>{selectedClub.schedule}</p>
-							</div>
+								{!formSubmitted && (
+									<button
+										className="join-button"
+										onClick={() => setShowForm(true)}
+									>
+										Join Club
+									</button>
+								)}
+							</>
+						) : (
+							<form onSubmit={handleSubmit} className="join-club-form">
+								<h3>Join {selectedClub.name}</h3>
+								<div>
+									<label htmlFor="name">Name:</label>
+									<input
+										type="text"
+										id="name"
+										name="name"
+										value={formData.name}
+										onChange={handleInputChange}
+										required
+									/>
+								</div>
+								<div>
+									<label htmlFor="surname">Surname:</label>
+									<input
+										type="text"
+										id="surname"
+										name="surname"
+										value={formData.surname}
+										onChange={handleInputChange}
+										required
+									/>
+								</div>
+								<div>
+									<label htmlFor="studentNumber">Student Number:</label>
+									<input
+										type="text"
+										id="studentNumber"
+										name="studentNumber"
+										value={formData.studentNumber}
+										onChange={handleInputChange}
+										required
+									/>
+								</div>
+								<button type="submit" className="join-button">
+									Submit
+								</button>
+							</form>
+						)}
 
-							<div className="info-row">
-								<h4>Location</h4>
-								<p>{selectedClub.meetingLocation}</p>
-							</div>
-
-							<div className="info-row">
-								<h4>Next Meeting</h4>
-								<p>{selectedClub.nextMeeting}</p>
-							</div>
-						</div>
-
-						<div className="description-section">
-							<h4>About the Club</h4>
-							<p>{selectedClub.description}</p>
-						</div>
-
-						<div className="requirements-section">
-							<h4>Requirements</h4>
-							<p>{selectedClub.requirements}</p>
-						</div>
-
-						<button
-							className="join-button"
-							onClick={() => handleJoinClub(selectedClub.id)}
-						>
-							Join Club
-						</button>
+						{/* Show success message after form submission */}
+						{formSubmitted && <p>Successfully joined the club!</p>}
 					</div>
 				</div>
 			)}

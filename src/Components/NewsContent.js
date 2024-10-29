@@ -3,14 +3,13 @@ import "../Styles/News.css";
 import { Search, ChevronDown, ThumbsUp } from "lucide-react";
 import {
 	enhancedMockNewsData,
-	newsCategories,
 	newsSubcategories,
 } from "../Mockdata/detailedMockData";
 import NewsModal from "./NewsModal";
 
 function NewsContent() {
 	const [searchTerm, setSearchTerm] = useState("");
-	const [selectedCategory, setSelectedCategory] = useState("All");
+	const [selectedCategory] = useState("All");
 	const [selectedSubcategory, setSelectedSubcategory] = useState("All");
 	const [sortBy, setSortBy] = useState("date");
 	const [expandedNewsId, setExpandedNewsId] = useState(null);
@@ -82,22 +81,35 @@ function NewsContent() {
 
 	return (
 		<div className="news-content">
-			<h2>Explore Topics</h2>
-			<div className="topic-buttons">
-				{newsCategories.map((category) => (
-					<button
-						key={category.name}
-						className={`topic-button ${
-							selectedCategory === category.name ? "active" : ""
-						}`}
-						onClick={() => setSelectedCategory(category.name)}
-					>
-						{category.icon}
-						<span>{category.name}</span>
-					</button>
+			<h2>Featured Headlines</h2>
+			<div className="featured-news">
+				{featuredNews.map((news) => (
+					<div key={news.id} className="featured-news-card">
+						<img
+							src={news.image}
+							alt={news.title}
+							className="featured-news-image"
+						/>
+						<div className="featured-news-content">
+							<div className="featured-news-icon">{news.icon}</div>
+							<div className="featured-news-info">
+								<h3>{news.title}</h3>
+								<p>
+									{news.category} - {news.subcategory}
+								</p>
+								<p className="news-date">{news.date}</p>
+								<p>
+									<strong>Author:</strong> {news.author}
+								</p>
+								<p>
+									<strong>Publisher:</strong> {news.publisher}
+								</p>
+								<p>{news.content}</p>
+							</div>
+						</div>
+					</div>
 				))}
 			</div>
-
 			<h2>Current Headlines</h2>
 			<div className="news-controls">
 				<div className="search-bar">
@@ -183,36 +195,6 @@ function NewsContent() {
 					Load More
 				</button>
 			)}
-
-			<h2>Featured Headlines</h2>
-			<div className="featured-news">
-				{featuredNews.map((news) => (
-					<div key={news.id} className="featured-news-card">
-						<img
-							src={news.image}
-							alt={news.title}
-							className="featured-news-image"
-						/>
-						<div className="featured-news-content">
-							<div className="featured-news-icon">{news.icon}</div>
-							<div className="featured-news-info">
-								<h3>{news.title}</h3>
-								<p>
-									{news.category} - {news.subcategory}
-								</p>
-								<p className="news-date">{news.date}</p>
-								<p>
-									<strong>Author:</strong> {news.author}
-								</p>
-								<p>
-									<strong>Publisher:</strong> {news.publisher}
-								</p>
-								<p>{news.content}</p>
-							</div>
-						</div>
-					</div>
-				))}
-			</div>
 
 			<NewsModal news={modalNews} onClose={closeModal} />
 		</div>

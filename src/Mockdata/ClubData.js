@@ -23,4 +23,11 @@ export const clubsData = [
 		overview: "Compete in math competitions.",
 		category: "academic",
 	},
+
+	{
+		id: 5,
+		name: "Photography Club",
+		overview: "A club for photography enthusiasts.",
+	},
+	{ id: 6, name: "Coding Ninjas", overview: "A club for aspiring coders." },
 ];
