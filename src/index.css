@@ -8,6 +8,16 @@ body {
 	background-color: #dfe4f1;
 }
 
+:root {
+	--primary-color: #1b065e;
+	--secondary-color: #3498db;
+	--tertiary-color: #27ae60;
+	--background-color: #f0f2f5;
+	--card-background: #ffffff;
+	--text-primary: #333333;
+	--text-secondary: #666666;
+	--border-radius: 12px;
+}
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;

@@ -1,12 +1,5 @@
 /* Scoped community page styles */
 .community-page {
-	--primary-color: #3b82f6;
-	--primary-hover: #2563eb;
-	--background-color: #f0f2f5;
-	--card-background: #ffffff;
-	--border-color: #e5e7eb;
-	--text-primary: #1f2937;
-	--text-secondary: #6b7280;
 	--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
 		0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -169,7 +162,7 @@
 }
 
 .community-page .listing-price {
-	color: var(--primary-color);
+	color: var(--secondary-color);
 	font-weight: 600;
 	font-size: 1.75rem;
 	margin-bottom: 1rem;
@@ -203,7 +196,7 @@
 }
 
 .community-page .contact-seller:hover {
-	background-color: var(--primary-hover);
+	background-color: var(--secondary-color);
 }
 
 .community-page .save-listing {

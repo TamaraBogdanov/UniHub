@@ -166,13 +166,6 @@ const VolunteerPage = () => {
 
 	return (
 		<div className="container">
-			<div className="header">
-				<h1>Wits Volunteer Hub</h1>
-				<p>
-					Make a difference in your community while developing valuable skills
-				</p>
-			</div>
-
 			{/* Benefits Section - Always Visible */}
 			<div className="benefits-section">
 				<h2>Why Volunteer at Wits?</h2>
