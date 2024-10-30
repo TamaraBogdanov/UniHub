@@ -1,29 +1,11 @@
 import React, { useState } from "react";
 import { Newspaper, Calendar, Clock, Users } from "lucide-react";
 import "../Styles/Home2.css";
-import "../Styles/Carousel.css";
+
 import { enhancedMockNewsData, Categories } from "../Mockdata/detailedMockData";
-import Carousel from "../Shared/Carousel";
+
 import { wellnessEvents } from "../Components/WellnessContent";
 import { eventsMockData } from "../Mockdata/eventsMockData"; // Import events data
-
-const carouselImages = [
-	"./images/student-unsplash.jpg",
-	"./images/image2.png",
-	"./images/image3.png",
-];
-
-const carouselTitles = [
-	"Welcome to the Student Hub",
-	"Explore Your Courses",
-	"Join Community Events",
-];
-
-const carouselParagraphs = [
-	"Here you can find resources to enhance your student life. Stay updated and get involved!",
-	"Discover a variety of courses tailored to your interests.",
-	"Participate in events that connect you with peers and professionals.",
-];
 
 function HomeContent() {
 	const [filter, setFilter] = useState("All");
@@ -55,11 +37,19 @@ function HomeContent() {
 
 	return (
 		<>
-			<Carousel
-				images={carouselImages}
-				titles={carouselTitles}
-				paragraphs={carouselParagraphs}
-			/>
+			<section className="hero">
+				<div className="hero-text">
+					<h1>Welcome, Student!</h1>
+					<h2>Ready to continue your academic journey?</h2>
+					<div className="hero-buttons">
+						<button className="primary-button">View Schedule</button>
+						<button className="secondary-button">Explore Courses</button>
+					</div>
+				</div>
+				<div className="hero-image">
+					<img src="./images/portal.png" alt="Hero" />
+				</div>
+			</section>
 			<section className="updates-section">
 				<h2>Latest Updates</h2>
 				<div className="filter-system">
