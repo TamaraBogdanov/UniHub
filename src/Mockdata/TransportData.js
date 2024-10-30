@@ -4,7 +4,7 @@ export const transportData = [
 		vehicle: "Bus A",
 		type: "Bus",
 		arrivalTime: "10:30",
-		days: ["Monday", "Wednesday", "Friday"],
+		days: ["Monday", "Friday"],
 		routes: [
 			{ startTime: "10:30", endTime: "10:50", location: "Downtown" },
 			{ startTime: "13:00", endTime: "13:20", location: "University" },
@@ -37,7 +37,7 @@ export const transportData = [
 		vehicle: "Taxi X",
 		type: "Taxi",
 		arrivalTime: "07:00",
-		days: ["Monday", "Wednesday", "Saturday"],
+		days: ["Wednesday", "Saturday"],
 		routes: [
 			{ startTime: "07:00", endTime: "07:20", location: "City Center" },
 			{ startTime: "09:30", endTime: "09:50", location: "Suburbs" },
@@ -48,7 +48,7 @@ export const transportData = [
 		vehicle: "Bus C",
 		type: "Bus",
 		arrivalTime: "12:45",
-		days: ["Tuesday", "Thursday", "Friday"],
+		days: ["Tuesday", "Thursday"],
 		routes: [
 			{ startTime: "12:40", endTime: "13:00", location: "Downtown" },
 			{ startTime: "15:00", endTime: "15:20", location: "University" },

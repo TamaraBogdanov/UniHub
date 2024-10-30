@@ -15,7 +15,10 @@ function App() {
 			<Router>
 				<Routes>
 					<Route path="/" element={<LoginPage setUserRole={setUserRole} />} />
-					<Route path="/home" element={<HomePage userRole={userRole} />} />
+					<Route
+						path="/login"
+						element={<LoginPage setUserRole={setUserRole} />}
+					/>
 					<Route path="/home" element={<HomePage userRole={userRole} />} />
 					<Route path="/self-service" element={<SelfServicePage />} />
 					<Route path="/student-hub" element={<StudentHubPage />} />

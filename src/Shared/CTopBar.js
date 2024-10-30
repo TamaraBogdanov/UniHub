@@ -30,14 +30,14 @@ function Topbar({ currentPage, userRole, topbarColor }) {
 	}, []);
 
 	//The toggleDropdown function toggles the state of dropdownOpen between true and false each time it is called
-	// Toggle the state of dropdownOpen between true and false
+
 	function toggleDropdown() {
 		setDropdownOpen(!dropdownOpen);
 	}
 
 	function handleLogout() {
 		// Navigate to the login page
-		navigate("/login");
+		navigate("/");
 	}
 
 	return (

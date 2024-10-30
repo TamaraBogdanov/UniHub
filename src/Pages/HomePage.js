@@ -212,7 +212,6 @@ function HomePage({ userRole }) {
 				<div className="dashboard">
 					<nav className="sidebar">
 						<div className="sidebar-content topnav">
-							{/* New Dashboard Button */}
 							{/* Keep Dashboard Button Active */}
 							<button
 								className="nav-button active" // Always active
