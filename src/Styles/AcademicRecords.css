@@ -1,0 +1,449 @@
+.academic-records-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: "Arial", sans-serif;
+}
+
+.academic-records-content h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+.student-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  background-color: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 1.5rem;
+}
+
+.student-info h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.student-info p {
+  color: #34495e;
+  margin: 0.25rem 0;
+}
+
+.academic-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #f0f4f8;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #34495e;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover,
+.tab-button.active {
+  background-color: #3498db;
+  color: white;
+}
+
+.tab-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Overview Tab */
+.quick-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  flex: 1;
+  margin: 0 0.5rem;
+}
+
+.stat-card h3 {
+  font-size: 1.2rem;
+  color: #34495e;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #3498db;
+}
+
+.recent-achievements,
+.upcoming-deadlines {
+  margin-bottom: 2rem;
+}
+
+.recent-achievements h3,
+.upcoming-deadlines h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.recent-achievements ul,
+.upcoming-deadlines ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.recent-achievements li,
+.upcoming-deadlines li {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background-color: #f8fafc;
+  border-radius: 4px;
+}
+
+/* Modules Tab */
+.module-card {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.module-header:hover {
+  background-color: #e8f0fe;
+}
+
+.module-header h4 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.module-details {
+  padding: 1rem;
+  border-top: 1px solid #e8e8e8;
+}
+
+/* Transcript Tab */
+.transcript-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.academic-download-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.academic-download-button:hover {
+  background-color: #2980b9;
+}
+
+.transcript-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transcript-table th,
+.transcript-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.transcript-table th {
+  background-color: #f8fafc;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* Progress Tab */
+.progress-bar {
+  height: 30px;
+  background-color: #f0f4f8;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.progress-bar .progress {
+  height: 100%;
+  background-color: #3498db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.progress-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress-card {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  flex: 1;
+  margin: 0 0.5rem;
+}
+
+.progress-card h4 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+/* Continuing from where we left off */
+
+.mini-progress-bar {
+  height: 10px;
+  background-color: #f0f4f8;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.mini-progress-bar .progress {
+  height: 100%;
+  background-color: #3498db;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .academic-records-content {
+    padding: 1rem;
+  }
+
+  .academic-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    flex: 1 0 calc(50% - 0.5rem);
+  }
+
+  .quick-stats,
+  .progress-details {
+    flex-direction: column;
+  }
+
+  .stat-card,
+  .progress-card {
+    margin: 0.5rem 0;
+  }
+
+  .student-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-pic {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab-button {
+    flex: 1 0 100%;
+  }
+
+  .transcript-table {
+    font-size: 0.8rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-content {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Accessibility improvements */
+.tab-button:focus,
+.academic-download-button:focus,
+.module-header:focus {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
+}
+
+/* Additional styles for better visual hierarchy */
+.module-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.transcript-table tr:hover {
+  background-color: #f8fafc;
+}
+
+/* Tooltip for abbreviated terms */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem;
+  background-color: #34495e;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Print styles */
+@media print {
+  .academic-tabs,
+  .academic-download-button {
+    display: none;
+  }
+
+  .tab-content {
+    box-shadow: none;
+  }
+
+  .transcript-table {
+    page-break-inside: avoid;
+  }
+
+  .progress-bar,
+  .mini-progress-bar {
+    border: 1px solid #000;
+  }
+
+  .progress-bar .progress,
+  .mini-progress-bar .progress {
+    background-color: #ccc;
+  }
+}
+
+/* Additional South African university-specific styles */
+.university-logo {
+  max-width: 150px;
+  margin-bottom: 1rem;
+}
+
+.national-colors {
+  background: linear-gradient(
+    to right,
+    #007a4d,
+    #fdb913,
+    #0c1c8c,
+    #ee1c25,
+    #000000,
+    #ffffff
+  );
+  height: 5px;
+  margin-bottom: 1rem;
+}
+
+.module-code {
+  font-weight: bold;
+  color: #007a4d; /* Using a color from the South African flag */
+}
+
+.distinction {
+  color: #fdb913; /* Gold color for distinction marks */
+  font-weight: bold;
+}
+
+/* Styles for indigenous language courses */
+.indigenous-language {
+  background-color: #fff5e6; /* Light orange background */
+  border-left: 4px solid #fdb913; /* Orange border */
+  padding-left: 1rem;
+}
+
+/* Style for important notices (e.g., NSFAS updates) */
+.important-notice {
+  background-color: #ffe5e5; /* Light red background */
+  border: 1px solid #ee1c25; /* Red border */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.important-notice h4 {
+  color: #ee1c25;
+  margin-top: 0;
+}
+
+/* Style for sports and cultural achievements */
+.achievement-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: #e8f0fe;
+  color: #0c1c8c;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
