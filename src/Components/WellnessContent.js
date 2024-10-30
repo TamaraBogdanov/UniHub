@@ -4,7 +4,6 @@ import {
 	Calendar,
 	Clock,
 	Users,
-	Heart,
 	Brain,
 	Utensils,
 	Activity,
