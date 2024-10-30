@@ -1,139 +1,139 @@
 /* Grades Styles */
 .grades-content {
-  padding: 20px;
+	padding: 20px;
 }
 
 .grades-content h2,
 .grades-content h3 {
-  margin-bottom: 20px;
-  color: #2c3e50;
+	margin-bottom: 20px;
+	color: #2c3e50;
 }
 
 .overall-average {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
 }
 
 .average-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background-color: #3498db;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	background-color: #3498db;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: white;
 }
 
 .average-number {
-  font-size: 28px;
-  font-weight: bold;
+	font-size: 28px;
+	font-weight: bold;
 }
 
 .average-label {
-  font-size: 14px;
+	font-size: 14px;
 }
 
 .average-trend {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .courses-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
 
 .course-card {
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+	background-color: white;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s ease;
 }
 
 .course-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .course-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  cursor: pointer;
-  background-color: #f8f9fa;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px;
+	cursor: pointer;
+	background-color: #f8f9fa;
 }
 
 .course-title h4 {
-  margin: 0;
-  color: #2c3e50;
+	margin: 0;
+	color: #2c3e50;
 }
 
 .course-title p {
-  margin: 5px 0 0;
-  color: #7f8c8d;
-  font-size: 14px;
+	margin: 5px 0 0;
+	color: #7f8c8d;
+	font-size: 14px;
 }
 
 .course-score {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
 }
 
 .score {
-  font-size: 24px;
-  font-weight: bold;
+	font-size: 24px;
+	font-weight: bold;
 }
 
 .score.first {
-  color: #27ae60;
+	color: #27ae60;
 }
 .score.upper-second {
-  color: #2980b9;
+	color: #2980b9;
 }
 .score.lower-second {
-  color: #f39c12;
+	color: #f39c12;
 }
 .score.third {
-  color: #e67e22;
+	color: #e67e22;
 }
 .score.fail {
-  color: #c0392b;
+	color: #c0392b;
 }
 
 .course-details {
-  padding: 15px;
-  border-top: 1px solid #e0e0e0;
+	padding: 15px;
+	border-top: 1px solid #e0e0e0;
 }
 
 .score-breakdown {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .breakdown-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .progressGrades-bar {
-  flex-grow: 1;
-  height: 8px;
-  background-color: #ecf0f1;
-  border-radius: 4px;
-  margin: 0 10px;
-  overflow: hidden;
+	flex-grow: 1;
+	height: 8px;
+	background-color: #ecf0f1;
+	border-radius: 4px;
+	margin: 0 10px;
+	overflow: hidden;
 }
 
 .progress {
-  height: 100%;
-  background-color: #3498db;
-  border-radius: 4px;
+	height: 100%;
+	background-color: #3498db;
+	border-radius: 4px;
 }

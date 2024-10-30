@@ -1,0 +1,359 @@
+/* Inside src/Pages/Transportation.css */
+.transportation-page {
+	padding: 2rem;
+	background-color: #f5f5f5;
+}
+
+/* Transportation.css */
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.current-time {
+	margin-left: auto; /* Pushes the time to the right */
+	font-size: 20px;
+	margin-bottom: 0.5rem;
+}
+
+/* Real-time info section */
+.real-time-info {
+	background-color: #e8f1fd;
+	padding: 1.5rem;
+	border-radius: 10px;
+	margin-bottom: 2rem;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.real-time-info ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+.real-time-info li {
+	font-size: 1.1rem;
+	color: #333;
+	margin-bottom: 0.5rem;
+}
+
+.real-time-info h1 {
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+.day-filter {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1.5rem;
+}
+
+.day-button {
+	background-color: #ffffff;
+	border: 2px solid #1b065e;
+	padding: 0.5rem 1rem;
+	margin: 0 0.5rem;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.2s;
+}
+
+.day-button.active {
+	background-color: #1b065e;
+	color: white;
+}
+
+.day-button:hover {
+	background-color: #e0e0e0;
+}
+
+.transport-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	justify-content: center;
+}
+
+.transport-card {
+	background-color: #ffffff;
+	border-radius: 8px;
+	padding: 1rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	width: 300px;
+	text-align: center;
+}
+
+.transport-card p {
+	font-size: 1rem;
+	margin: 0.25rem 0;
+}
+
+.book-btn {
+	background-color: #1b065e;
+	color: white;
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 1rem;
+}
+
+.book-btn:hover {
+	background-color: #e0e0e0;
+	color: #1b065e;
+}
+
+/* Collapsible Schedule */
+.schedule {
+	margin-top: 1rem;
+}
+
+.schedule h3 {
+	font-size: 1.1rem;
+	margin-bottom: 0.5rem;
+}
+
+.schedule ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.schedule ul li {
+	margin-bottom: 0.5rem;
+}
+
+.order-cab {
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.order-cab-btn {
+	background-color: #ff4e00;
+	color: white;
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.order-cab-btn:hover {
+	background-color: #ff751a;
+}
+
+.book-card {
+	margin-top: 5rem;
+}
+
+.book-card-header {
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.book-card-title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin: 0;
+	color: #111827;
+}
+
+/* Alert Styles */
+.alert {
+	padding: 1rem;
+	border-radius: 6px;
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+}
+
+.alert.success {
+	background-color: #f0fdf4;
+	border: 1px solid #86efac;
+	color: #166534;
+}
+
+.alert.warning {
+	background-color: #fefce8;
+	border: 1px solid #fde047;
+	color: #854d0e;
+}
+
+.alert-description {
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+.button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5rem 1rem;
+	border-radius: 6px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.2s, opacity 0.2s;
+	border: none;
+	text-align: center;
+	min-width: 100px; /* Base minimum width */
+}
+
+.button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Button Variants */
+.button-primary {
+	background-color: #2563eb;
+	color: white;
+}
+
+.button-primary:hover {
+	background-color: #1d4ed8;
+}
+
+.button-secondary {
+	background-color: #6b7280;
+	color: white;
+}
+
+.button-secondary:hover {
+	background-color: #4b5563;
+}
+
+.button-destructive {
+	background-color: #dc2626;
+	color: white;
+}
+
+.button-destructive:hover {
+	background-color: #b91c1c;
+}
+
+.modal-actions .button {
+	flex: 1;
+	max-width: 150px; /* Equal width for modal buttons */
+}
+
+/* Booking List specific styles */
+.booking-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/* Add any other booking item styles you need */
+}
+
+.booking-item .button-destructive {
+	width: auto;
+	min-width: 80px; /* Smaller minimum width for the booking list cancel button */
+	max-width: 100px; /* Maximum width to prevent it from becoming too wide */
+}
+/* Form Elements */
+.select-container {
+	margin-bottom: 1rem;
+}
+
+select {
+	width: 100%;
+	padding: 0.5rem;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	font-size: 0.875rem;
+	background-color: white;
+}
+
+label {
+	display: block;
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	color: #374151;
+}
+
+/* Grid Layout */
+.grid {
+	display: grid;
+	gap: 1rem;
+	margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+	.grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* Booking List Styles */
+.booking-list {
+	margin-top: 1.5rem;
+}
+
+.booking-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+	background-color: #f9fafb;
+	border-radius: 6px;
+	margin-bottom: 0.5rem;
+}
+
+.booking-info {
+	flex-grow: 1;
+}
+
+.booking-time {
+	font-weight: 500;
+	color: #111827;
+}
+
+.booking-location {
+	color: #6b7280;
+	font-size: 0.875rem;
+}
+
+/* Utility Classes */
+.text-sm {
+	font-size: 0.875rem;
+}
+
+.text-gray {
+	color: #6b7280;
+}
+
+.space-y {
+	margin-top: 1.5rem;
+}
+
+.w-full {
+	width: 100%;
+}
+
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000; /* Ensure it’s above other elements */
+}
+
+.modal-content {
+	background: #fff;
+	padding: 2rem;
+	border-radius: 8px;
+	width: 90%;
+	max-width: 400px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	text-align: center;
+}
+
+.modal-actions {
+	margin-top: 1rem;
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+}

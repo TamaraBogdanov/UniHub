@@ -142,6 +142,33 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+.events-section {
+	margin-top: 2rem;
+}
+
+.events-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1rem;
+}
+
+.event-card {
+	border: 1px solid #ccc;
+	padding: 1rem;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	position: relative; /* Ensure relative positioning for absolute children if needed */
+}
+
+.event-image {
+	width: 100%; /* Make the image take full width */
+	height: 150px; /* Set a fixed height */
+	object-fit: cover; /* Ensure the image covers the area without distortion */
+	border-radius: 8px; /* Round the corners of the image */
+	margin-bottom: 1rem; /* Add space below the image */
+}
+
 .update-icon {
   margin-bottom: 10px;
   color: #1b065e;
