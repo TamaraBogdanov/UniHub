@@ -1,38 +1,50 @@
-import React, { useState } from "react";
-import "../Styles/CommunityPage.css";
+import React, { useEffect, useState } from "react";
+import "../../Styles/CommunityPage.css";
+import CreateListingModal from "./CreateListing";
+import ImageModal from "./ImageModal";
+import ContactSellerModal from "./ContactSeller";
 
 const CommunityContent = () => {
 	const [activeTab, setActiveTab] = useState("marketplace");
 	const [selectedDiscussion, setSelectedDiscussion] = useState(null);
 	const discussionRef = React.useRef(null);
 	const [newComment, setNewComment] = useState("");
+	const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+	const [selectedImage, setSelectedImage] = useState(null);
+	const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+	const [selectedSeller, setSelectedSeller] = useState(null);
+	const [selectedItem, setSelectedItem] = useState(null);
 
-	const [listings] = useState([
-		{
-			id: 1,
-			title: "Calculus Textbook",
-			price: 45,
-			seller: "Alex",
-			type: "Books",
-			image: "/api/placeholder/150/150",
-		},
-		{
-			id: 2,
-			title: "Scientific Calculator",
-			price: 25,
-			seller: "Sarah",
-			type: "Electronics",
-			image: "/api/placeholder/150/150",
-		},
-		{
-			id: 3,
-			title: "Study Desk",
-			price: 80,
-			seller: "Mike",
-			type: "Furniture",
-			image: "/api/placeholder/150/150",
-		},
-	]);
+	const getInitialListings = () => {
+		return [
+			{
+				id: 1,
+				title: "Calculus Textbook",
+				price: 250,
+				seller: "Alex",
+				type: "Books",
+				image: "./images/calc.jpg",
+			},
+			{
+				id: 2,
+				title: "Scientific Calculator",
+				price: 300,
+				seller: "Sarah",
+				type: "Electronics",
+				image: "./images/calculator.jpg",
+			},
+			{
+				id: 3,
+				title: "Study Desk",
+				price: 500,
+				seller: "Mike",
+				type: "Furniture",
+				image: "./images/desk.jpg",
+			},
+		];
+	};
+
+	const [listings, setListings] = useState(getInitialListings());
 
 	const [events] = useState([
 		{
@@ -120,7 +132,33 @@ const CommunityContent = () => {
 			],
 		},
 	]);
+	const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
+	const handleCreateListing = (newListing) => {
+		setListings((prevListings) => [newListing, ...prevListings]);
+	};
+
+	const handleImageClick = (image) => {
+		setSelectedImage(image);
+		setIsImageModalOpen(true);
+	};
+
+	const handleCloseModal = () => {
+		setIsImageModalOpen(false);
+		setSelectedImage(null);
+	};
+
+	// Add useEffect to save listings to localStorage whenever they change
+	useEffect(() => {
+		localStorage.setItem("listings", JSON.stringify(listings));
+	}, [listings]);
+
+	// Add delete listing handler
+	const handleDeleteListing = (listingId) => {
+		setListings((prevListings) =>
+			prevListings.filter((listing) => listing.id !== listingId)
+		);
+	};
 	React.useEffect(() => {
 		const handleClickOutside = (event) => {
 			if (
@@ -212,7 +250,12 @@ const CommunityContent = () => {
 						<section className="discussions-section">
 							<div className="section-header">
 								<h2 className="section-title">Student Marketplace</h2>
-								<button className="create-button">+ New Listing</button>
+								<button
+									className="create-button"
+									onClick={() => setIsCreateModalOpen(true)}
+								>
+									+ New Listing
+								</button>
 							</div>
 							<div className="listings-container">
 								{listings.map((listing) => (
@@ -222,21 +265,47 @@ const CommunityContent = () => {
 												src={listing.image}
 												alt={listing.title}
 												className="listing-image"
+												onClick={() => handleImageClick(listing.image)}
 											/>
 											<div className="listing-details">
 												<h3 className="listing-title">{listing.title}</h3>
 												<p className="listing-seller">
 													Seller: {listing.seller}
 												</p>
-												<p className="listing-price">${listing.price}</p>
+												<p className="listing-price">R{listing.price}</p>
 												<span className="listing-tag">{listing.type}</span>
 												<div className="listing-actions">
-													<button className="contact-seller">
+													<button
+														className="contact-seller"
+														onClick={(e) => {
+															e.stopPropagation();
+															setSelectedSeller(listing.seller);
+															setSelectedItem(listing.title);
+															setIsContactModalOpen(true);
+														}}
+													>
 														Contact Seller
 													</button>
 													<button className="save-listing">
 														Save for Later
 													</button>
+													{listing.seller === "You" && (
+														<button
+															className="delete-listing"
+															onClick={(e) => {
+																e.stopPropagation();
+																if (
+																	window.confirm(
+																		"Are you sure you want to delete this listing?"
+																	)
+																) {
+																	handleDeleteListing(listing.id);
+																}
+															}}
+														>
+															Delete Listing
+														</button>
+													)}
 												</div>
 											</div>
 										</div>
@@ -382,6 +451,23 @@ const CommunityContent = () => {
 						</div>
 					</section>
 				)}
+				<CreateListingModal
+					isOpen={isCreateModalOpen}
+					onClose={() => setIsCreateModalOpen(false)}
+					onCreateListing={handleCreateListing}
+				/>
+
+				{/* Render the ImageModal if an image is selected */}
+				{isImageModalOpen && (
+					<ImageModal image={selectedImage} onClose={handleCloseModal} />
+				)}
+
+				<ContactSellerModal
+					isOpen={isContactModalOpen}
+					onClose={() => setIsContactModalOpen(false)}
+					seller={selectedSeller}
+					itemTitle={selectedItem}
+				/>
 			</main>
 		</div>
 	);

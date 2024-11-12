@@ -14,11 +14,13 @@ import {
 
 import "../Styles/Volunteering.css";
 import VolunteerTracking from "./VolunteerTracking";
+import VolunteerApplicationForm from "./VolunteerApplication";
 
 const VolunteerPage = () => {
 	const [selectedCategory, setSelectedCategory] = useState("all");
 	const [searchQuery] = useState("");
 	const [activeView, setActiveView] = useState("opportunities");
+	const [activeApplication, setActiveApplication] = useState(null); // Track the active form's ID
 
 	const categories = [
 		{ id: "all", name: "All Opportunities", icon: Globe },
@@ -46,7 +48,6 @@ const VolunteerPage = () => {
 			icon: Heart,
 		},
 	];
-
 	const volunteerOpportunities = [
 		{
 			id: 1,
@@ -153,7 +154,6 @@ const VolunteerPage = () => {
 			faculty: "All Faculties",
 		},
 	];
-
 	const filteredOpportunities = volunteerOpportunities
 		.filter(
 			(opp) => selectedCategory === "all" || opp.category === selectedCategory
@@ -166,7 +166,6 @@ const VolunteerPage = () => {
 
 	return (
 		<div className="container">
-			{/* Benefits Section - Always Visible */}
 			<div className="benefits-section">
 				<h2>Why Volunteer at Wits?</h2>
 				<div className="benefits-grid">
@@ -180,7 +179,6 @@ const VolunteerPage = () => {
 				</div>
 			</div>
 
-			{/* View Toggle Buttons - Always Visible */}
 			<div className="view-toggle">
 				<button
 					className={`view-button ${
@@ -198,10 +196,8 @@ const VolunteerPage = () => {
 				</button>
 			</div>
 
-			{/* Conditional Rendering of Main Content */}
 			{activeView === "opportunities" ? (
 				<>
-					{/* Categories */}
 					<div className="categories">
 						{categories.map((category) => (
 							<button
@@ -217,7 +213,6 @@ const VolunteerPage = () => {
 						))}
 					</div>
 
-					{/* Opportunities Grid */}
 					<div className="opportunities-grid">
 						{filteredOpportunities.map((opportunity) => (
 							<div key={opportunity.id} className="card">
@@ -252,7 +247,10 @@ const VolunteerPage = () => {
 									</p>
 								</div>
 								<div className="button-container">
-									<button className="button">
+									<button
+										className="button"
+										onClick={() => setActiveApplication(opportunity.id)}
+									>
 										Apply Now
 										<ArrowRight className="icon" />
 									</button>
@@ -265,15 +263,24 @@ const VolunteerPage = () => {
 				<VolunteerTracking />
 			)}
 
-			{/* Bottom CTA Section - Always Visible */}
-			<div className="cta-section">
-				<h2>Can't find what you're looking for?</h2>
-				<p>
-					Contact the Wits Citizenship and Outreach Programme to discuss
-					creating new volunteer opportunities.
-				</p>
-				<button className="button-secondary">Contact WCCO</button>
-			</div>
+			{/* Application Form Modal */}
+			{activeApplication && (
+				<div className="application-modal">
+					<div className="modal-content">
+						<button
+							className="close-button"
+							onClick={() => setActiveApplication(null)}
+						>
+							Close
+						</button>
+						<VolunteerApplicationForm
+							opportunity={volunteerOpportunities.find(
+								(opportunity) => opportunity.id === activeApplication
+							)}
+						/>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };

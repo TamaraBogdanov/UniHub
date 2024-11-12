@@ -1,5 +1,6 @@
 .events-content {
-	max-width: 1200px;
+	width: 100%;
+	max-width: none; /* Remove the max-width limit */
 	margin: 0 auto;
 	padding: 20px;
 	background-color: var(--background-color);
@@ -106,9 +107,12 @@
 }
 
 .featured-event-details {
-	padding: 15px;
+	padding: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	flex-grow: 1;
 }
-
 .event-info {
 	display: flex;
 	align-items: center;
@@ -153,10 +157,12 @@
 	color: var(--text-primary);
 }
 
-.event-category {
-	font-size: 0.9rem;
-	color: var(--primary-color);
-	margin-bottom: 10px;
+.event-content {
+	padding: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1; /* Allow content to fill remaining space */
+	min-height: 0; /* Prevent content from expanding card unnecessarily */
 }
 
 .event-details {
