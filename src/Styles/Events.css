@@ -3,7 +3,10 @@
 	max-width: none; /* Remove the max-width limit */
 	margin: 0 auto;
 	padding: 20px;
-	background-color: var(--background-color);
+	background-color: var(--background-color); /* Background color */
+	border: 1px solid #ddd; /* Light border around the container */
+	border-radius: var(--border-radius); /* Rounded corners */
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle box shadow for depth */
 }
 
 .events-title,
@@ -12,6 +15,8 @@
 	color: var(--text-primary);
 	text-align: center;
 	margin-bottom: 30px;
+	border-bottom: 2px solid var(--primary-color); /* Underline the title */
+	padding-bottom: 10px;
 }
 
 .events-controls {
@@ -28,6 +33,7 @@
 	border-radius: 30px;
 	padding: 10px 20px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border: 1px solid #ccc; /* Add a border to the search bar */
 }
 
 .search-bar input {
@@ -47,7 +53,7 @@
 
 .event-category-button {
 	background-color: var(--card-background);
-	border: none;
+	border: 1px solid #ccc; /* Add borders to the category buttons */
 	border-radius: 20px;
 	padding: 8px 16px;
 	font-size: 14px;
@@ -77,6 +83,7 @@
 	overflow: hidden;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	border: 1px solid #ddd; /* Add a border around event cards */
 }
 
 .featured-event-card:hover {
@@ -113,6 +120,7 @@
 	gap: 0.75rem;
 	flex-grow: 1;
 }
+
 .event-info {
 	display: flex;
 	align-items: center;
@@ -129,16 +137,20 @@
 }
 
 .event-card {
-	background-color: var(--card-background);
-	border-radius: var(--border-radius);
-	overflow: hidden;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	background-color: var(--card-background); /* Light background color */
+	border-radius: 10px; /* Rounded corners */
+	overflow: hidden; /* Ensures child elements like images stay within bounds */
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+	transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transform on hover */
+	border: 1px solid #ddd; /* Border to make the card stand out */
+	display: flex;
+	flex-direction: column;
+	padding: 15px;
 }
 
 .event-card:hover {
-	transform: translateY(-3px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	transform: translateY(-5px); /* Lift the card on hover */
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
 }
 
 .event-image {
@@ -149,26 +161,28 @@
 
 .event-content {
 	padding: 15px;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	justify-content: space-between; /* Ensures content is spaced out evenly */
 }
 
 .event-content h3 {
-	margin: 0 0 5px 0;
+	margin: 0 0 10px 0;
 	font-size: 1.2rem;
 	color: var(--text-primary);
 }
 
-.event-content {
-	padding: 1.5rem;
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1; /* Allow content to fill remaining space */
-	min-height: 0; /* Prevent content from expanding card unnecessarily */
+.event-category {
+	font-size: 1rem;
+	color: var(--text-secondary);
+	margin-bottom: 10px; /* Adds space between category and other details */
 }
 
 .event-details {
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 10px; /* Provides space between each event detail */
 	margin-bottom: 15px;
 }
 
@@ -189,6 +203,8 @@
 	font-size: 0.9rem;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
+	text-align: center;
+	margin-top: auto; /* Pushes the button to the bottom of the card */
 }
 
 .event-rsvp:hover {
@@ -244,6 +260,7 @@
 	max-height: 90vh;
 	overflow-y: auto;
 	position: relative;
+	border: 1px solid #ddd; /* Add border around modal */
 }
 
 .close-modal {
@@ -332,84 +349,32 @@
 }
 
 /* Animations */
+@keyframes slideIn {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
 @keyframes fadeIn {
-	from {
+	0% {
 		opacity: 0;
 	}
-	to {
+	100% {
 		opacity: 1;
 	}
 }
 
-@keyframes slideUp {
-	from {
-		transform: translateY(20px);
-		opacity: 0;
+@keyframes bounce {
+	0% {
+		transform: scale(1);
 	}
-	to {
-		transform: translateY(0);
-		opacity: 1;
+	50% {
+		transform: scale(1.1);
 	}
-}
-
-.featured-event-card,
-.event-card {
-	animation: fadeIn 0.5s ease-out, slideUp 0.5s ease-out;
-}
-
-.event-modal {
-	animation: fadeIn 0.3s ease-out, slideUp 0.3s ease-out;
-}
-
-/* Hover effects */
-.featured-event-card::before,
-.event-card::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: linear-gradient(45deg, #6c5ce7, #3498db);
-	opacity: 0;
-	transition: opacity 0.3s ease;
-	z-index: -1;
-	border-radius: 10px;
-}
-
-.featured-event-card:hover::before,
-.event-card:hover::before {
-	opacity: 0.1;
-}
-
-/* Responsive design improvements */
-@media (max-width: 768px) {
-	.events-title {
-		font-size: 2rem;
-	}
-
-	.category-filters {
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-
-	.featured-events,
-	.events-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.event-modal {
-		width: 95%;
+	100% {
+		transform: scale(1);
 	}
 }
-
-/* Accessibility improvements */
-.event-category-button:focus,
-.event-rsvp:focus,
-.load-more-button:focus,
-.share-button:focus {
-	outline: 2px solid #6c5ce7;
-	outline-offset: 2px;
-}
-
-/* Dark mode support */

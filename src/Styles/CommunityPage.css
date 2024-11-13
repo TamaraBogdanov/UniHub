@@ -578,3 +578,94 @@
 		font-size: 1.25rem;
 	}
 }
+
+/* Event Card Styles */
+/* Event Card Styles */
+.events-container {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.events-list-title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: var(--text-primary);
+}
+
+.event-card {
+	background-color: var(--card-background);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-lg);
+	padding: 1.5rem;
+	box-shadow: var(--shadow-sm);
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	transition: all 0.3s ease;
+}
+
+.event-card:hover {
+	box-shadow: var(--shadow-md);
+	transform: translateY(-2px);
+}
+
+.event-title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--text-primary);
+}
+
+.event-info {
+	color: var(--text-secondary);
+	font-size: 0.875rem;
+}
+
+.event-attending {
+	color: var(--text-secondary);
+	font-size: 0.875rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.event-attending-count {
+	font-weight: 500;
+}
+
+.event-join-button {
+	background-color: var(--primary-color);
+	color: white;
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	font-size: 0.875rem;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	align-self: flex-start;
+}
+
+.event-join-button:hover,
+.event-leave-button:hover {
+	background-color: var(--secondary-color);
+}
+
+.event-leave-button {
+	background-color: rgb(128, 7, 7);
+	color: white;
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	font-size: 0.875rem;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	align-self: flex-start;
+}
+
+.events-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1.5rem;
+}

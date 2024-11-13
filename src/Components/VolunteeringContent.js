@@ -58,7 +58,7 @@ const VolunteerPage = () => {
 			participants: "20 needed",
 			description:
 				"Help fellow students excel in their studies by becoming a peer tutor in various subjects.",
-			image: "/api/placeholder/400/200",
+			image: "./images/meeting.jpg",
 			hours: "5-10 hours/week",
 			faculty: "All Faculties",
 		},
@@ -71,36 +71,24 @@ const VolunteerPage = () => {
 			participants: "15 needed",
 			description:
 				"Join us in maintaining community gardens and teaching sustainable farming practices.",
-			image: "/api/placeholder/400/200",
+			image: "./images/garden.jpg",
 			hours: "4 hours/week",
 			faculty: "Science, Agriculture",
 		},
 		{
 			id: 3,
-			title: "Wits Open Day Guides",
-			category: "campus",
-			location: "All Wits Campuses",
-			date: "July 2024",
-			participants: "50 needed",
+			title: "Hillbrow Youth Mentorship",
+			category: "community",
+			location: "Hillbrow",
+			date: "Weekday Afternoons",
+			participants: "12 needed",
 			description:
-				"Guide prospective students and their families during the annual Wits Open Day.",
-			image: "/api/placeholder/400/200",
-			hours: "8 hours/day",
+				"Mentor high school students in Hillbrow, helping with academics and life skills.",
+			image: "./images/students.jpg",
+			hours: "3 hours/week",
 			faculty: "All Faculties",
 		},
-		{
-			id: 4,
-			title: "Alexandra Health Awareness Campaign",
-			category: "health",
-			location: "Alexandra Township",
-			date: "Monthly",
-			participants: "10 needed",
-			description:
-				"Assist in health education and awareness programs in partnership with local clinics.",
-			image: "/api/placeholder/400/200",
-			hours: "6 hours/month",
-			faculty: "Health Sciences",
-		},
+
 		{
 			id: 5,
 			title: "COVID-19 Research Support",
@@ -110,20 +98,20 @@ const VolunteerPage = () => {
 			participants: "5 needed",
 			description:
 				"Support ongoing COVID-19 research projects by assisting with data collection and analysis.",
-			image: "/api/placeholder/400/200",
+			image: "./images/covid.jpg",
 			hours: "10 hours/week",
 			faculty: "Health Sciences, Science",
 		},
 		{
 			id: 6,
-			title: "Tshimologong Digital Skills Workshop",
+			title: "Digital Skills Workshop",
 			category: "education",
 			location: "Braamfontein",
 			date: "Weekends",
 			participants: "8 needed",
 			description:
 				"Teach basic digital skills to youth from surrounding communities at Wits Digital Innovation Hub.",
-			image: "/api/placeholder/400/200",
+			image: "./images/digital.jpg",
 			hours: "4 hours/weekend",
 			faculty: "Engineering, Science",
 		},
@@ -136,22 +124,9 @@ const VolunteerPage = () => {
 			participants: "6 needed",
 			description:
 				"Guide visitors through South Africa's remarkable journey of human development at the Origins Centre.",
-			image: "/api/placeholder/400/200",
+			image: "./images/origin.jpg",
 			hours: "Flexible",
 			faculty: "Science, Humanities",
-		},
-		{
-			id: 8,
-			title: "Hillbrow Youth Mentorship",
-			category: "community",
-			location: "Hillbrow",
-			date: "Weekday Afternoons",
-			participants: "12 needed",
-			description:
-				"Mentor high school students in Hillbrow, helping with academics and life skills.",
-			image: "/api/placeholder/400/200",
-			hours: "3 hours/week",
-			faculty: "All Faculties",
 		},
 	];
 	const filteredOpportunities = volunteerOpportunities
@@ -281,6 +256,16 @@ const VolunteerPage = () => {
 					</div>
 				</div>
 			)}
+
+			{/* Bottom CTA Section - Always Visible */}
+			<div className="cta-section">
+				<h2>Can't find what you're looking for?</h2>
+				<p>
+					Contact the Wits Citizenship and Outreach Programme to discuss
+					creating new volunteer opportunities.
+				</p>
+				<button className="vol-button-secondary">Contact WCCO</button>
+			</div>
 		</div>
 	);
 };

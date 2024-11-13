@@ -46,20 +46,100 @@ const CommunityContent = () => {
 
 	const [listings, setListings] = useState(getInitialListings());
 
-	const [events] = useState([
+	const [events, setEvents] = useState([
 		{
 			id: 1,
 			title: "Study Group: Advanced Physics",
 			date: "2024-11-01",
 			location: "Library Room 204",
+			attending: [],
 		},
 		{
 			id: 2,
 			title: "Campus Volunteer Day",
 			date: "2024-11-05",
 			location: "Main Quad",
+			attending: [],
 		},
 	]);
+
+	const [upcomingEvents, setUpcomingEvents] = useState([
+		{
+			id: 1,
+			title: "Study Group: Advanced Physics",
+			date: "2024-11-01",
+			location: "Library Room 204",
+			attending: [23],
+		},
+		{
+			id: 2,
+			title: "Campus Volunteer Day",
+			date: "2024-11-05",
+			location: "Main Quad",
+			attending: [52],
+		},
+		{
+			id: 3,
+			title: "Coding Hackathon",
+			date: "2024-11-15",
+			location: "Engineering Building",
+			attending: [60],
+		},
+		{
+			id: 4,
+			title: "Wellness Workshop",
+			date: "2024-11-20",
+			location: "Student Union",
+			attending: [23],
+		},
+	]);
+	const [myEvents, setMyEvents] = useState([]);
+
+	const handleJoinEvent = (eventId) => {
+		const event = [...events, ...upcomingEvents].find((e) => e.id === eventId);
+
+		if (!event) return;
+
+		setEvents((prevEvents) =>
+			prevEvents.map((e) =>
+				e.id === eventId ? { ...e, attending: [...e.attending, "You"] } : e
+			)
+		);
+		setUpcomingEvents((prevEvents) =>
+			prevEvents.map((e) =>
+				e.id === eventId ? { ...e, attending: [...e.attending, "You"] } : e
+			)
+		);
+		setMyEvents((prevMyEvents) => [...prevMyEvents, event]);
+	};
+
+	const handleLeaveEvent = (eventId) => {
+		const event = [...events, ...upcomingEvents].find((e) => e.id === eventId);
+
+		if (!event) return;
+
+		setEvents((prevEvents) =>
+			prevEvents.map((e) =>
+				e.id === eventId
+					? {
+							...e,
+							attending: e.attending.filter((attendee) => attendee !== "You"),
+					  }
+					: e
+			)
+		);
+		setUpcomingEvents((prevEvents) =>
+			prevEvents.map((e) =>
+				e.id === eventId
+					? {
+							...e,
+							attending: e.attending.filter((attendee) => attendee !== "You"),
+					  }
+					: e
+			)
+		);
+		setMyEvents((prevMyEvents) => prevMyEvents.filter((e) => e.id !== eventId));
+	};
 
 	const [discussions, setDiscussions] = useState([
 		{
@@ -320,16 +400,33 @@ const CommunityContent = () => {
 					<section>
 						<section className="discussions-section">
 							<div className="section-header">
-								<h2 className="section-title">Campus Events</h2>
+								<h2 className="section-title">Student Events</h2>
 								<button className="create-button">+ Create Event</button>
 							</div>
 							<div className="events-list">
-								{events.map((event) => (
+								{upcomingEvents.map((event) => (
 									<article key={event.id} className="event-card">
 										<h3 className="event-title">{event.title}</h3>
 										<p className="event-info">Date: {event.date}</p>
 										<p className="event-info">Location: {event.location}</p>
-										<button className="join-button">Join Event</button>
+										{event.attending.includes("You") ? (
+											<button
+												className="event-leave-button"
+												onClick={() => handleLeaveEvent(event.id)}
+											>
+												Leave Event
+											</button>
+										) : (
+											<button
+												className="event-join-button"
+												onClick={() => handleJoinEvent(event.id)}
+											>
+												Join Event
+											</button>
+										)}
+										<p className="event-attending">
+											Attending: {event.attending.join(", ") || "None"}
+										</p>
 									</article>
 								))}
 							</div>

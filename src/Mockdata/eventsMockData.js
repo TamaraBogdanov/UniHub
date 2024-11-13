@@ -7,6 +7,7 @@ import {
 	Globe,
 	Zap,
 	Coffee,
+	Cpu,
 } from "lucide-react";
 
 export const eventsMockData = [
@@ -73,7 +74,7 @@ export const eventsMockData = [
 	},
 	{
 		id: 5,
-		title: "Entrepreneurship Workshop",
+		title: "Buisness Workshop",
 		category: "Events",
 		subcategory: "Business",
 		date: "2024-10-15",
@@ -88,18 +89,18 @@ export const eventsMockData = [
 	},
 	{
 		id: 6,
-		title: "Science Symposium",
+		title: "AI in Healthcare",
 		category: "Events",
-		subcategory: "Academic",
-		date: "2024-11-05",
-		time: "10:00 AM - 4:00 PM",
-		location: "Science Building",
+		subcategory: "Technology",
+		date: "2024-11-10",
+		time: "2:00 PM - 4:00 PM",
+		location: "Innovation Hub",
 		description:
-			"Explore groundbreaking research and attend talks by leading scientists in various fields.",
-		icon: <Book size={24} color="#66CDAA" />,
+			"Join experts in the field of AI as they discuss its impact on the healthcare industry.",
+		icon: <Cpu size={24} color="#4B0082" />,
 		image: "/images/online-learning.png",
-		attendees: 300,
-		featured: false,
+		attendees: 150,
+		featured: true,
 	},
 	{
 		id: 7,
