@@ -22,9 +22,9 @@ import VolunteeringContent from "../Components/VolunteeringContent";
 import TransportationContent from "../Components/TransportationContent";
 
 function StudentHubPage({ userRole }) {
-	const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("home");
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const renderContent = () => {
     switch (activeSection) {
@@ -62,11 +62,7 @@ function StudentHubPage({ userRole }) {
 
   return (
     <div className="HomePage">
-      <Topbar
-        currentPage="Student Hub"
-        userRole={userRole}
-        topbarColor={topbarColor}
-      />
+      <Topbar currentPage="Student Hub" userRole={userRole} />
 
       <div className="dashboard">
         <nav className="sidebar">
