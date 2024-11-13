@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Route,
+	Routes,
+	BrowserRouter,
+} from "react-router-dom";
 import LoginPage from "./Login/LoginPage";
 import HomePage from "./Pages/HomePage";
 import SelfServicePage from "./Pages/SelfServicePage";
@@ -17,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage setUserRole={setUserRole} />} />
           <Route
-            path="/login?"
+            path="/login"
             element={<LoginPage setUserRole={setUserRole} />}
           />
           <Route path="/home" element={<HomePage userRole={userRole} />} />

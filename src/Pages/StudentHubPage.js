@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Home,
@@ -17,23 +17,14 @@ import NewsContent from "../Components/NewsContent";
 import ClubsContent from "../Components/ClubsContent";
 import EventsContent from "../Components/EventsContent";
 import WellnessContent from "../Components/WellnessContent";
-import CommunityContent from "../Components/CommunityContent";
+import CommunityContent from "../Components/community/CommunityContent";
 import VolunteeringContent from "../Components/VolunteeringContent";
 import TransportationContent from "../Components/TransportationContent";
 
 function StudentHubPage({ userRole }) {
-  const [activeSection, setActiveSection] = useState("home");
-  const [topbarColor, setTopbarColor] = useState("#3c005a");
-  const navigate = useNavigate();
+	const [activeSection, setActiveSection] = useState("home");
 
-  // Change the topbar color based on the active section
-  useEffect(() => {
-    if (activeSection === "student-hub") {
-      setTopbarColor("#3c005a"); // New color for Student Hub
-    } else {
-      setTopbarColor("#3c005a"); // Default Dashboard color
-    }
-  }, [activeSection]);
+	const navigate = useNavigate();
 
   const renderContent = () => {
     switch (activeSection) {

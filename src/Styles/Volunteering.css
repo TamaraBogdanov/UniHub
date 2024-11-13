@@ -1,0 +1,499 @@
+/* Container and Layout */
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 2rem 1rem;
+}
+
+/* Header Styles */
+.header {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+
+.header h1 {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+
+.header p {
+	font-size: 1.125rem;
+	color: #666;
+	margin-bottom: 1.5rem;
+}
+
+/* Alert Styles */
+.alert {
+	background-color: #fff8e1;
+	border: 1px solid #ffd54f;
+	border-radius: 8px;
+	padding: 1rem;
+	margin-bottom: 2rem;
+}
+
+.alert-title {
+	color: #f57c00;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+}
+
+.alert-description {
+	color: #795548;
+}
+
+/* Category Buttons */
+.categories {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 2rem;
+}
+
+.category-button {
+	padding: 0.5rem 1rem;
+	border-radius: 9999px;
+	border: 1px solid #e2e8f0;
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.2s;
+	margin-top: 4rem;
+}
+
+.category-button:hover {
+	background-color: #f7fafc;
+}
+
+.category-button.active {
+	background-color: var(--primary-color);
+	color: white;
+	border-color: var(--primary-color);
+}
+
+/* Opportunities Grid */
+
+.opportunities-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1.5rem;
+	padding: 1rem;
+}
+
+/* Card Structure */
+.card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	background-color: white;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	height: 600px; /* Fixed height for all cards */
+}
+
+.card-image {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+}
+
+.card-header {
+	padding: 1rem;
+}
+
+.card-title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+	color: #1a1a1a;
+}
+
+.card-meta {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: #666;
+	font-size: 0.875rem;
+	margin-bottom: 0.5rem;
+}
+
+.card-meta svg {
+	width: 1rem;
+	height: 1rem;
+	flex-shrink: 0;
+}
+
+.card-content {
+	padding: 0 1rem;
+	overflow-y: auto; /* Allow scrolling if content is too long */
+	flex: 1;
+}
+
+.card-description {
+	color: #666;
+	margin-bottom: 1rem;
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
+.card-faculty {
+	font-size: 0.875rem;
+	color: #64748b;
+	margin-bottom: 1rem;
+	font-style: italic;
+}
+
+/* Button Container */
+.button-container {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 1rem;
+	background-color: white; /* Ensure button background is clean */
+	border-radius: 0 0 8px 8px;
+}
+
+/* Button Styles */
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 0.75rem 1rem;
+	background-color: var(--primary-color);
+	color: white;
+	border: none;
+	border-radius: 6px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.button:hover {
+	background-color: var(--secondary-color);
+}
+
+.button svg {
+	margin-left: 0.5rem;
+	width: 1rem;
+	height: 1rem;
+}
+
+/* Ensure content doesn't overlap with button */
+.card-content {
+	padding-bottom: 4rem; /* Space for button */
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+	.opportunities-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.card {
+		height: 550px; /* Slightly smaller on mobile */
+	}
+}
+/* Icon Styles */
+.icon {
+	display: inline-block;
+	vertical-align: middle;
+	width: 1rem;
+	height: 1rem;
+}
+
+/* Utility Classes */
+.mb-4 {
+	margin-bottom: 1rem;
+}
+
+.gap-2 {
+	gap: 0.5rem;
+}
+
+/* Loading State */
+.loading {
+	text-align: center;
+	padding: 2rem;
+	color: #666;
+}
+
+/* Previous CSS styles remain the same, adding new styles below */
+
+/* Search Container */
+.search-container {
+	position: relative;
+	margin-bottom: 2rem;
+	max-width: 600px;
+	margin: 0 auto 2rem;
+}
+
+.search-input {
+	width: 100%;
+	padding: 1rem 1rem 1rem 3rem;
+	border: 1px solid #e2e8f0;
+	border-radius: 9999px;
+	font-size: 1rem;
+	outline: none;
+	transition: border-color 0.2s;
+}
+
+.search-icon {
+	position: absolute;
+	left: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #64748b;
+	width: 1.25rem;
+	height: 1.25rem;
+}
+
+/* Benefits Section */
+.benefits-section {
+	margin: 3rem 0;
+	text-align: center;
+}
+
+.benefits-section h2 {
+	font-size: 2rem;
+	font-weight: 600;
+	margin-bottom: 2rem;
+}
+
+.benefits-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 2rem;
+	margin-bottom: 3rem;
+}
+
+.benefit-card {
+	padding: 2rem;
+	background-color: #f8fafc;
+	border-radius: 8px;
+	text-align: center;
+}
+
+.benefit-icon {
+	width: 3rem;
+	height: 3rem;
+	margin: 0 auto 1rem;
+	color: #3b82f6;
+}
+
+.benefit-card h3 {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+}
+
+.benefit-card p {
+	color: #64748b;
+}
+
+/* Category Updates */
+.category-button {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.category-icon {
+	width: 1rem;
+	height: 1rem;
+}
+
+/* Card Updates */
+.card-faculty {
+	font-size: 0.875rem;
+	color: #64748b;
+	margin-bottom: 1rem;
+	font-style: italic;
+}
+
+/* CTA Section */
+.cta-section {
+	text-align: center;
+	margin: 4rem 0 2rem;
+	padding: 3rem;
+	background-color: #f8fafc;
+	border-radius: 8px;
+}
+
+.cta-section h2 {
+	font-size: 1.75rem;
+	font-weight: 600;
+	margin-bottom: 1rem;
+}
+
+.cta-section p {
+	color: #64748b;
+	margin-bottom: 1.5rem;
+}
+
+.vol-button-secondary {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.75rem 1.5rem;
+	background-color: white;
+	color: var(--primary-color);
+	border: 2px solid var(--primary-color);
+	border-radius: 6px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.vol-button-secondary:hover {
+	background-color: var(--primary-color);
+	color: white;
+}
+
+/* Responsive Updates */
+@media (max-width: 640px) {
+	.benefits-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.categories {
+		flex-direction: column;
+	}
+
+	.category-button {
+		width: 100%;
+		justify-content: center;
+	}
+}
+
+.view-toggle {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-bottom: 2rem;
+}
+
+.view-button {
+	padding: 0.5rem 1.5rem;
+	background-color: #f3f4f6;
+	border: 5px solid #e5e7eb;
+	border-radius: 0.375rem;
+	color: #374151;
+	font-weight: 500;
+	transition: all 0.2s ease-in-out;
+	margin-top: 2rem;
+}
+
+.view-button:hover {
+	background-color: #e5e7eb;
+}
+
+.view-button.active {
+	background-color: var(--primary-color);
+	color: white;
+	border-color: var(--primary-color);
+}
+
+.volunteer-application-form {
+	background-color: #f8f8f8;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.application-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-content {
+	background: white;
+	padding: 2rem;
+	border-radius: 10px;
+	width: 90%;
+	max-width: 600px;
+	position: relative;
+}
+
+.close-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 1.5rem;
+	color: #333;
+}
+
+.form-header {
+	margin-bottom: 1.5rem;
+}
+
+.form-title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #333;
+}
+
+.form-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.form-label {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: #666;
+}
+
+.form-input,
+.form-textarea {
+	padding: 0.75rem 1rem;
+	font-size: 0.875rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: #fff;
+	transition: border-color 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+	outline: none;
+	border-color: #4a90e2;
+}
+
+.form-actions {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.form-submit-button {
+	background-color: #4a90e2;
+	color: #fff;
+	font-size: 0.875rem;
+	font-weight: 500;
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.form-submit-button:hover {
+	background-color: #3a7ec2;
+}
