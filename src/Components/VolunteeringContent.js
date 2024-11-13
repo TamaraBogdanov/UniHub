@@ -14,11 +14,13 @@ import {
 
 import "../Styles/Volunteering.css";
 import VolunteerTracking from "./VolunteerTracking";
+import VolunteerApplicationForm from "./VolunteerApplication";
 
 const VolunteerPage = () => {
 	const [selectedCategory, setSelectedCategory] = useState("all");
 	const [searchQuery] = useState("");
 	const [activeView, setActiveView] = useState("opportunities");
+	const [activeApplication, setActiveApplication] = useState(null); // Track the active form's ID
 
 	const categories = [
 		{ id: "all", name: "All Opportunities", icon: Globe },
@@ -46,7 +48,6 @@ const VolunteerPage = () => {
 			icon: Heart,
 		},
 	];
-
 	const volunteerOpportunities = [
 		{
 			id: 1,
@@ -57,7 +58,7 @@ const VolunteerPage = () => {
 			participants: "20 needed",
 			description:
 				"Help fellow students excel in their studies by becoming a peer tutor in various subjects.",
-			image: "/api/placeholder/400/200",
+			image: "./images/meeting.jpg",
 			hours: "5-10 hours/week",
 			faculty: "All Faculties",
 		},
@@ -70,36 +71,24 @@ const VolunteerPage = () => {
 			participants: "15 needed",
 			description:
 				"Join us in maintaining community gardens and teaching sustainable farming practices.",
-			image: "/api/placeholder/400/200",
+			image: "./images/garden.jpg",
 			hours: "4 hours/week",
 			faculty: "Science, Agriculture",
 		},
 		{
 			id: 3,
-			title: "Wits Open Day Guides",
-			category: "campus",
-			location: "All Wits Campuses",
-			date: "July 2024",
-			participants: "50 needed",
+			title: "Hillbrow Youth Mentorship",
+			category: "community",
+			location: "Hillbrow",
+			date: "Weekday Afternoons",
+			participants: "12 needed",
 			description:
-				"Guide prospective students and their families during the annual Wits Open Day.",
-			image: "/api/placeholder/400/200",
-			hours: "8 hours/day",
+				"Mentor high school students in Hillbrow, helping with academics and life skills.",
+			image: "./images/students.jpg",
+			hours: "3 hours/week",
 			faculty: "All Faculties",
 		},
-		{
-			id: 4,
-			title: "Alexandra Health Awareness Campaign",
-			category: "health",
-			location: "Alexandra Township",
-			date: "Monthly",
-			participants: "10 needed",
-			description:
-				"Assist in health education and awareness programs in partnership with local clinics.",
-			image: "/api/placeholder/400/200",
-			hours: "6 hours/month",
-			faculty: "Health Sciences",
-		},
+
 		{
 			id: 5,
 			title: "COVID-19 Research Support",
@@ -109,20 +98,20 @@ const VolunteerPage = () => {
 			participants: "5 needed",
 			description:
 				"Support ongoing COVID-19 research projects by assisting with data collection and analysis.",
-			image: "/api/placeholder/400/200",
+			image: "./images/covid.jpg",
 			hours: "10 hours/week",
 			faculty: "Health Sciences, Science",
 		},
 		{
 			id: 6,
-			title: "Tshimologong Digital Skills Workshop",
+			title: "Digital Skills Workshop",
 			category: "education",
 			location: "Braamfontein",
 			date: "Weekends",
 			participants: "8 needed",
 			description:
 				"Teach basic digital skills to youth from surrounding communities at Wits Digital Innovation Hub.",
-			image: "/api/placeholder/400/200",
+			image: "./images/digital.jpg",
 			hours: "4 hours/weekend",
 			faculty: "Engineering, Science",
 		},
@@ -135,25 +124,11 @@ const VolunteerPage = () => {
 			participants: "6 needed",
 			description:
 				"Guide visitors through South Africa's remarkable journey of human development at the Origins Centre.",
-			image: "/api/placeholder/400/200",
+			image: "./images/origin.jpg",
 			hours: "Flexible",
 			faculty: "Science, Humanities",
 		},
-		{
-			id: 8,
-			title: "Hillbrow Youth Mentorship",
-			category: "community",
-			location: "Hillbrow",
-			date: "Weekday Afternoons",
-			participants: "12 needed",
-			description:
-				"Mentor high school students in Hillbrow, helping with academics and life skills.",
-			image: "/api/placeholder/400/200",
-			hours: "3 hours/week",
-			faculty: "All Faculties",
-		},
 	];
-
 	const filteredOpportunities = volunteerOpportunities
 		.filter(
 			(opp) => selectedCategory === "all" || opp.category === selectedCategory
@@ -166,7 +141,6 @@ const VolunteerPage = () => {
 
 	return (
 		<div className="container">
-			{/* Benefits Section - Always Visible */}
 			<div className="benefits-section">
 				<h2>Why Volunteer at Wits?</h2>
 				<div className="benefits-grid">
@@ -180,7 +154,6 @@ const VolunteerPage = () => {
 				</div>
 			</div>
 
-			{/* View Toggle Buttons - Always Visible */}
 			<div className="view-toggle">
 				<button
 					className={`view-button ${
@@ -198,10 +171,8 @@ const VolunteerPage = () => {
 				</button>
 			</div>
 
-			{/* Conditional Rendering of Main Content */}
 			{activeView === "opportunities" ? (
 				<>
-					{/* Categories */}
 					<div className="categories">
 						{categories.map((category) => (
 							<button
@@ -217,7 +188,6 @@ const VolunteerPage = () => {
 						))}
 					</div>
 
-					{/* Opportunities Grid */}
 					<div className="opportunities-grid">
 						{filteredOpportunities.map((opportunity) => (
 							<div key={opportunity.id} className="card">
@@ -252,7 +222,10 @@ const VolunteerPage = () => {
 									</p>
 								</div>
 								<div className="button-container">
-									<button className="button">
+									<button
+										className="button"
+										onClick={() => setActiveApplication(opportunity.id)}
+									>
 										Apply Now
 										<ArrowRight className="icon" />
 									</button>
@@ -265,6 +238,25 @@ const VolunteerPage = () => {
 				<VolunteerTracking />
 			)}
 
+			{/* Application Form Modal */}
+			{activeApplication && (
+				<div className="application-modal">
+					<div className="modal-content">
+						<button
+							className="close-button"
+							onClick={() => setActiveApplication(null)}
+						>
+							Close
+						</button>
+						<VolunteerApplicationForm
+							opportunity={volunteerOpportunities.find(
+								(opportunity) => opportunity.id === activeApplication
+							)}
+						/>
+					</div>
+				</div>
+			)}
+
 			{/* Bottom CTA Section - Always Visible */}
 			<div className="cta-section">
 				<h2>Can't find what you're looking for?</h2>
@@ -272,7 +264,7 @@ const VolunteerPage = () => {
 					Contact the Wits Citizenship and Outreach Programme to discuss
 					creating new volunteer opportunities.
 				</p>
-				<button className="button-secondary">Contact WCCO</button>
+				<button className="vol-button-secondary">Contact WCCO</button>
 			</div>
 		</div>
 	);

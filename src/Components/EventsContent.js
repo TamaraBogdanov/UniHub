@@ -27,7 +27,6 @@ function EventModal({ event, onClose }) {
 				})
 				.catch(console.error);
 		} else {
-			// Fallback for browsers that don't support navigator.share
 			alert(
 				`Share this event: ${event.title}\n${event.description}\n${window.location.href}`
 			);
@@ -71,6 +70,7 @@ function EventModal({ event, onClose }) {
 function EventsContent() {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [selectedCategory, setSelectedCategory] = useState("All");
+	const [selectedSubcategory, setSelectedSubcategory] = useState("All");
 	const [visibleEvents, setVisibleEvents] = useState(6);
 	const [rsvpedEvents, setRsvpedEvents] = useState([]);
 	const [selectedEvent, setSelectedEvent] = useState(null);
@@ -79,11 +79,20 @@ function EventsContent() {
 		setSearchTerm(event.target.value);
 	};
 
-	const filteredEvents = eventsMockData.filter(
-		(event) =>
-			event.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-			(selectedCategory === "All" || event.category === selectedCategory)
-	);
+	const filteredEvents = eventsMockData.filter((event) => {
+		const lowerSearchTerm = searchTerm.toLowerCase();
+		const lowerSelectedSubcategory = selectedSubcategory.toLowerCase();
+
+		return (
+			// Title filter (case insensitive)
+			event.title.toLowerCase().includes(lowerSearchTerm) &&
+			// Category filter (case insensitive)
+			(selectedCategory === "All" || event.category === selectedCategory) &&
+			// Subcategory filter (case insensitive)
+			(selectedSubcategory === "All" ||
+				event.subcategory.toLowerCase() === lowerSelectedSubcategory) // Exact match for subcategory
+		);
+	});
 
 	const loadMoreEvents = () => {
 		setVisibleEvents((prevVisible) => prevVisible + 3);
@@ -135,16 +144,35 @@ function EventsContent() {
 				</div>
 				<div className="event-category-filters">
 					{eventCategories.map((category) => (
-						<button
-							key={category.name}
-							className={`event-category-button ${
-								selectedCategory === category.name ? "active" : ""
-							}`}
-							onClick={() => setSelectedCategory(category.name)}
-						>
-							{category.icon}
-							<span>{category.name}</span>
-						</button>
+						<div key={category.name}>
+							<button
+								className={`event-category-button ${
+									selectedCategory === category.name ? "active" : ""
+								}`}
+								onClick={() => {
+									setSelectedCategory(category.name);
+									setSelectedSubcategory("All"); // Reset subcategory when changing category
+								}}
+							>
+								{category.icon}
+								<span>{category.name}</span>
+							</button>
+							{selectedCategory === category.name && category.subcategories && (
+								<div className="subcategory-filter">
+									{category.subcategories.map((subcategory) => (
+										<button
+											key={subcategory}
+											className={`event-subcategory-button ${
+												selectedSubcategory === subcategory ? "active" : ""
+											}`}
+											onClick={() => setSelectedSubcategory(subcategory)}
+										>
+											{subcategory}
+										</button>
+									))}
+								</div>
+							)}
+						</div>
 					))}
 				</div>
 			</div>
@@ -210,7 +238,8 @@ function EventsContent() {
 						></div>
 						<div className="event-content">
 							<h3>{event.title}</h3>
-							<p className="event-category">{event.category}</p>
+							<p className="event-category">{event.subcategory}</p>{" "}
+							{/* Update to show subcategory */}
 							<div className="event-details">
 								<div className="detail">
 									<Calendar size={16} />
@@ -247,7 +276,10 @@ function EventsContent() {
 				</button>
 			)}
 
-			<EventModal event={selectedEvent} onClose={closeEventModal} />
+			{/* Event Modal */}
+			{selectedEvent && (
+				<EventModal event={selectedEvent} onClose={closeEventModal} />
+			)}
 		</div>
 	);
 }

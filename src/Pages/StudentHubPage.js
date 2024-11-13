@@ -17,7 +17,7 @@ import NewsContent from "../Components/NewsContent";
 import ClubsContent from "../Components/ClubsContent";
 import EventsContent from "../Components/EventsContent";
 import WellnessContent from "../Components/WellnessContent";
-import CommunityContent from "../Components/CommunityContent";
+import CommunityContent from "../Components/community/CommunityContent";
 import VolunteeringContent from "../Components/VolunteeringContent";
 import TransportationContent from "../Components/TransportationContent";
 
