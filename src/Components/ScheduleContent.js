@@ -1,316 +1,706 @@
-import React, { useState } from "react";
-import { Plus, X, Edit2, CheckSquare, Clock } from "lucide-react";
+import React, { useState, useMemo, useCallback } from "react";
 import "../Styles/Schedule.css";
-import { useTodo } from "../Components/TodoContext";
+import { courses } from "../Mockdata/mockData";
+import {
+  Calendar,
+  Clock,
+  ChevronLeft,
+  ChevronRight,
+  BookOpen,
+  AlertCircle,
+  Users,
+  BarChart,
+  FileText,
+  MapPin,
+  Monitor,
+  Plus,
+  X,
+  Bell,
+  ChevronDown,
+  Check,
+  Trash2,
+  Edit2,
+} from "lucide-react";
+import { de } from "@faker-js/faker";
 
-const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-const timeSlots = Array.from({ length: 14 }, (_, i) => i + 7); // 7 AM to 8 PM
-
-// Mock data for demo purposes - schedule
-const initialSchedule = [
+// Mock data for schedule events
+const mockEvents = [
   {
     id: 1,
-    day: "Monday",
-    startTime: 9,
-    endTime: 11,
-    title: "Computer Science Lecture",
-    type: "lecture",
+    type: "class",
+    courseCode: "CS101",
+    title: "Introduction to Computer Science",
+    startTime: "09:00",
+    endTime: "10:30",
+    days: ["Monday", "Wednesday"],
+    location: "Room 101",
+    instructor: "Dr. John Doe",
+    isOnline: false,
+    description:
+      "Introduction to programming concepts and computational thinking",
+    materials: ["Textbook Ch. 3", "Lecture Slides"],
+    upcoming: "Quiz on Arrays and Loops",
   },
   {
     id: 2,
-    day: "Tuesday",
-    startTime: 14,
-    endTime: 16,
-    title: "Mathematics Tutorial",
-    type: "tutorial",
+    type: "assignment",
+    courseCode: "MATH201",
+    title: "Calculus Problem Set 3",
+    dueDate: "2024-03-15",
+    dueTime: "23:59",
+    status: "pending",
+    priority: "high",
+    isOnline: false,
+    description: "Solve problems from chapter 3 of the textbook",
+    materials: ["Textbook Ch. 3", "Lecture Slides"],
+    upcoming: "Final Exam",
   },
   {
     id: 3,
-    day: "Wednesday",
-    startTime: 10,
-    endTime: 12,
-    title: "Physics Lab",
-    type: "lab",
+    type: "meeting",
+    title: "Study Group Session",
+    courseCode: "HIST105",
+    startTime: "14:00",
+    endTime: "15:30",
+    day: "Tuesday",
+    location: "Library Room 204",
+    participants: 5,
+    isOnline: false,
+    description: "Discuss topics from the textbook",
+    materials: ["Textbook Ch. 3", "Lecture Slides"],
+    upcoming: "Final Exam",
   },
   {
     id: 4,
-    day: "Thursday",
-    startTime: 13,
-    endTime: 15,
-    title: "Study Group",
-    type: "study",
+    type: "exam",
+    courseCode: "PSYC101",
+    title: "Midterm Examination",
+    date: "2024-03-20",
+    startTime: "13:00",
+    endTime: "15:00",
+    location: "Main Hall",
+    priority: "high",
+    isOnline: false,
+    description: "Take the midterm examination",
+    materials: ["Textbook Ch. 3", "Lecture Slides"],
+    upcoming: "Final Exam",
   },
   {
     id: 5,
-    day: "Friday",
-    startTime: 11,
-    endTime: 13,
-    title: "Research Meeting",
+    type: "class",
+    courseCode: "CHEM301",
+    title: "Organic Chemistry",
+    startTime: "11:00",
+    endTime: "12:30",
+    days: ["Tuesday", "Thursday"],
+    location: "Lab 302",
+    instructor: "Prof. Charlie Brown",
+    isOnline: false,
+    description:
+      "A study of the structure, properties, composition, reactions, and synthesis of organic compounds.",
+    materials: ["Textbook Ch. 3", "Lecture Slides"],
+    upcoming: "Final Exam",
+  },
+  {
+    id: 6,
     type: "meeting",
+    title: "Virtual Office Hours",
+    courseCode: "ECON201",
+    startTime: "15:00",
+    endTime: "16:00",
+    day: "Wednesday",
+    isOnline: true,
+    meetingLink: "https://zoom.us/j/123456789",
+    description: "Discuss topics from the textbook",
+    materials: ["Textbook Ch. 3", "Lecture Slides"],
+    upcoming: "Final Exam",
   },
 ];
 
-// Schedule component
-function ScheduleContent() {
-  // State hooks for schedule and modal
-  const [schedule, setSchedule] = useState(initialSchedule);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [newEvent, setNewEvent] = useState({
-    day: "",
-    startTime: 7,
-    endTime: 8,
-    title: "",
-    type: "lecture",
+// Helper function to get dates for the current week
+const getWeekDates = (date) => {
+  const curr = new Date(date);
+  const week = [];
+
+  // Starting from Monday
+  curr.setDate(curr.getDate() - curr.getDay() + 1);
+
+  for (let i = 0; i < 7; i++) {
+    week.push(new Date(curr));
+    curr.setDate(curr.getDate() + 1);
+  }
+
+  return week;
+};
+
+// Helper function to format time
+const formatTime = (time) => {
+  return new Date(`2000-01-01T${time}`).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
   });
+};
 
-  // Context hooks for todos
-  const { todos, addTodo, toggleTodo, deleteTodo } = useTodo();
-  const [newTodo, setNewTodo] = useState("");
+// New component for event details modal
+const EventDetailsModal = ({ event, onClose, onEdit, onDelete }) => {
+  if (!event) return null;
 
-  // Helper functions for modal
-  const openModal = (event = null) => {
-    if (event) {
-      setSelectedEvent(event);
-      setNewEvent(event);
-    } else {
-      setSelectedEvent(null);
-      setNewEvent({
-        day: "",
-        startTime: 7,
-        endTime: 8,
-        title: "",
-        type: "lecture",
-      });
-    }
-    setIsModalOpen(true);
-  };
-
-  // Modal functions and event handlers
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedEvent(null);
-  };
-
-  const handleEventChange = (e) => {
-    const { name, value } = e.target;
-    setNewEvent({
-      ...newEvent,
-      [name]:
-        name === "startTime" || name === "endTime" ? parseInt(value) : value,
+  const formatEventTime = (time) => {
+    return new Date(`2000-01-01T${time}`).toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
     });
   };
 
-  // Event handlers for modal buttons
+  return (
+    <div className="schedule-modal-overlay" onClick={onClose}>
+      <div
+        className="schedule-modal-content"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="schedule-modal-header">
+          <div className={`schedule-modal-type ${event.type}`}>
+            {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
+          </div>
+          <button className="schedule-modal-close" onClick={onClose}>
+            <X size={20} />
+          </button>
+        </div>
+
+        <div className="schedule-modal-body">
+          <h2 className="schedule-modal-title">{event.title}</h2>
+          <div className="schedule-modal-course">{event.courseCode}</div>
+
+          <div className="schedule-modal-details">
+            {event.startTime && (
+              <div className="schedule-detail-item">
+                <Clock size={16} />
+                <span>
+                  {formatEventTime(event.startTime)} -{" "}
+                  {formatEventTime(event.endTime)}
+                </span>
+              </div>
+            )}
+
+            {event.location && (
+              <div className="schedule-detail-item">
+                {event.isOnline ? <Monitor size={16} /> : <MapPin size={16} />}
+                <span>{event.location}</span>
+              </div>
+            )}
+
+            {event.instructor && (
+              <div className="schedule-detail-item">
+                <Users size={16} />
+                <span>{event.instructor}</span>
+              </div>
+            )}
+          </div>
+
+          {event.description && (
+            <div className="schedule-modal-section">
+              <h3>Description</h3>
+              <p>{event.description}</p>
+            </div>
+          )}
+
+          {event.materials && event.materials.length > 0 && (
+            <div className="schedule-modal-section">
+              <h3>Materials</h3>
+              <ul className="schedule-materials-list">
+                {event.materials.map((material, index) => (
+                  <li key={index}>{material}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {event.upcoming && (
+            <div className="schedule-modal-section">
+              <h3>Upcoming</h3>
+              <div className="schedule-upcoming-alert">
+                <Bell size={16} />
+                <span>{event.upcoming}</span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="schedule-modal-actions">
+          <button
+            className="schedule-action-button delete"
+            onClick={() => onDelete(event.id)}
+          >
+            <Trash2 size={16} />
+            Delete
+          </button>
+          <button
+            className="schedule-action-button edit"
+            onClick={() => onEdit(event)}
+          >
+            <Edit2 size={16} />
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// New component for event creation/editing
+const EventForm = ({ event, onClose, onSave }) => {
+  const [formData, setFormData] = useState(
+    event || {
+      type: "class",
+      title: "",
+      courseCode: "",
+      startTime: "",
+      endTime: "",
+      location: "",
+      description: "",
+      isOnline: false,
+    }
+  );
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (selectedEvent) {
-      setSchedule(
-        schedule.map((event) =>
-          event.id === selectedEvent.id
-            ? { ...newEvent, id: selectedEvent.id }
-            : event
+    onSave(formData);
+  };
+
+  return (
+    <div className="schedule-modal-overlay">
+      <div className="schedule-modal-content">
+        <div className="schedule-modal-header">
+          <h2>{event ? "Edit Event" : "Create Event"}</h2>
+          <button className="schedule-modal-close" onClick={onClose}>
+            <X size={20} />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="schedule-event-form">
+          <div className="schedule-form-group">
+            <label>Type</label>
+            <select
+              value={formData.type}
+              onChange={(e) =>
+                setFormData({ ...formData, type: e.target.value })
+              }
+            >
+              <option value="class">Class</option>
+              <option value="assignment">Assignment</option>
+              <option value="meeting">Meeting</option>
+              <option value="exam">Exam</option>
+            </select>
+          </div>
+
+          <div className="schedule-form-group">
+            <label>Title</label>
+            <input
+              type="text"
+              value={formData.title}
+              onChange={(e) =>
+                setFormData({ ...formData, title: e.target.value })
+              }
+              required
+            />
+          </div>
+
+          <div className="schedule-form-group">
+            <label>Course Code</label>
+            <input
+              type="text"
+              value={formData.courseCode}
+              onChange={(e) =>
+                setFormData({ ...formData, courseCode: e.target.value })
+              }
+              required
+            />
+          </div>
+
+          <div className="schedule-form-row">
+            <div className="schedule-form-group">
+              <label>Start Time</label>
+              <input
+                type="time"
+                value={formData.startTime}
+                onChange={(e) =>
+                  setFormData({ ...formData, startTime: e.target.value })
+                }
+              />
+            </div>
+
+            <div className="schedule-form-group">
+              <label>End Time</label>
+              <input
+                type="time"
+                value={formData.endTime}
+                onChange={(e) =>
+                  setFormData({ ...formData, endTime: e.target.value })
+                }
+              />
+            </div>
+          </div>
+
+          <div className="schedule-form-group">
+            <label>Location</label>
+            <input
+              type="text"
+              value={formData.location}
+              onChange={(e) =>
+                setFormData({ ...formData, location: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="schedule-form-group">
+            <label>Description</label>
+            <textarea
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="schedule-form-checkbox">
+            <input
+              type="checkbox"
+              id="isOnline"
+              checked={formData.isOnline}
+              onChange={(e) =>
+                setFormData({ ...formData, isOnline: e.target.checked })
+              }
+            />
+            <label htmlFor="isOnline">Online Event</label>
+          </div>
+
+          <div className="schedule-form-actions">
+            <button
+              type="button"
+              className="schedule-button-secondary"
+              onClick={onClose}
+            >
+              Cancel
+            </button>
+            <button type="submit" className="schedule-button-primary">
+              {event ? "Update" : "Create"} Event
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+function ScheduleContent() {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [view, setView] = useState("week"); // week, day, month
+  const [filter, setFilter] = useState("all");
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [editingEvent, setEditingEvent] = useState(null);
+  const [events, setEvents] = useState(mockEvents);
+
+  const weekDates = useMemo(() => getWeekDates(currentDate), [currentDate]);
+
+  // Event handlers
+  const handleEventClick = (event) => {
+    setSelectedEvent(event);
+  };
+
+  const handleCreateEvent = () => {
+    setIsCreateModalOpen(true);
+  };
+
+  const handleEditEvent = (event) => {
+    setSelectedEvent(null);
+    setEditingEvent(event);
+  };
+
+  const handleDeleteEvent = (eventId) => {
+    setEvents(events.filter((event) => event.id !== eventId));
+    setSelectedEvent(null);
+  };
+
+  const handleSaveEvent = (eventData) => {
+    if (eventData.id) {
+      // Update existing event
+      setEvents(
+        events.map((event) =>
+          event.id === eventData.id ? { ...event, ...eventData } : event
         )
       );
     } else {
-      setSchedule([...schedule, { ...newEvent, id: Date.now() }]);
+      // Create new event
+      setEvents([...events, { ...eventData, id: Date.now() }]);
     }
-    closeModal();
+    setIsCreateModalOpen(false);
+    setEditingEvent(null);
   };
 
-  const handleDeleteEvent = () => {
-    setSchedule(schedule.filter((event) => event.id !== selectedEvent.id));
-    closeModal();
+  const goToPreviousWeek = () => {
+    const newDate = new Date(currentDate);
+    newDate.setDate(newDate.getDate() - 7);
+    setCurrentDate(newDate);
   };
 
-  const handleAddTodo = (e) => {
-    e.preventDefault();
-    if (newTodo.trim()) {
-      addTodo(newTodo);
-      setNewTodo("");
+  const goToNextWeek = () => {
+    const newDate = new Date(currentDate);
+    newDate.setDate(newDate.getDate() + 7);
+    setCurrentDate(newDate);
+  };
+
+  const goToToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  const getEventsByDate = (date) => {
+    const dayOfWeek = date.toLocaleDateString("en-US", { weekday: "long" });
+    return mockEvents.filter((event) => {
+      if (event.type === "class") {
+        return event.days.includes(dayOfWeek);
+      }
+      if (event.type === "meeting") {
+        return event.day === dayOfWeek;
+      }
+      if (event.type === "assignment" || event.type === "exam") {
+        return (
+          new Date(event.dueDate || event.date).toDateString() ===
+          date.toDateString()
+        );
+      }
+      return false;
+    });
+  };
+
+  const getEventIcon = (type) => {
+    switch (type) {
+      case "class":
+        return <BookOpen className="event-icon" />;
+      case "assignment":
+        return <FileText className="event-icon" />;
+      case "meeting":
+        return <Users className="event-icon" />;
+      case "exam":
+        return <BarChart className="event-icon" />;
+      default:
+        return <Calendar className="event-icon" />;
     }
   };
 
-  // Rendering functions
-  const renderEvent = (event, day) => {
-    // Calculate top and height based on startTime and endTime
-    const top = (event.startTime - 7) * 60; // 7 is the starting hour
-    const height = (event.endTime - event.startTime) * 60;
+  const getEventClass = (type) => {
+    switch (type) {
+      case "class":
+        return "event-class";
+      case "assignment":
+        return "event-assignment";
+      case "meeting":
+        return "event-meeting";
+      case "exam":
+        return "event-exam";
+      default:
+        return "";
+    }
+  };
+
+  const formatDateHeader = (date) => {
+    const today = new Date();
+    const isToday = date.toDateString() === today.toDateString();
+
     return (
-      <div
-        key={event.id}
-        className={`event ${event.type}`}
-        style={{
-          top: `${top}px`,
-          height: `${height}px`,
-        }}
-        onClick={() => openModal(event)}
-      >
-        {event.title}
+      <div className={`date-header ${isToday ? "today" : ""}`}>
+        <span className="day-name">
+          {date.toLocaleDateString("en-US", { weekday: "short" })}
+        </span>
+        <span className="date-number">{date.getDate()}</span>
       </div>
     );
   };
 
   return (
     <div className="schedule-content">
-      <h2>My Schedule</h2>
-      <div className="schedule-grid">
-        <div className="time-column">
-          <div className="day-header"></div>
-          {timeSlots.map((time) => (
-            <div key={time} className="time-slot">
-              {time}:00
-            </div>
-          ))}
+      <div className="schedule-header">
+        <div className="schedule-header-left">
+          <h1 className="schedule-heading">Schedule</h1>
+          <div className="view-controls">
+            <button
+              className={`schedule-view-button ${
+                view === "week" ? "active" : ""
+              }`}
+              onClick={() => setView("week")}
+            >
+              Week
+            </button>
+            <button
+              className={`schedule-view-button ${
+                view === "day" ? "active" : ""
+              }`}
+              onClick={() => setView("day")}
+            >
+              Day
+            </button>
+            <button
+              className={`schedule-view-button ${
+                view === "month" ? "active" : ""
+              }`}
+              onClick={() => setView("month")}
+            >
+              Month
+            </button>
+          </div>
         </div>
-        {daysOfWeek.map((day) => (
-          <div key={day} className="day-column">
-            <div className="day-header">{day}</div>
-            <div className="day-slots">
-              {schedule
-                .filter((event) => event.day === day)
-                .map((event) => renderEvent(event, day))}
-              {timeSlots.map((time) => (
-                <div
-                  key={`${day}-${time}`}
-                  className="time-slot"
-                  onClick={() =>
-                    openModal({
-                      day,
-                      startTime: time,
-                      endTime: time + 1,
-                      title: "",
-                      type: "lecture",
-                    })
-                  }
-                >
-                  <span className="add-event">+</span>
+
+        <div className="schedule-header-right">
+          <button className="today-button" onClick={goToToday}>
+            Today
+          </button>
+          <div className="navigation-buttons">
+            <button className="schedule-nav-button" onClick={goToPreviousWeek}>
+              <ChevronLeft size={16} />
+            </button>
+            <button className="schedule-nav-button" onClick={goToNextWeek}>
+              <ChevronRight size={16} />
+            </button>
+          </div>
+          <span className="current-date">
+            {currentDate.toLocaleDateString("en-US", {
+              month: "long",
+              year: "numeric",
+            })}
+          </span>
+        </div>
+      </div>
+
+      <div className="schedule-toolbar">
+        <button className="schedule-add-button" onClick={handleCreateEvent}>
+          <Plus size={20} />
+          Add Event
+        </button>
+
+        <div className="schedule-filters">
+          <button
+            className={`filter-button ${filter === "all" ? "active" : ""}`}
+            onClick={() => setFilter("all")}
+          >
+            All Events
+          </button>
+          <button
+            className={`filter-button ${filter === "classes" ? "active" : ""}`}
+            onClick={() => setFilter("classes")}
+          >
+            Classes
+          </button>
+          <button
+            className={`filter-button ${
+              filter === "assignments" ? "active" : ""
+            }`}
+            onClick={() => setFilter("assignments")}
+          >
+            Assignments
+          </button>
+          <button
+            className={`filter-button ${filter === "meetings" ? "active" : ""}`}
+            onClick={() => setFilter("meetings")}
+          >
+            Meetings
+          </button>
+          <button
+            className={`filter-button ${filter === "exams" ? "active" : ""}`}
+            onClick={() => setFilter("exams")}
+          >
+            Exams
+          </button>
+        </div>
+      </div>
+
+      <div className="week-view">
+        {weekDates.map((date) => (
+          <div key={date.toISOString()} className="day-column">
+            {formatDateHeader(date)}
+            <div className="events-container">
+              {getEventsByDate(date)
+                .filter(
+                  (event) =>
+                    filter === "all" || event.type === filter.slice(0, -1)
+                )
+                .map((event) => (
+                  <div
+                    key={event.id}
+                    className={`schedule-event-card ${getEventClass(
+                      event.type
+                    )}`}
+                    onClick={() => handleEventClick(event)}
+                  >
+                    <div className="event-header">
+                      {getEventIcon(event.type)}
+                      <span className="schedule-course-code">
+                        {event.courseCode}
+                      </span>
+                    </div>
+
+                    <h3 className="event-title">{event.title}</h3>
+
+                    <div className="schedule-event-details">
+                      {event.startTime && (
+                        <div className="event-time">
+                          <Clock size={14} />
+                          <span>
+                            {formatTime(event.startTime)} -{" "}
+                            {formatTime(event.endTime)}
+                          </span>
+                        </div>
+                      )}
+
+                      {event.location && (
+                        <div className="event-location">
+                          {event.isOnline ? (
+                            <Monitor size={14} />
+                          ) : (
+                            <MapPin size={14} />
+                          )}
+                          <span>{event.location}</span>
+                        </div>
+                      )}
+
+                      {event.priority === "high" && (
+                        <div className="event-priority">
+                          <AlertCircle size={14} />
+                          <span>High Priority</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+
+              {getEventsByDate(date).length === 0 && (
+                <div className="empty-day-message">
+                  <Calendar size={20} />
+                  <p>No events scheduled</p>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         ))}
       </div>
 
-      <div className="todo-section">
-        <h3>To-Do List</h3>
-        {/* Form for adding new tasks and list of tasks */}
-        <form onSubmit={handleAddTodo} className="todo-form">
-          <input
-            type="text"
-            value={newTodo}
-            onChange={(e) => setNewTodo(e.target.value)}
-            placeholder="Add a new task"
-          />
-          <button type="submit">
-            <Plus size={20} />
-          </button>
-        </form>
+      {selectedEvent && (
+        <EventDetailsModal
+          event={selectedEvent}
+          onClose={() => setSelectedEvent(null)}
+          onEdit={handleEditEvent}
+          onDelete={handleDeleteEvent}
+        />
+      )}
 
-        {/* List of tasks */}
-        <ul className="todo-list">
-          {/* Render each task as a list item */}
-          {todos.map((todo) => (
-            <li key={todo.id} className={todo.completed ? "completed" : ""}>
-              <span onClick={() => toggleTodo(todo.id)}>
-                <CheckSquare size={20} />
-                {todo.title}
-              </span>
-              <button onClick={() => deleteTodo(todo.id)}>
-                <X size={16} />
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h3>{selectedEvent ? "Edit Event" : "Add New Event"}</h3>
-            {/* Form for editing or adding new events */}
-            <form onSubmit={handleSubmit}>
-              <select
-                name="day"
-                value={newEvent.day}
-                onChange={handleEventChange}
-                required
-              >
-                {/* Add an option for each day of the week */}
-                <option value="">Select Day</option>
-                {daysOfWeek.map((day) => (
-                  <option key={day} value={day}>
-                    {day}
-                  </option>
-                ))}
-              </select>
-              {/* Input fields for start and end time and title */}
-              <div className="time-inputs">
-                <label>
-                  Start Time:
-                  <input
-                    type="number"
-                    name="startTime"
-                    min="7"
-                    max="20"
-                    value={newEvent.startTime}
-                    onChange={handleEventChange}
-                    required
-                  />
-                </label>
-
-                <label>
-                  End Time:
-                  <input
-                    type="number"
-                    name="endTime"
-                    min="8"
-                    max="21"
-                    value={newEvent.endTime}
-                    onChange={handleEventChange}
-                    required
-                  />
-                </label>
-              </div>
-              <input
-                type="text"
-                name="title"
-                value={newEvent.title}
-                onChange={handleEventChange}
-                placeholder="Event Title"
-                required
-              />
-              <select
-                name="type"
-                value={newEvent.type}
-                onChange={handleEventChange}
-              >
-                {/* Added an option for each event type */}
-                <option value="lecture">Lecture</option>
-                <option value="tutorial">Tutorial</option>
-                <option value="lab">Lab</option>
-                <option value="study">Study</option>
-                <option value="meeting">Meeting</option>
-              </select>
-
-              {/* Added buttons for submitting and canceling the form */}
-              <div className="modal-actions">
-                <button type="submit">
-                  {selectedEvent ? "Update" : "Add"} Event
-                </button>
-                {selectedEvent && (
-                  <button type="button" onClick={handleDeleteEvent}>
-                    Delete Event
-                  </button>
-                )}
-
-                <button type="button" onClick={closeModal}>
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+      {(isCreateModalOpen || editingEvent) && (
+        <EventForm
+          event={editingEvent}
+          onClose={() => {
+            setIsCreateModalOpen(false);
+            setEditingEvent(null);
+          }}
+          onSave={handleSaveEvent}
+        />
       )}
     </div>
   );

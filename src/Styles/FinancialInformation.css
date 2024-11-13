@@ -232,9 +232,10 @@
 }
 
 .scholarship-amount {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin: 1rem 0;
+  color: #1e293b;
 }
 
 .balance-indicators {
@@ -1286,13 +1287,13 @@ select:focus {
   align-items: center;
 }
 
-.status-indicator {
+.financial-status-indicator {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.status-indicator.active {
+.financial-status-indicator.active {
   color: #059669;
 }
 
@@ -2707,14 +2708,14 @@ tr.credit .amount {
   align-items: center;
 }
 
-.status-indicator {
+.financial-status-indicator {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   color: #059669;
 }
 
-.aid-card.nsfas .status-indicator {
+.aid-card.nsfas .financial-status-indicator {
   color: white;
 }
 
@@ -2776,6 +2777,8 @@ tr.credit .amount {
 
 .match-badge {
   padding: 0.25rem 0.75rem;
+  text-align: center;
+  width: 80px;
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 500;

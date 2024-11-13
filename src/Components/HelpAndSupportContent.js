@@ -613,7 +613,7 @@ function ChatModal({ onClose, chatHistory, setChatHistory }) {
 
   return (
     <div className="chat-modal">
-      <div className="chat-container">
+      <div className="chat-box-container">
         <div className="chat-header">
           <h3>Student Support Chat</h3>
           <button className="help-close-button" onClick={onClose}>

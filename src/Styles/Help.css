@@ -297,7 +297,7 @@
   z-index: 50;
 }
 
-.chat-container {
+.chat-box-container {
   background-color: white;
   border-radius: 12px;
   width: 100%;
@@ -553,7 +553,7 @@
     max-width: 100%;
   }
 
-  .chat-container {
+  .chat-box-container {
     height: 100vh;
     max-height: none;
     border-radius: 0;
@@ -933,7 +933,7 @@
     background-color: #334155;
   }
 
-  .chat-container {
+  .chat-box-container {
     background-color: #1e293b;
   }
 

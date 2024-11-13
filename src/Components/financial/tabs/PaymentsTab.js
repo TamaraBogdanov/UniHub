@@ -290,7 +290,7 @@ function PaymentsTab({ financialInfo, formatAmount }) {
             <FileText size={24} />
             <h4>EFT Payment</h4>
             <p>Direct bank transfer</p>
-            <button className="details-button">View Bank Details</button>
+            <button className="secondary-button">View Bank Details</button>
           </div>
 
           {/* E-Wallet Option */}

@@ -3,6 +3,7 @@
   height: 80vh;
   margin-left: 30px;
   margin-right: 30px;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -11,7 +12,7 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2.5rem;
 }
 
 .completed {
@@ -21,12 +22,14 @@
 
 .sidebar-content {
   display: flex;
+  border-left-color: #3b82f6;
+  border-left-width: 5px;
+  border-left-style: solid;
   background-color: white;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   flex-direction: column;
   align-items: start;
-
   padding: 0.5rem 0.5rem;
 }
 .nav-button {
@@ -241,7 +244,7 @@
   margin-bottom: 0.5rem;
 }
 
-.progress-bar {
+.course-progress-bar {
   height: 100%;
   background-color: #3b82f6;
   border-radius: 2px;
@@ -325,8 +328,10 @@
 }
 
 .classes-content {
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  /* margin-bottom: 2rem;
+  margin-top: 2rem; */
+  padding: 24px;
+  background-color: #f8fafc;
 }
 
 .classes-header {
