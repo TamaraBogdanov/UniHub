@@ -126,17 +126,17 @@ function ScholarshipsTab({ financialInfo, saInfo, formatAmount }) {
                 <span className="year-badge">{scholarship.year}</span>
               </div>
               <div className="scholarship-amount">
-                <span>Award Amount</span>
+                <span>Award Amount: </span>
                 <span className="amount">
                   {formatAmount(scholarship.amount)}
                 </span>
               </div>
               <div className="scholarship-status">
-                <div className="status-indicator active">
+                <div className="financial-status-indicator active">
                   <CheckCircle size={16} />
                   <span>Active</span>
                 </div>
-                <button className="details-button">View Details</button>
+                <button className="secondary-button">View Details</button>
               </div>
             </div>
           ))}

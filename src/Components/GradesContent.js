@@ -1,212 +1,439 @@
-import React, { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import React, { useState, useMemo } from "react";
+import "../Styles/Grades.css";
+import { courses } from "../Mockdata/mockData";
 import {
+  BarChart,
   LineChart,
   Line,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
-import "../Styles/Grades.css";
+import {
+  Award,
+  Target,
+  CheckCircle,
+  ArrowUp,
+  ArrowDown,
+  Clock,
+} from "lucide-react";
+
+// Mock grade history data
+const gradeHistory = [
+  { month: "Sep", average: 85 },
+  { month: "Oct", average: 82 },
+  { month: "Nov", average: 88 },
+  { month: "Dec", average: 86 },
+  { month: "Jan", average: 90 },
+  { month: "Feb", average: 87 },
+  { month: "Mar", average: 92 },
+];
+
+const performanceMetrics = {
+  currentGPA: 3.7,
+  trendDirection: "up",
+  trendPercentage: 5.2,
+  totalCredits: 45,
+  completedAssignments: 78,
+  upcomingAssignments: 12,
+  bestPerformance: "CS101",
+  needsImprovement: "MATH201",
+};
 
 function GradesContent() {
-  const [expandedCourse, setExpandedCourse] = useState(null);
+  const [selectedTerm, setSelectedTerm] = useState("Spring 2024");
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  // const [showDetails, setShowDetails] = useState(false);
+  const [gradeFilter, setGradeFilter] = useState("all"); // all, high, low
 
-  // Sample data - easier to put it hear for now, but we will have to use live data in the future using MongoDB
-  const gradesData = [
-    {
-      id: 1,
-      code: "CSC1015F",
-      name: "Computer Science 1015",
-      score: 75,
-      credits: 18,
-      year: 1,
-      semester: 1,
-      breakdown: { Practicals: 82, Tests: 70, Exam: 75 },
-    },
-    {
-      id: 2,
-      code: "MAM1000W",
-      name: "Mathematics 1000",
-      score: 68,
-      credits: 36,
-      year: 1,
-      semester: "Full Year",
-      breakdown: { Tutorials: 72, Tests: 65, Exam: 68 },
-    },
-    {
-      id: 3,
-      code: "PHY1004W",
-      name: "Physics 1004",
-      score: 72,
-      credits: 36,
-      year: 1,
-      semester: "Full Year",
-      breakdown: { Practicals: 80, Tests: 68, Exam: 71 },
-    },
-    {
-      id: 4,
-      code: "CSC1016S",
-      name: "Computer Science 1016",
-      score: 78,
-      credits: 18,
-      year: 1,
-      semester: 2,
-      breakdown: { Practicals: 85, Tests: 75, Exam: 77 },
-    },
-    {
-      id: 5,
-      code: "STA1000S",
-      name: "Statistics 1000",
-      score: 70,
-      credits: 18,
-      year: 1,
-      semester: 2,
-      breakdown: { Tutorials: 73, Tests: 68, Exam: 70 },
-    },
-  ];
-
-  // Calculate weighted average
-  const calculateWeightedAverage = () => {
-    const totalWeightedScore = gradesData.reduce(
-      (sum, course) => sum + course.score * course.credits,
+  // Calculate overall statistics
+  const stats = useMemo(() => {
+    const allGrades = courses.flatMap((course) => course.grades);
+    const totalGrades = allGrades.reduce(
+      (sum, grade) => sum + grade.grade * grade.weight,
       0
     );
-    const totalCredits = gradesData.reduce(
-      (sum, course) => sum + course.credits,
-      0
-    );
-    return (totalWeightedScore / totalCredits).toFixed(2);
+    const totalWeight = allGrades.reduce((sum, grade) => sum + grade.weight, 0);
+
+    return {
+      average: (totalGrades / totalWeight).toFixed(1),
+      highest: Math.max(...allGrades.map((grade) => grade.grade)),
+      lowest: Math.min(...allGrades.map((grade) => grade.grade)),
+      total: allGrades.length,
+    };
+  }, []);
+
+  // Filter and sort courses based on grades
+  const filteredCourses = useMemo(() => {
+    let filtered = [...courses];
+
+    if (gradeFilter === "high") {
+      filtered = filtered.filter((course) => {
+        const avg =
+          course.grades.reduce(
+            (sum, grade) => sum + grade.grade * grade.weight,
+            0
+          ) / course.grades.reduce((sum, grade) => sum + grade.weight, 0);
+        return avg >= 85;
+      });
+    } else if (gradeFilter === "low") {
+      filtered = filtered.filter((course) => {
+        const avg =
+          course.grades.reduce(
+            (sum, grade) => sum + grade.grade * grade.weight,
+            0
+          ) / course.grades.reduce((sum, grade) => sum + grade.weight, 0);
+        return avg < 85;
+      });
+    }
+
+    return filtered.sort((a, b) => {
+      const aAvg =
+        a.grades.reduce((sum, grade) => sum + grade.grade * grade.weight, 0) /
+        a.grades.reduce((sum, grade) => sum + grade.weight, 0);
+      const bAvg =
+        b.grades.reduce((sum, grade) => sum + grade.grade * grade.weight, 0) /
+        b.grades.reduce((sum, grade) => sum + grade.weight, 0);
+      return bAvg - aAvg;
+    });
+  });
+
+  const getGradeColor = (grade) => {
+    if (grade >= 90) return "text-emerald-500";
+    if (grade >= 80) return "text-blue-500";
+    if (grade >= 70) return "text-yellow-500";
+    return "text-red-500";
   };
 
-  // Calculate trend data - nice feature to add and it shows the performance trend of the student over the year
-  const weightedAverage = calculateWeightedAverage();
-
-  // Sample trend data - we'll have to use live data here as well using MongoDB
-  const trendData = [
-    { semester: "Semester 1", average: 71.5 },
-    { semester: "Semester 2", average: 74 },
-    { semester: "Overall", average: parseFloat(weightedAverage) },
-  ];
-
-  // Get score class based on score
-  const getScoreClass = (score) => {
-    if (score >= 75) return "first";
-    if (score >= 70) return "upper-second";
-    if (score >= 60) return "lower-second";
-    if (score >= 50) return "third";
-    return "fail";
+  const getGradeLetter = (grade) => {
+    if (grade >= 90) return "A";
+    if (grade >= 80) return "B";
+    if (grade >= 70) return "C";
+    if (grade >= 60) return "D";
+    return "F";
   };
 
   return (
     <div className="grades-content">
-      <h2>My Academic Record</h2>
+      {/* Header Section */}
+      <div className="grades-header">
+        <div className="grades-header-left">
+          <h1 className="grades-heading">Academic Performance</h1>
+          <div className="term-selector">
+            <select
+              value={selectedTerm}
+              onChange={(e) => setSelectedTerm(e.target.value)}
+              className="term-select"
+            >
+              <option value="Spring 2024">Spring 2024</option>
+              <option value="Fall 2023">Fall 2023</option>
+              <option value="Summer 2023">Summer 2023</option>
+            </select>
+          </div>
+        </div>
 
-      <div className="overall-average">
-        <h3>Weighted Average</h3>
-
-        <div className="average-circle">
-          {/* Change the color of the circle based on the score */}
-          <span className="average-number">{weightedAverage}%</span>
-          <span className="average-label">Overall</span>
+        <div className="grades-header-right">
+          <div className="gpa-display">
+            <div className="gpa-value">{performanceMetrics.currentGPA}</div>
+            <div className="gpa-label">
+              Current GPA
+              <span
+                className={`gpa-trend ${
+                  performanceMetrics.trendDirection === "up"
+                    ? "trend-up"
+                    : "trend-down"
+                }`}
+              >
+                {performanceMetrics.trendDirection === "up" ? (
+                  <ArrowUp size={16} />
+                ) : (
+                  <ArrowDown size={16} />
+                )}
+                {performanceMetrics.trendPercentage}%
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Added the trend chart to which shows the performance trend as well */}
-      <div className="average-trend">
-        <h3>Performance Trend</h3>
-        {/* Added responsive container */}
-        <ResponsiveContainer width="100%" height={200}>
-          {/* Added line chart */}
-          <LineChart data={trendData}>
-            {/* Added x and y axis */}
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="semester" />
-            <YAxis domain={[0, 100]} />
-            {/* Added tooltip which shows the score and semester */}
-            <Tooltip />
-            {/* Added legend which shows the average score for each semester */}
-            <Legend />
-            {/* Added line chart which also shows the average score */}
-            <Line
-              type="monotone"
-              dataKey="average"
-              stroke="#8884d8"
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+      {/* Performance Overview Cards */}
+      <div className="performance-metrics">
+        <div className="metric-card">
+          <div className="metric-icon">
+            <Award />
+          </div>
+          <div className="metric-content">
+            <div className="metric-value">{stats.average}%</div>
+            <div className="metric-label">Overall Average</div>
+          </div>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-icon">
+            <Target />
+          </div>
+          <div className="metric-content">
+            <div className="metric-value">
+              {performanceMetrics.totalCredits}
+            </div>
+            <div className="metric-label">Credits Completed</div>
+          </div>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-icon">
+            <CheckCircle />
+          </div>
+          <div className="metric-content">
+            <div className="metric-value">
+              {performanceMetrics.completedAssignments}
+            </div>
+            <div className="metric-label">Completed Assignments</div>
+          </div>
+        </div>
+
+        <div className="metric-card">
+          <div className="metric-icon">
+            <Clock />
+          </div>
+          <div className="metric-content">
+            <div className="metric-value">
+              {performanceMetrics.upcomingAssignments}
+            </div>
+            <div className="metric-label">Upcoming Assignments</div>
+          </div>
+        </div>
       </div>
 
-      <div className="courses-list">
-        <h3>Course Results</h3>
-        {/* A card for each course in the list with the course details */}
-        {gradesData.map((course) => (
-          <div key={course.id} className="course-card">
-            <div
-              className="course-header"
-              style={{ cursor: "pointer" }}
-              // Clicking the header will expand or collapse the course details
-              onClick={() =>
-                setExpandedCourse(
-                  expandedCourse === course.id ? null : course.id
-                )
-              }
-            >
-              {/* Added icons for course code and score */}
-              <div className="course-title">
-                <h4>
-                  {/* Course code and name - we'll use live data next time */}
-                  {course.code}: {course.name}
-                </h4>
-                <p>
-                  {/* Course details - we'll use live data next time */}
-                  Credits: {course.credits} | Year {course.year} |{" "}
-                  {typeof course.semester === "number"
-                    ? `Semester ${course.semester}`
-                    : course.semester}
-                </p>
-              </div>
-
-              <div className="course-score">
-                {/* Course score - we'll use live data next time */}
-                <span className={`score ${getScoreClass(course.score)}`}>
-                  {course.score}%
-                </span>
-              </div>
-              {/* Expanded or collapsed icon */}
-              {expandedCourse === course.id ? (
-                <ChevronUp size={24} />
-              ) : (
-                <ChevronDown size={24} />
-              )}
+      {/* Performance Trends */}
+      <div className="performance-charts">
+        <div className="chart-card">
+          <div className="chart-header">
+            <h3>Grade Trends</h3>
+            <div className="chart-legend">
+              <span className="legend-item">
+                <span className="legend-color bg-blue-500"></span>
+                Monthly Average
+              </span>
             </div>
-
-            {/* Expanded course details */}
-            {expandedCourse === course.id && (
-              <div className="course-details">
-                <h5>Score Breakdown</h5>
-                <div className="score-breakdown">
-                  {Object.entries(course.breakdown).map(([category, score]) => (
-                    <div key={category} className="breakdown-item">
-                      <span>{category}</span>
-                      <div className="progressGrades-bar">
-                        <div
-                          className="progress"
-                          style={{ width: `${score}%` }}
-                        ></div>
-                      </div>
-                      <span>{score}%</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
-        ))}
+          <div className="chart-container">
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={gradeHistory}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                <XAxis
+                  dataKey="month"
+                  axisLine={false}
+                  tickLine={false}
+                  style={{ fontSize: "12px" }}
+                />
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  domain={[60, 100]}
+                  style={{ fontSize: "12px" }}
+                />
+                <Tooltip
+                  contentStyle={{
+                    background: "#fff",
+                    border: "none",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)",
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="average"
+                  stroke="#3b82f6"
+                  strokeWidth={2}
+                  dot={{ fill: "#3b82f6", strokeWidth: 2 }}
+                  activeDot={{ r: 8 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="chart-card">
+          <div className="chart-header">
+            <h3>Course Performance Distribution</h3>
+          </div>
+          <div className="chart-container">
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart
+                data={filteredCourses.map((course) => ({
+                  name: course.code,
+                  grade:
+                    course.grades.reduce(
+                      (sum, grade) => sum + grade.grade * grade.weight,
+                      0
+                    ) /
+                    course.grades.reduce((sum, grade) => sum + grade.weight, 0),
+                }))}
+              >
+                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                <XAxis
+                  dataKey="name"
+                  axisLine={false}
+                  tickLine={false}
+                  style={{ fontSize: "12px" }}
+                />
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  domain={[0, 100]}
+                  style={{ fontSize: "12px" }}
+                />
+                <Tooltip
+                  contentStyle={{
+                    background: "#fff",
+                    border: "none",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)",
+                  }}
+                />
+                <Bar dataKey="grade" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </div>
+
+      {/* Course Grades List */}
+      <div className="grades-list-section">
+        <div className="grades-list-header">
+          <h3>Course Grades</h3>
+          <div className="grades-filters">
+            <button
+              className={`grade-filter-btn ${
+                gradeFilter === "all" ? "active" : ""
+              }`}
+              onClick={() => setGradeFilter("all")}
+            >
+              All
+            </button>
+            <button
+              className={`grade-filter-btn ${
+                gradeFilter === "high" ? "active" : ""
+              }`}
+              onClick={() => setGradeFilter("high")}
+            >
+              High Performing
+            </button>
+            <button
+              className={`grade-filter-btn ${
+                gradeFilter === "low" ? "active" : ""
+              }`}
+              onClick={() => setGradeFilter("low")}
+            >
+              Needs Improvement
+            </button>
+          </div>
+        </div>
+
+        <div className="grades-list">
+          {filteredCourses.map((course) => {
+            const courseAvg =
+              course.grades.reduce(
+                (sum, grade) => sum + grade.grade * grade.weight,
+                0
+              ) / course.grades.reduce((sum, grade) => sum + grade.weight, 0);
+
+            return (
+              <div
+                key={course.id}
+                className={`course-grade-card ${
+                  selectedCourse === course.id ? "expanded" : ""
+                }`}
+                onClick={() => setSelectedCourse(course.id)}
+              >
+                <div className="course-grade-header">
+                  <div className="course-info">
+                    <span className="course-code">{course.code}</span>
+                    <h4 className="course-title">{course.title}</h4>
+                  </div>
+
+                  <div className="grade-info">
+                    <div className={`grade-value ${getGradeColor(courseAvg)}`}>
+                      {courseAvg.toFixed(1)}%
+                    </div>
+                    <div className="grade-letter">
+                      {getGradeLetter(courseAvg)}
+                    </div>
+                  </div>
+                </div>
+
+                {selectedCourse === course.id && (
+                  <div className="course-grade-details">
+                    <div className="grade-breakdown">
+                      {course.grades.map((grade, index) => (
+                        <div key={index} className="grade-item">
+                          <div className="grade-item-info">
+                            <span className="grade-item-title">
+                              {grade.title}
+                            </span>
+                            <span className="grade-item-weight">
+                              {grade.weight}%
+                            </span>
+                          </div>
+                          <div
+                            className={`grade-item-value ${getGradeColor(
+                              grade.grade
+                            )}`}
+                          >
+                            {grade.grade.toFixed(1)}%
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="grade-chart">
+                      <ResponsiveContainer width="100%" height={150}>
+                        <BarChart
+                          data={course.grades}
+                          margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+                        >
+                          <CartesianGrid
+                            strokeDasharray="3 3"
+                            vertical={false}
+                          />
+                          <XAxis
+                            dataKey="title"
+                            axisLine={false}
+                            tickLine={false}
+                            style={{ fontSize: "10px" }}
+                          />
+                          <YAxis
+                            domain={[0, 100]}
+                            axisLine={false}
+                            tickLine={false}
+                            style={{ fontSize: "10px" }}
+                          />
+                          <Tooltip
+                            contentStyle={{
+                              background: "#fff",
+                              border: "none",
+                              borderRadius: "8px",
+                              boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)",
+                            }}
+                          />
+                          <Bar
+                            dataKey="grade"
+                            fill="#3b82f6"
+                            radius={[4, 4, 0, 0]}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useScrollToTop from "../hooks/useScrollToTop";
 import {
   Home,
   Users,
@@ -28,6 +29,9 @@ function SelfServicePage({ userRole }) {
   const [activeSection, setActiveSection] = useState("home");
   const [topbarColor, setTopbarColor] = useState("#1b065e");
   const navigate = useNavigate();
+
+  // Use the hook with activeSection as dependency
+  useScrollToTop(activeSection);
 
   useEffect(() => {
     setTopbarColor("#1b065e"); // Default color for Self-Service
@@ -129,7 +133,7 @@ function SelfServicePage({ userRole }) {
               <DollarSign size={25} />
               <h3>Finances</h3>
             </button>
-            <button
+            {/* <button
               className={`nav-button ${
                 activeSection === "personal-information" ? "active" : ""
               }`}
@@ -137,7 +141,7 @@ function SelfServicePage({ userRole }) {
             >
               <User size={25} />
               <h3>Personal</h3>
-            </button>
+            </button> */}
             <button
               className={`nav-button ${
                 activeSection === "registration" ? "active" : ""

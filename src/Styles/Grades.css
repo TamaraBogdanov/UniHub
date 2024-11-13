@@ -1,139 +1,403 @@
-/* Grades Styles */
+/* Grades.css */
 .grades-content {
-	padding: 20px;
+  padding: 24px;
+  background-color: #f8fafc;
+  min-height: 100vh;
 }
 
-.grades-content h2,
-.grades-content h3 {
-	margin-bottom: 20px;
-	color: #2c3e50;
+/* Header Styles */
+.grades-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
 }
 
-.overall-average {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 30px;
+.grades-header-left {
+  flex: 1;
 }
 
-.average-circle {
-	width: 120px;
-	height: 120px;
-	border-radius: 50%;
-	background-color: #3498db;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	color: white;
+.grades-heading {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 8px 0;
 }
 
-.average-number {
-	font-size: 28px;
-	font-weight: bold;
+.term-selector {
+  display: inline-block;
 }
 
-.average-label {
-	font-size: 14px;
+.term-select {
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: white;
+  color: #475569;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.average-trend {
-	margin-bottom: 30px;
+.term-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.courses-list {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
+.grades-header-right {
+  text-align: right;
 }
 
-.course-card {
-	background-color: white;
-	border-radius: 8px;
-	overflow: hidden;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	transition: box-shadow 0.3s ease;
+.gpa-display {
+  background-color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
 }
 
-.course-card:hover {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.gpa-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+  margin-bottom: 4px;
 }
 
-.course-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 15px;
-	cursor: pointer;
-	background-color: #f8f9fa;
+.gpa-label {
+  font-size: 14px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.course-title h4 {
-	margin: 0;
-	color: #2c3e50;
+.gpa-trend {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
-.course-title p {
-	margin: 5px 0 0;
-	color: #7f8c8d;
-	font-size: 14px;
+.gpa-trend.trend-up {
+  color: #10b981;
 }
 
-.course-score {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
+.gpa-trend.trend-down {
+  color: #ef4444;
 }
 
-.score {
-	font-size: 24px;
-	font-weight: bold;
+/* Performance Metrics */
+.performance-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
-.score.first {
-	color: #27ae60;
-}
-.score.upper-second {
-	color: #2980b9;
-}
-.score.lower-second {
-	color: #f39c12;
-}
-.score.third {
-	color: #e67e22;
-}
-.score.fail {
-	color: #c0392b;
+.metric-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.course-details {
-	padding: 15px;
-	border-top: 1px solid #e0e0e0;
+.metric-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #eff6ff;
+  color: #3b82f6;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.score-breakdown {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
+.metric-content {
+  flex: 1;
 }
 
-.breakdown-item {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+.metric-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1;
+  margin-bottom: 4px;
 }
 
-.progressGrades-bar {
-	flex-grow: 1;
-	height: 8px;
-	background-color: #ecf0f1;
-	border-radius: 4px;
-	margin: 0 10px;
-	overflow: hidden;
+.metric-label {
+  font-size: 14px;
+  color: #64748b;
 }
 
-.progress {
-	height: 100%;
-	background-color: #3498db;
-	border-radius: 4px;
+/* Performance Charts */
+.performance-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.chart-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.chart-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+/* Course Grades List */
+.grades-list-section {
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 20px;
+}
+
+.grades-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.grades-list-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.grades-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.grade-filter-btn {
+  padding: 6px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: white;
+  color: #475569;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.grade-filter-btn:hover {
+  background-color: #f8fafc;
+}
+
+.grade-filter-btn.active {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.grades-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.course-grade-card {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.course-grade-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.course-grade-header {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.course-code {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.course-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1e293b;
+  margin: 0;
+}
+
+.grade-info {
+  text-align: right;
+}
+
+.grade-value {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.grade-letter {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.text-emerald-500 {
+  color: #10b981;
+}
+
+.text-blue-500 {
+  color: #3b82f6;
+}
+
+.text-yellow-500 {
+  color: #f59e0b;
+}
+
+.text-red-500 {
+  color: #ef4444;
+}
+
+/* Course Grade Details */
+.course-grade-details {
+  background-color: white;
+  border-top: 1px solid #e2e8f0;
+  padding: 16px;
+}
+
+.grade-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.grade-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background-color: #f8fafc;
+  border-radius: 6px;
+}
+
+.grade-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.grade-item-title {
+  font-size: 14px;
+  color: #1e293b;
+}
+
+.grade-item-weight {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.grade-item-value {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .grades-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .grades-header-right {
+    width: 100%;
+    text-align: left;
+  }
+
+  .gpa-display {
+    display: inline-block;
+  }
+
+  .performance-charts {
+    grid-template-columns: 1fr;
+  }
+
+  .grades-list-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .grades-filters {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .grade-filter-btn {
+    white-space: nowrap;
+  }
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.course-grade-details {
+  animation: slideDown 0.3s ease;
 }

@@ -3,73 +3,107 @@ import { useNavigate } from "react-router-dom";
 import logo from "./logouni.png";
 import "../Shared/Styling/CTopBar.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-
-// Allow the Topbar component to display the current date, manage dropdown visibility, and change login based on user role.
+import { MessageSquare, Bell } from "lucide-react";
 
 function Topbar({ currentPage, userRole, topbarColor }) {
-	const [date, setDate] = useState("");
-	const [dropdownOpen, setDropdownOpen] = useState(false);
-	const navigate = useNavigate();
+  const [date, setDate] = useState("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [notifications, setNotifications] = useState(3); // Example notification count
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		function updateDate() {
-			const now = new Date();
-			const optionsDay = { weekday: "long" };
-			const optionsDate = { day: "numeric", month: "long", year: "numeric" };
+  useEffect(() => {
+    function updateDate() {
+      const now = new Date();
+      const optionsDay = { weekday: "long" };
+      const optionsDate = { day: "numeric", month: "long", year: "numeric" };
 
-			const day = now.toLocaleDateString("en-GB", optionsDay);
-			const rest = now.toLocaleDateString("en-GB", optionsDate);
+      const day = now.toLocaleDateString("en-GB", optionsDay);
+      const rest = now.toLocaleDateString("en-GB", optionsDate);
 
-			const formattedDate = `${day}, ${rest}`;
-			setDate(formattedDate);
-		}
+      const formattedDate = `${day}, ${rest}`;
+      setDate(formattedDate);
+    }
 
-		updateDate(); // Set the initial date
-		const timer = setInterval(updateDate, 1000); // Update the date every second
-		return () => clearInterval(timer);
-	}, []);
+    updateDate();
+    const timer = setInterval(updateDate, 60000); // Update every minute instead of every second
+    return () => clearInterval(timer);
+  }, []);
 
-	//The toggleDropdown function toggles the state of dropdownOpen between true and false each time it is called
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownOpen && !event.target.closest(".profile-container")) {
+        setDropdownOpen(false);
+      }
+    }
 
-	function toggleDropdown() {
-		setDropdownOpen(!dropdownOpen);
-	}
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [dropdownOpen]);
 
-	function handleLogout() {
-		// Navigate to the login page
-		navigate("/");
-	}
+  const handleLogout = () => {
+    navigate("/login");
+  };
 
-	return (
-		<nav className="topbar" style={{ backgroundColor: topbarColor }}>
-			<div className="logo">
-				<img src={logo} alt="Logo" />
-			</div>
-			<div className="topbar-content">
-				<span className="topbar-page">{currentPage}</span>
-				<span className="topbar-date">{date}</span>
-			</div>
-			<div className="icons">
-				<i className="fas fa-envelope"></i> {/* Email icon */}
-				<i className="fas fa-bell"></i> {/* Notification icon */}
-				<div className="profile-container">
-					<i className="fas fa-user-circle"></i> {/* Profile icon */}
-					<span className="user-role">
-						{userRole === "admin" ? "Admin" : "Student"}
-					</span>
-					<i
-						className="fas fa-caret-down dropdown-icon"
-						onClick={toggleDropdown}
-					></i>
-					{dropdownOpen && (
-						<div className="dropdown-menu">
-							<button onClick={handleLogout}>Log Out</button>
-						</div>
-					)}
-				</div>
-			</div>
-		</nav>
-	);
+  return (
+    <nav className="topbar">
+      <div className="logo">
+        <img src={logo} alt="University Logo" />
+      </div>
+
+      <div className="topbar-content">
+        <span className="topbar-page">{currentPage}</span>
+        <span className="topbar-date">{date}</span>
+      </div>
+
+      <div className="icons">
+        <button
+          className="nav-icon-button"
+          onClick={() => navigate("/messages")}
+        >
+          <MessageSquare size={25} color="white" />
+          {notifications > 0 && (
+            <span className="notification-badge">{notifications}</span>
+          )}
+        </button>
+
+        <button className="nav-icon-button">
+          <Bell size={25} color="white" />
+          {notifications > 0 && (
+            <span className="notification-badge">{notifications}</span>
+          )}
+        </button>
+
+        <div
+          className="profile-container"
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
+          <i className="fas fa-user-circle"></i>
+          <span className="user-role">
+            {userRole === "admin" ? "Administrator" : "Student"}
+          </span>
+          <i className={`fas fa-chevron-${dropdownOpen ? "up" : "down"}`}></i>
+
+          {dropdownOpen && (
+            <div className="dropdown-menu">
+              <button onClick={() => navigate("/profile")}>
+                <i className="fas fa-user"></i>
+                Profile
+              </button>
+              <button onClick={() => navigate("/settings")}>
+                <i className="fas fa-cog"></i>
+                Settings
+              </button>
+              <button onClick={handleLogout} className="logout-button">
+                <i className="fas fa-sign-out-alt"></i>
+                Log Out
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
 }
 
 export default Topbar;

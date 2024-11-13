@@ -1,11 +1,11 @@
 body {
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-		sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	background-color: #dfe4f1;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #dfe4f1;
 }
 
 :root {
@@ -19,6 +19,39 @@ body {
 	--border-radius: 12px;
 }
 code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-		monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* Modern, minimalist scrollbar */
+
+/* Webkit browsers custom styling */
+::-webkit-scrollbar {
+  width: 10px; /* slim width */
+  height: 2px;
+}
+
+/* Transparent track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Custom thumb */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    #8b5cf6,
+    #6d28d9
+  ); /* Purple gradient */
+  border-radius: 100vh;
+  border: none;
+}
+
+/* Hover state */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    to bottom,
+    #7c3aed,
+    #5b21b6
+  ); /* Darker gradient on hover */
 }
