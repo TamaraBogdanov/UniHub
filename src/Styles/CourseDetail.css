@@ -783,8 +783,6 @@
 button:focus,
 a:focus {
   outline: none;
-  ring: 2px solid #3b82f6;
-  ring-offset: 2px;
 }
 
 /* Print Styles */

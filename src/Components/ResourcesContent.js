@@ -16,12 +16,9 @@ import {
   List,
   ChevronDown,
   Plus,
-  File,
-  Youtube,
   Star,
   Clock,
   Calendar,
-  CheckCircle,
   AlertCircle,
 } from "lucide-react";
 
@@ -263,14 +260,7 @@ function ResourcesContent() {
           return 0;
       }
     });
-  }, [
-    mockResources,
-    searchQuery,
-    selectedType,
-    selectedCourse,
-    showRequired,
-    sortBy,
-  ]);
+  });
 
   // Get resource type icon and color
   const getResourceTypeInfo = (type) => {

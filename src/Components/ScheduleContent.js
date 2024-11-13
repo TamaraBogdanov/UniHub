@@ -1,6 +1,5 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo } from "react";
 import "../Styles/Schedule.css";
-import { courses } from "../Mockdata/mockData";
 import {
   Calendar,
   Clock,
@@ -16,12 +15,9 @@ import {
   Plus,
   X,
   Bell,
-  ChevronDown,
-  Check,
   Trash2,
   Edit2,
 } from "lucide-react";
-import { de } from "@faker-js/faker";
 
 // Mock data for schedule events
 const mockEvents = [

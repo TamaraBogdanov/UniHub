@@ -37,7 +37,6 @@ import ClassesContent from "../Components/ClassesContent";
 import GradesContent from "../Components/GradesContent";
 import SubmissionsContent from "../Components/SubmissionsContent";
 import GroupsContent from "../Components/GroupsContent";
-import { TodoProvider, useTodo } from "../Components/TodoContext";
 import useScrollToTop from "../hooks/useScrollToTop";
 
 function TaskModal({ task, onClose }) {
@@ -62,17 +61,6 @@ function TaskModal({ task, onClose }) {
 }
 
 function DashboardContent() {
-  const [filter, setFilter] = useState("All");
-  const [selectedView, setSelectedView] = useState("overview");
-  const [showAllAnnouncements, setShowAllAnnouncements] = useState(false);
-
-  // Original filters
-  const filters = [
-    { name: "All", icon: BookOpen },
-    { name: "Newest", icon: Calendar },
-    { name: "Oldest", icon: Calendar },
-  ];
-
   // Alert data
   const classesData = [
     {
@@ -159,23 +147,6 @@ function DashboardContent() {
   classesData.forEach((alert, index) => {
     alert.alertType = index % 2 === 0 ? "newest" : "oldest";
   });
-
-  const filteredClasses = classesData
-    .filter(
-      (alert) =>
-        filter === "All" ||
-        (filter === "Newest" && alert.alertType === "newest") ||
-        (filter === "Oldest" && alert.alertType === "oldest")
-    )
-    .sort((a, b) => {
-      if (filter === "Newest") {
-        return new Date(b.date) - new Date(a.date);
-      }
-      if (filter === "Oldest") {
-        return new Date(a.date) - new Date(b.date);
-      }
-      return 0;
-    });
 
   return (
     <div className="dashboard-content">
@@ -413,7 +384,7 @@ function HomePage({ userRole }) {
   useScrollToTop(activeSection);
 
   const [selectedTask, setSelectedTask] = useState(null);
-  const { todos, toggleTodo } = useTodo();
+
   const navigate = useNavigate();
 
   const handleTopLevelNavigation = (page) => {
@@ -448,110 +419,109 @@ function HomePage({ userRole }) {
   };
 
   return (
-    <TodoProvider>
-      <div className="HomePage">
-        {/* Pass activeTopPage to Topbar */}
-        <Topbar currentPage="Dashboard" userRole={userRole} />
+    <div className="HomePage">
+      {/* Pass activeTopPage to Topbar */}
+      <Topbar currentPage="Dashboard" userRole={userRole} />
 
-        <div className="dashboard">
-          <nav className="sidebar">
-            <div className="sidebar-content topnav">
-              {/* New Dashboard Button */}
-              {/* Keep Dashboard Button Active */}
-              <button
-                className="nav-button active" // Always active
-                onClick={() => setActiveSection("dashboard")}
-              >
-                <Home size={25} />
-                <h3>Dashboard</h3>
-              </button>
+      <div className="dashboard">
+        <nav className="sidebar">
+          <div className="sidebar-content topnav">
+            {/* New Dashboard Button */}
+            {/* Keep Dashboard Button Active */}
+            <button
+              className="nav-button active" // Always active
+              onClick={() => setActiveSection("dashboard")}
+            >
+              <Home size={25} />
+              <h3>Dashboard</h3>
+            </button>
 
-              {/* Only changes activeTopPage */}
+            {/* Only changes activeTopPage */}
 
-              <button
-                className="nav-button"
-                onClick={() => handleTopLevelNavigation("student-hub")}
-              >
-                <Users size={25} />
-                <h3>Student Hub</h3>
-              </button>
-              <button
-                className="nav-button"
-                onClick={() => handleTopLevelNavigation("self-service")}
-              >
-                <Home size={25} />
-                <h3>Self-Service</h3>
-              </button>
-            </div>
+            <button
+              className="nav-button"
+              onClick={() => handleTopLevelNavigation("student-hub")}
+            >
+              <Users size={25} />
+              <h3>Student Hub</h3>
+            </button>
+            <button
+              className="nav-button"
+              onClick={() => handleTopLevelNavigation("self-service")}
+            >
+              <Home size={25} />
+              <h3>Self-Service</h3>
+            </button>
+          </div>
 
-            <div className="sidebar-content midnav">
-              {/* These buttons do not change the top-level page */}
-              <button
-                className={`nav-button ${
-                  activeSection === "dashboard" ? "active" : ""
-                }`}
-                onClick={() => setActiveSection("dashboard")}
-              >
-                <Home size={25} />
-                <h3>Home</h3>
-              </button>
-              <button
-                className={`nav-button ${
-                  activeSection === "courses" ? "active" : ""
-                }`}
-                onClick={() => setActiveSection("courses")}
-              >
-                <Group size={25} />
-                <h3>Courses</h3>
-              </button>
-              <button
-                className={`nav-button ${
-                  activeSection === "grades" ? "active" : ""
-                }`}
-                onClick={() => setActiveSection("grades")}
-              >
-                <PieChart size={25} />
-                <h3>Grades</h3>
-              </button>
-              <button
-                className={`nav-button ${
-                  activeSection === "submissions" ? "active" : ""
-                }`}
-                onClick={() => setActiveSection("submissions")}
-              >
-                <Book size={25} />
-                <h3>Submissions</h3>
-              </button>
-              <button
-                className={`nav-button ${
-                  activeSection === "groups" ? "active" : ""
-                }`}
-                onClick={() => setActiveSection("groups")}
-              >
-                <Users size={25} />
-                <h3>Groups</h3>
-              </button>
-              <button
-                className={`nav-button ${
-                  activeSection === "schedule" ? "active" : ""
-                }`}
-                onClick={() => setActiveSection("schedule")}
-              >
-                <Calendar size={25} />
-                <h3>Schedule</h3>
-              </button>
-              <button
-                className={`nav-button ${
-                  activeSection === "resources" ? "active" : ""
-                }`}
-                onClick={() => setActiveSection("resources")}
-              >
-                <Video size={25} />
-                <h3>Resources</h3>
-              </button>
-            </div>
+          <div className="sidebar-content midnav">
+            {/* These buttons do not change the top-level page */}
+            <button
+              className={`nav-button ${
+                activeSection === "dashboard" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("dashboard")}
+            >
+              <Home size={25} />
+              <h3>Home</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "courses" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("courses")}
+            >
+              <Group size={25} />
+              <h3>Courses</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "grades" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("grades")}
+            >
+              <PieChart size={25} />
+              <h3>Grades</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "submissions" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("submissions")}
+            >
+              <Book size={25} />
+              <h3>Submissions</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "groups" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("groups")}
+            >
+              <Users size={25} />
+              <h3>Groups</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "schedule" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("schedule")}
+            >
+              <Calendar size={25} />
+              <h3>Schedule</h3>
+            </button>
+            <button
+              className={`nav-button ${
+                activeSection === "resources" ? "active" : ""
+              }`}
+              onClick={() => setActiveSection("resources")}
+            >
+              <Video size={25} />
+              <h3>Resources</h3>
+            </button>
+          </div>
 
-            {/* <div className="sidebar-content todo-list">
+          {/* <div className="sidebar-content todo-list">
 							<h3>
 								<CheckSquare size={25} /> Tasks
 							</h3>
@@ -570,16 +540,15 @@ function HomePage({ userRole }) {
 								))}
 							</ul>
 						</div> */}
-          </nav>
+        </nav>
 
-          {/* Main content area */}
-          <main className="main-content">{renderContent()}</main>
-        </div>
-
-        {/* Modal for tasks */}
-        <TaskModal task={selectedTask} onClose={() => setSelectedTask(null)} />
+        {/* Main content area */}
+        <main className="main-content">{renderContent()}</main>
       </div>
-    </TodoProvider>
+
+      {/* Modal for tasks */}
+      <TaskModal task={selectedTask} onClose={() => setSelectedTask(null)} />
+    </div>
   );
 }
 

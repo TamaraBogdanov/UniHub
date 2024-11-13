@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import "../Styles/Groups.css";
-import { courses } from "../Mockdata/mockData";
 import {
   Users,
   Search,
@@ -12,7 +11,6 @@ import {
   Clock,
   Plus,
   UserPlus,
-  MoveRight,
   AlertCircle,
 } from "lucide-react";
 
@@ -90,7 +88,7 @@ function GroupsContent() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortType, setSortType] = useState("lastActive");
   const [showFilters, setShowFilters] = useState(false);
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [setShowCreateModal] = useState(false);
 
   // Filter and sort groups
   const filteredGroups = useMemo(() => {
@@ -128,7 +126,7 @@ function GroupsContent() {
           return 0;
       }
     });
-  }, [mockGroups, filter, searchQuery, sortType]);
+  });
 
   const getAvailabilityColor = (group) => {
     const availability =

@@ -3,21 +3,17 @@ import React, { useState, useRef, useEffect } from "react";
 import {
   Search,
   MessageCircle,
-  Settings,
   Plus,
   Paperclip,
   Smile,
   Send,
-  MoreVertical,
   Phone,
   Video,
-  Image,
   File,
   Filter,
   Check,
   CheckCheck,
   Clock,
-  ArrowLeft,
   Mic,
   Trash,
   X,
@@ -28,7 +24,6 @@ import {
   mockConversations,
   currentUser,
   chatCategories,
-  messageStatuses,
 } from "../../Mockdata/chatData";
 import "../../Styles/Chat.css";
 
@@ -67,7 +62,7 @@ function ChatPage() {
     if (selectedChat) {
       markMessagesAsRead();
     }
-  }, [selectedChat]);
+  });
 
   // Functions
   const scrollToBottom = () => {

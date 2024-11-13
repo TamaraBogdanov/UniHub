@@ -3,7 +3,6 @@ import "../Styles/Grades.css";
 import { courses } from "../Mockdata/mockData";
 import {
   BarChart,
-  PieChart,
   LineChart,
   Line,
   Bar,
@@ -11,21 +10,14 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 import {
-  ChevronDown,
-  BookOpen,
-  TrendingUp,
   Award,
   Target,
-  AlertCircle,
   CheckCircle,
-  Calendar,
   ArrowUp,
   ArrowDown,
-  Filter,
   Clock,
 } from "lucide-react";
 
@@ -54,7 +46,7 @@ const performanceMetrics = {
 function GradesContent() {
   const [selectedTerm, setSelectedTerm] = useState("Spring 2024");
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [showDetails, setShowDetails] = useState(false);
+  // const [showDetails, setShowDetails] = useState(false);
   const [gradeFilter, setGradeFilter] = useState("all"); // all, high, low
 
   // Calculate overall statistics
@@ -72,7 +64,7 @@ function GradesContent() {
       lowest: Math.min(...allGrades.map((grade) => grade.grade)),
       total: allGrades.length,
     };
-  }, [courses]);
+  }, []);
 
   // Filter and sort courses based on grades
   const filteredCourses = useMemo(() => {
@@ -107,7 +99,7 @@ function GradesContent() {
         b.grades.reduce((sum, grade) => sum + grade.weight, 0);
       return bAvg - aAvg;
     });
-  }, [courses, gradeFilter]);
+  });
 
   const getGradeColor = (grade) => {
     if (grade >= 90) return "text-emerald-500";

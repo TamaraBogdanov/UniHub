@@ -3,10 +3,8 @@ import "../Styles/Submissions.css";
 import { courses } from "../Mockdata/mockData";
 import {
   Calendar,
-  Clock,
   BookOpen,
   AlertCircle,
-  CheckCircle,
   FileText,
   ChevronDown,
   Search,
