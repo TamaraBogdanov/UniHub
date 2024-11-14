@@ -27,23 +27,35 @@
 	position: absolute;
 	left: 100px;
 	z-index: 2;
-	text-align: left;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
 	color: #fff;
 	font-family: "Open Sans", sans-serif;
 	opacity: 1;
 	transition: opacity 0.5s ease-in-out;
+	width: 600px; /* Set a fixed width for the content container */
 }
 
 .carousel-content.fade {
 	opacity: 0;
 }
 
+.carousel-content h2 {
+	margin: 0 0 20px 0;
+	padding: 0;
+	color: rgb(0, 0, 0);
+	text-align: left;
+}
+
 .carousel-content p {
 	font-size: 18px;
 	line-height: 1.5;
-	margin-top: 10px;
+	margin: 0;
+	padding: 0;
 	color: rgb(0, 0, 0);
-	max-width: 600px;
+	text-align: left;
 }
 
 .carousel-dots {
@@ -70,8 +82,11 @@
 .dot.active {
 	background-color: #717171;
 }
+
 @media (max-width: 768px) {
 	.carousel-content {
 		padding: 10px;
+		left: 50px;
+		width: calc(100% - 100px);
 	}
 }

@@ -982,7 +982,7 @@
 	}
 }
 
-/* Dark Mode Support */
+/* Dark Mode Support 
 @media (prefers-color-scheme: dark) {
 	.support-content {
 		background-color: #0f172a;
@@ -1029,7 +1029,7 @@
 		border-color: #334155;
 	}
 }
-
+*/
 /* Responsive Design */
 @media (max-width: 768px) {
 	.support-grid {

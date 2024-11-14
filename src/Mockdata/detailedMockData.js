@@ -122,7 +122,6 @@ export const newsCategories = [
 export const Categories = [
 	{ name: "All", icon: <Newspaper size={20} /> },
 	{ name: "News", icon: <Newspaper size={20} /> }, // This now reflects all news items
-	{ name: "Clubs", icon: <Users size={20} /> },
 	{ name: "Wellness", icon: <Heart size={20} /> },
 	{ name: "Events", icon: <MessageCircle size={20} /> },
 ];
