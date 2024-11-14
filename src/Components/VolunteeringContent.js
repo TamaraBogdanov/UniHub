@@ -173,16 +173,16 @@ const VolunteerPage = () => {
 
 			{activeView === "opportunities" ? (
 				<>
-					<div className="categories">
+					<div className="opp-categories">
 						{categories.map((category) => (
 							<button
 								key={category.id}
-								className={`category-button ${
+								className={`opp-category-button ${
 									selectedCategory === category.id ? "active" : ""
 								}`}
 								onClick={() => setSelectedCategory(category.id)}
 							>
-								<category.icon className="category-icon" />
+								<category.icon className="opp-category-icon" />
 								{category.name}
 							</button>
 						))}
@@ -190,34 +190,36 @@ const VolunteerPage = () => {
 
 					<div className="opportunities-grid">
 						{filteredOpportunities.map((opportunity) => (
-							<div key={opportunity.id} className="card">
+							<div key={opportunity.id} className="opp-card">
 								<img
 									src={opportunity.image}
 									alt={opportunity.title}
-									className="card-image"
+									className="opp-card-image"
 								/>
-								<div className="card-header">
-									<h3 className="card-title">{opportunity.title}</h3>
-									<div className="card-meta">
+								<div className="opp-card-header">
+									<h3 className="opp-card-title">{opportunity.title}</h3>
+									<div className="opp-card-meta">
 										<MapPin className="icon" />
 										<span>{opportunity.location}</span>
 									</div>
-									<div className="card-meta">
-										<Calendar className="icon" />
+									<div className="opp-card-meta">
+										<Calendar className="opp-icon" />
 										<span>{opportunity.date}</span>
 									</div>
-									<div className="card-meta">
-										<Users className="icon" />
+									<div className="opp-card-meta">
+										<Users className="opp-icon" />
 										<span>{opportunity.participants}</span>
 									</div>
-									<div className="card-meta">
-										<Clock className="icon" />
+									<div className="opp-card-meta">
+										<Clock className="opp-icon" />
 										<span>{opportunity.hours}</span>
 									</div>
 								</div>
-								<div className="card-content">
-									<p className="card-description">{opportunity.description}</p>
-									<p className="card-faculty">
+								<div className="opp-card-content">
+									<p className="opp-card-description">
+										{opportunity.description}
+									</p>
+									<p className="opp-card-faculty">
 										Suitable for: {opportunity.faculty}
 									</p>
 								</div>
