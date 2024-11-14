@@ -196,11 +196,6 @@
 .filter-system {
   margin-top: 5rem;
 }
-.course-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
-}
 
 .course-card {
   background-color: white;
@@ -325,20 +320,6 @@
 .modal-content p {
   margin-bottom: 0.5rem;
   color: #4b5563;
-}
-
-.classes-content {
-  /* margin-bottom: 2rem;
-  margin-top: 2rem; */
-  padding: 24px;
-  background-color: #f8fafc;
-}
-
-.classes-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
 }
 
 .search-bar {

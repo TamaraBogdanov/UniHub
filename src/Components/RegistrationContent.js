@@ -306,7 +306,7 @@ function CourseScheduleTab({
       <div className="schedule-grid">
         <div className="available-courses">
           <h3>Available Courses</h3>
-          <div className="course-list">
+          <div className="reg-course-list">
             {filteredCourses.map((course) => (
               <CourseCard
                 key={course.code}
@@ -322,7 +322,7 @@ function CourseScheduleTab({
 
         <div className="selected-courses">
           <h3>Selected Courses</h3>
-          <div className="course-list">
+          <div className="reg-course-list">
             {selectedCourses.map((course) => (
               <CourseCard
                 key={course.code}
@@ -362,7 +362,7 @@ function CourseCard({ course, onAction, actionType, isSelected, disabled }) {
 
   return (
     <div
-      className={`course-card ${isSelected ? "selected" : ""} ${
+      className={`reg-course-card ${isSelected ? "selected" : ""} ${
         disabled ? "disabled" : ""
       }`}
     >

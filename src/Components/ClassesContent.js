@@ -12,10 +12,8 @@ import {
   DollarSign,
   Search,
   SortAsc,
-  Clock,
   AlertCircle,
   Calendar,
-  BookMarked,
   MessageSquare,
   Users,
   BarChart2,
@@ -30,7 +28,7 @@ function ClassesContent() {
   const [filter, setFilter] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortType, setSortType] = useState("name");
-  const [viewType, setViewType] = useState("grid"); // grid or list
+  const [viewType, setViewType] = useState("class-grid"); // grid or list
   const [selectedSemester, setSelectedSemester] = useState("Fall 2024");
   const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate();
@@ -120,7 +118,7 @@ function ClassesContent() {
     <div className="classes-content">
       {/* Header Section */}
       <div className="classes-header">
-        <div className="header-left">
+        <div className="classes-header-left">
           <h2 className="classes-heading">My Courses</h2>
           <div className="semester-selector">
             <select
@@ -137,15 +135,19 @@ function ClassesContent() {
           </div>
         </div>
 
-        <div className="view-controls">
+        <div className="classes-view-controls">
           <button
-            className={`view-button ${viewType === "grid" ? "active" : ""}`}
-            onClick={() => setViewType("grid")}
+            className={`classes-view-button ${
+              viewType === "class-grid" ? "active" : ""
+            }`}
+            onClick={() => setViewType("class-grid")}
           >
             <Grid size={20} />
           </button>
           <button
-            className={`view-button ${viewType === "list" ? "active" : ""}`}
+            className={`classes-view-button ${
+              viewType === "list" ? "active" : ""
+            }`}
             onClick={() => setViewType("list")}
           >
             <List size={20} />
@@ -155,19 +157,19 @@ function ClassesContent() {
 
       {/* Search and Filters Bar */}
       <div className="search-filter-bar">
-        <div className="search-box">
-          <Search className="search-icon" size={20} />
+        <div className="classes-search-box">
+          <Search className="classes-search-icon" size={20} />
           <input
             type="text"
             placeholder="Search courses..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
+            className="classes-search-input"
           />
         </div>
 
         <button
-          className="filter-toggle"
+          className="classes-filter-toggle"
           onClick={() => setShowFilters(!showFilters)}
         >
           <BarChart2 size={20} />
@@ -180,7 +182,7 @@ function ClassesContent() {
           <select
             value={sortType}
             onChange={(e) => setSortType(e.target.value)}
-            className="sort-select"
+            className="classes-sort-select"
           >
             <option value="name">Sort by Name</option>
             <option value="progress">Sort by Progress</option>
@@ -193,7 +195,7 @@ function ClassesContent() {
 
       {/* Expanded Filters */}
       {showFilters && (
-        <div className="expanded-filters">
+        <div className="classes-expanded-filters">
           {filters.map(({ name, icon: Icon }) => (
             <button
               key={name}
@@ -209,7 +211,9 @@ function ClassesContent() {
 
       {/* Course Grid/List */}
       <section className={`courses ${viewType}`}>
-        <div className={viewType === "grid" ? "course-grid" : "course-list"}>
+        <div
+          className={viewType === "class-grid" ? "course-grid" : "course-list"}
+        >
           {filteredAndSortedCourses.map((course) => {
             const upcomingAssignment = getUpcomingAssignment(course);
             const completedModules = course.modules.filter(
@@ -221,7 +225,7 @@ function ClassesContent() {
             return (
               <div
                 key={course.id}
-                className="course-card"
+                className="classes-course-card"
                 onClick={() => handleCourseClick(course.id)}
               >
                 <div className="course-card-header">
@@ -233,7 +237,7 @@ function ClassesContent() {
                   <div className="course-badge">{course.code}</div>
                 </div>
 
-                <div className="course-info">
+                <div className="classes-course-info">
                   <div className="course-title-section">
                     <h4>{course.title}</h4>
                     <div className="course-meta">
