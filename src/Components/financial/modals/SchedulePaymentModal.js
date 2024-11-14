@@ -35,7 +35,7 @@ function SchedulePaymentModal({ onClose, onSchedule, amount, formatAmount }) {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content schedule-modal">
+      <div className="payment-modal-content schedule-modal">
         <div className="modal-header">
           <h3>Schedule Payment</h3>
           <button className="close-button" onClick={onClose}>

@@ -48,7 +48,7 @@ function PaymentReminderModal({ onClose, upcomingPayments, formatAmount }) {
   if (isSuccess) {
     return (
       <div className="modal-overlay">
-        <div className="modal-content payment-reminder-modal success">
+        <div className="payment-modal-content payment-reminder-modal success">
           <div className="success-message">
             <CheckCircle size={48} className="success-icon" />
             <h3>Reminder Set Successfully!</h3>
@@ -61,7 +61,7 @@ function PaymentReminderModal({ onClose, upcomingPayments, formatAmount }) {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content payment-reminder-modal">
+      <div className="payment-modal-content payment-reminder-modal">
         <div className="modal-header">
           <h3>Set Payment Reminder</h3>
           <button className="close-button" onClick={onClose}>

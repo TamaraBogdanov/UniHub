@@ -12,7 +12,7 @@
   margin-bottom: 24px;
 }
 
-.header-left {
+.classes-header-left {
   display: flex;
   align-items: center;
   gap: 24px;
@@ -40,12 +40,12 @@
   outline: none;
 }
 
-.view-controls {
+.classes-view-controls {
   display: flex;
   gap: 8px;
 }
 
-.view-button {
+.classes-view-button {
   padding: 8px;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
@@ -55,11 +55,11 @@
   transition: all 0.2s ease;
 }
 
-.view-button:hover {
+.classes-view-button:hover {
   background-color: #f1f5f9;
 }
 
-.view-button.active {
+.classes-view-button.active {
   background-color: #3b82f6;
   color: white;
   border-color: #3b82f6;
@@ -71,20 +71,20 @@
   margin-bottom: 16px;
 }
 
-.search-box {
+.classes-search-box {
   flex: 1;
   position: relative;
 }
 
-.search-icon {
+.classes-search-icon {
   position: absolute;
   left: 12px;
-  top: 50%;
+  top: 30%;
   transform: translateY(-50%);
   color: #64748b;
 }
 
-.search-input {
+.classes-search-input {
   width: 100%;
   padding: 10px 16px 10px 40px;
   border: 1px solid #e2e8f0;
@@ -95,12 +95,12 @@
   transition: all 0.2s ease;
 }
 
-.search-input:focus {
+.classes-search-input:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.filter-toggle {
+.classes-filter-toggle {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -114,11 +114,11 @@
   transition: all 0.2s ease;
 }
 
-.filter-toggle:hover {
+.classes-filter-toggle:hover {
   background-color: #f1f5f9;
 }
 
-.expanded-filters {
+.classes-expanded-filters {
   display: flex;
   gap: 8px;
   margin-bottom: 24px;
@@ -141,7 +141,7 @@
   gap: 16px;
 }
 
-.course-card {
+.classes-course-card {
   background-color: white;
   border-radius: 12px;
   overflow: hidden;
@@ -150,7 +150,7 @@
   cursor: pointer;
 }
 
-.course-card:hover {
+.classes-course-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
 }
@@ -178,7 +178,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.course-info {
+.classes-course-info {
   padding: 16px;
 }
 
@@ -303,17 +303,17 @@
 }
 
 /* List View Specific Styles */
-.course-list .course-card {
+.course-list .classes-course-card {
   display: grid;
   grid-template-columns: 200px 1fr;
-  height: 160px;
+  height: 260px;
 }
 
 .course-list .course-image {
   height: 100%;
 }
 
-.course-list .course-info {
+.course-list .classes-course-info {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 16px;
@@ -325,11 +325,11 @@
 
 /* Responsive Styles */
 @media (max-width: 1024px) {
-  .course-list .course-card {
+  .course-list .classes-course-card {
     grid-template-columns: 160px 1fr;
   }
 
-  .course-list .course-info {
+  .course-list .classes-course-info {
     grid-template-columns: 1fr;
   }
 }
@@ -341,7 +341,7 @@
     gap: 16px;
   }
 
-  .header-left {
+  .classes-header-left {
     width: 100%;
     justify-content: space-between;
   }
@@ -350,7 +350,7 @@
     flex-direction: column;
   }
 
-  .course-list .course-card {
+  .course-list .classes-course-card {
     grid-template-columns: 1fr;
     height: auto;
   }
@@ -401,11 +401,11 @@
 }
 
 /* Hover Effects */
-.course-card .course-image {
+.classes-course-card .course-image {
   transition: transform 0.3s ease;
 }
 
-.course-card:hover .course-image {
+.classes-course-card:hover .course-image {
   transform: scale(1.05);
 }
 
@@ -414,7 +414,7 @@
 }
 
 /* Focus States */
-.search-input:focus,
+.classes-search-input:focus,
 .semester-select:focus,
 .filter-button:focus {
   outline: none;

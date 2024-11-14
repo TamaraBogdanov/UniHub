@@ -21,7 +21,7 @@ function SharePaymentModal({ onClose, amount, formatAmount, paymentRef }) {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content share-modal">
+      <div className="payment-modal-content share-modal">
         <div className="modal-header">
           <h3>Share Payment Link</h3>
           <button className="close-button" onClick={onClose}>

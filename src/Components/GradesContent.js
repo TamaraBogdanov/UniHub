@@ -161,7 +161,7 @@ function GradesContent() {
 
       {/* Performance Overview Cards */}
       <div className="performance-metrics">
-        <div className="metric-card">
+        <div className="grades-metric-card">
           <div className="metric-icon">
             <Award />
           </div>
@@ -171,7 +171,7 @@ function GradesContent() {
           </div>
         </div>
 
-        <div className="metric-card">
+        <div className="grades-metric-card">
           <div className="metric-icon">
             <Target />
           </div>
@@ -183,7 +183,7 @@ function GradesContent() {
           </div>
         </div>
 
-        <div className="metric-card">
+        <div className="grades-metric-card">
           <div className="metric-icon">
             <CheckCircle />
           </div>
@@ -195,7 +195,7 @@ function GradesContent() {
           </div>
         </div>
 
-        <div className="metric-card">
+        <div className="grades-metric-card">
           <div className="metric-icon">
             <Clock />
           </div>
