@@ -244,20 +244,6 @@
 	box-shadow: var(--shadow-lg);
 }
 
-.community-page .discussion-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-	margin-bottom: 1rem;
-}
-
-.community-page .discussion-title {
-	font-size: 1.25rem;
-	font-weight: 600;
-	color: var(--text-primary);
-	margin: 0;
-}
-
 .community-page .discussion-meta {
 	display: flex;
 	gap: 1rem;

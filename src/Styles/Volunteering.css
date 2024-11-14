@@ -43,14 +43,15 @@
 }
 
 /* Category Buttons */
-.categories {
+.opp-categories {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.5rem;
 	margin-bottom: 2rem;
+	margin-left: 5rem;
 }
 
-.category-button {
+.opp-category-button {
 	padding: 0.5rem 1rem;
 	border-radius: 9999px;
 	border: 1px solid #e2e8f0;
@@ -60,11 +61,11 @@
 	margin-top: 4rem;
 }
 
-.category-button:hover {
+.opp-category-button:hover {
 	background-color: #f7fafc;
 }
 
-.category-button.active {
+.opp-category-button.active {
 	background-color: var(--primary-color);
 	color: white;
 	border-color: var(--primary-color);
@@ -80,7 +81,7 @@
 }
 
 /* Card Structure */
-.card {
+.opp-card {
 	position: relative;
 	display: flex;
 	flex-direction: column;
@@ -91,24 +92,24 @@
 	height: 600px; /* Fixed height for all cards */
 }
 
-.card-image {
+.opp-card-image {
 	width: 100%;
 	height: 200px;
 	object-fit: cover;
 }
 
-.card-header {
+.opp-card-header {
 	padding: 1rem;
 }
 
-.card-title {
+.opp-card-title {
 	font-size: 1.25rem;
 	font-weight: 600;
 	margin-bottom: 0.5rem;
 	color: #1a1a1a;
 }
 
-.card-meta {
+.opp-card-meta {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
@@ -117,26 +118,26 @@
 	margin-bottom: 0.5rem;
 }
 
-.card-meta svg {
+.opp-card-meta svg {
 	width: 1rem;
 	height: 1rem;
 	flex-shrink: 0;
 }
 
-.card-content {
+.opp-card-content {
 	padding: 0 1rem;
 	overflow-y: auto; /* Allow scrolling if content is too long */
 	flex: 1;
 }
 
-.card-description {
+.opp-card-description {
 	color: #666;
 	margin-bottom: 1rem;
 	font-size: 0.9rem;
 	line-height: 1.5;
 }
 
-.card-faculty {
+.opp-card-faculty {
 	font-size: 0.875rem;
 	color: #64748b;
 	margin-bottom: 1rem;
@@ -293,13 +294,13 @@
 }
 
 /* Category Updates */
-.category-button {
+.opp-category-button {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 }
 
-.category-icon {
+.opp-category-icon {
 	width: 1rem;
 	height: 1rem;
 }

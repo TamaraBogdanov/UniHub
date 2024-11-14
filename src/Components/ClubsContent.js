@@ -3,16 +3,7 @@ import "../Styles/Clubs.css";
 import { clubsData } from "../Mockdata/ClubData";
 import JoinableClubs from "./JoinableClubs";
 import ClubDetailPanel from "./ClubDetails";
-import {
-	Users,
-	Calendar,
-	MapPin,
-	Clock,
-	Trophy,
-	Tags,
-	Activity,
-	Award,
-} from "lucide-react";
+import { Users, Calendar, Trophy, Award } from "lucide-react";
 
 // Define default joined clubs with more detailed information
 const defaultJoinedClubs = [
@@ -128,12 +119,12 @@ const ClubsContent = () => {
 								</div>
 
 								<div className="club-info">
-									<div className="info-item">
+									<div className="club-info-item">
 										<Users size={18} className="info-icon" />
 										<span>{club.memberCount} members</span>
 									</div>
 
-									<div className="info-item">
+									<div className="club-info-item">
 										<Calendar size={18} className="info-icon" />
 										<span>{club.meetingSchedule}</span>
 									</div>

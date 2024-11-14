@@ -112,15 +112,6 @@ function NewsContent() {
 			</div>
 			<h2>Current Headlines</h2>
 			<div className="news-controls">
-				<div className="search-bar">
-					<Search size={20} />
-					<input
-						type="text"
-						placeholder="Search news..."
-						value={searchTerm}
-						onChange={handleSearch}
-					/>
-				</div>
 				<select
 					value={selectedSubcategory}
 					onChange={(e) => setSelectedSubcategory(e.target.value)}

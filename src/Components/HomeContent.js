@@ -9,10 +9,31 @@ import {
 	X,
 } from "lucide-react";
 import "../Styles/Home2.css";
+import "../Styles/Carousel.css";
 
 import { enhancedMockNewsData, Categories } from "../Mockdata/detailedMockData";
 import { wellnessEvents } from "../Components/WellnessContent";
 import { eventsMockData } from "../Mockdata/eventsMockData";
+
+import Carousel from "../Shared/Carousel";
+
+const carouselImages = [
+	"./images/student-unsplash.jpg",
+	"./images/image2.png",
+	"./images/image3.png",
+];
+
+const carouselTitles = [
+	"Welcome To UniHub",
+	"Connect With Peers",
+	"Manage Your Finances",
+];
+
+const carouselParagraphs = [
+	"Your One-Stop Hub for Academics, Campus Life, and Finances  Simplified for Success!",
+	"Enhance your student life, Stay updated and get involved!",
+	"Your Path, Your Control: Manage Finances, Courses, and More.",
+];
 
 // Event Modal Component
 function EventModal({ event, onClose }) {
@@ -119,19 +140,11 @@ function HomeContent() {
 
 	return (
 		<>
-			<section className="hero">
-				<div className="hero-text">
-					<h1>Welcome, Student!</h1>
-					<h2>Ready to continue your academic journey?</h2>
-					<div className="hero-buttons">
-						<button className="schedule-button">View Schedule</button>
-						<button className="course-button">Explore Courses</button>
-					</div>
-				</div>
-				<div className="hero-image">
-					<img src="./images/portal.png" alt="Hero" />
-				</div>
-			</section>
+			<Carousel
+				images={carouselImages}
+				titles={carouselTitles}
+				paragraphs={carouselParagraphs}
+			/>
 
 			<section className="updates-section">
 				<h2>Latest Updates</h2>
