@@ -990,7 +990,7 @@ select:focus {
 }
 
 /* Modal Overlay */
-.modal-overlay {
+.payment-modal-overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -1001,7 +1001,7 @@ select:focus {
   padding: 1rem;
 }
 
-.modal-content {
+.payment-modal-content {
   background-color: white;
   border-radius: 12px;
   width: 100%;
@@ -1039,7 +1039,7 @@ select:focus {
     flex-direction: column;
   }
 
-  .modal-content {
+  .payment-modal-content {
     margin: 0;
     max-height: 100vh;
     border-radius: 0;
@@ -1101,12 +1101,12 @@ select:focus {
     border: 1px solid #e2e8f0;
   }
 
-  .modal-overlay {
+  .payment-modal-overlay {
     position: relative;
     background: none;
   }
 
-  .modal-content {
+  .payment-modal-content {
     box-shadow: none;
     border: 1px solid #e2e8f0;
   }
@@ -1162,7 +1162,7 @@ select:focus {
   .payment-summary,
   .payment-methods,
   .payment-plans,
-  .modal-content {
+  .payment-modal-content {
     background-color: #1e293b;
     color: #f8fafc;
   }
@@ -2507,7 +2507,7 @@ tr.credit .amount {
 }
 
 /* Modal Styles */
-.modal-overlay {
+.payment-modal-overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -2517,7 +2517,7 @@ tr.credit .amount {
   z-index: 50;
 }
 
-.modal-content {
+.payment-modal-content {
   background-color: white;
   border-radius: 12px;
   width: 100%;
@@ -2624,7 +2624,7 @@ tr.credit .amount {
     flex-direction: column;
   }
 
-  .modal-content {
+  .payment-modal-content {
     margin: 1rem;
     max-height: calc(100vh - 2rem);
   }
@@ -2634,7 +2634,7 @@ tr.credit .amount {
 @media print {
   .controls,
   .analytics-controls,
-  .modal-overlay {
+  .payment-modal-overlay {
     display: none;
   }
 

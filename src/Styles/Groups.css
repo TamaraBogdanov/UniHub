@@ -266,7 +266,7 @@
   font-size: 12px;
 }
 
-.join-button {
+.group-join-button {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -279,21 +279,21 @@
   border: none;
 }
 
-.join-button:not(.joined) {
+.group-join-button:not(.joined) {
   background-color: #3b82f6;
   color: white;
 }
 
-.join-button:not(.joined):hover {
+.group-join-button:not(.joined):hover {
   background-color: #2563eb;
 }
 
-.join-button.joined {
+.group-join-button.joined {
   background-color: #f1f5f9;
   color: #475569;
 }
 
-.join-button.joined:hover {
+.group-join-button.joined:hover {
   background-color: #e2e8f0;
 }
 

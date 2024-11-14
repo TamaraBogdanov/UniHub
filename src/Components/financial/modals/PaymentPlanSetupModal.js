@@ -59,8 +59,8 @@ function PaymentPlanSetupModal({
 
   if (showConfirmation) {
     return (
-      <div className="modal-overlay">
-        <div className="modal-content payment-plan-modal success">
+      <div className="payment-modal-overlay">
+        <div className="payment-modal-content payment-plan-modal success">
           <div className="success-message">
             <CheckCircle size={48} className="success-icon" />
             <h3>Payment Plan Set Up Successfully!</h3>
@@ -75,8 +75,8 @@ function PaymentPlanSetupModal({
   }
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content payment-plan-modal">
+    <div className="payment-modal-overlay">
+      <div className="payment-modal-content payment-plan-modal">
         <div className="modal-header">
           <h3>Setup Payment Plan</h3>
           <button className="close-button" onClick={onClose}>

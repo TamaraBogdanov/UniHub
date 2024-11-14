@@ -154,10 +154,7 @@ function GroupsContent() {
         </div>
 
         <div className="header-right">
-          <button
-            className="create-group-button"
-            onClick={() => setShowCreateModal(true)}
-          >
+          <button className="create-group-button">
             <Plus />
             Create Group
           </button>
@@ -280,7 +277,9 @@ function GroupsContent() {
                 </div>
 
                 <button
-                  className={`join-button ${group.isJoined ? "joined" : ""}`}
+                  className={`group-join-button ${
+                    group.isJoined ? "joined" : ""
+                  }`}
                 >
                   {group.isJoined ? (
                     <>

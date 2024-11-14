@@ -233,7 +233,7 @@ function OverviewContent({ course }) {
         </div>
 
         <div className="overview-sidebar">
-          <section className="overview-card upcoming-deadlines">
+          <section className="overview-card course-upcoming-deadlines">
             <h3>
               <Clock size={20} />
               Next Deadline

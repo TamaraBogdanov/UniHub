@@ -427,7 +427,7 @@ function PaymentsTab({ financialInfo, formatAmount }) {
       {/* Card Payment Modal */}
       {showCardModal && (
         <div className="modal-overlay">
-          <div className="modal-content card-payment-modal">
+          <div className="payment-modal-content card-payment-modal">
             <div className="modal-header">
               <h3>Credit/Debit Card Payment</h3>
               <button
@@ -612,7 +612,7 @@ function PaymentsTab({ financialInfo, formatAmount }) {
       {/* EFT Details Modal */}
       {showEftDetails && (
         <div className="modal-overlay">
-          <div className="modal-content eft-details-modal">
+          <div className="payment-modal-content eft-details-modal">
             <div className="modal-header">
               <h3>Bank Account Details</h3>
               <button
