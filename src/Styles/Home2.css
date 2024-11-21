@@ -29,9 +29,10 @@
 
 .student-hero-image img {
 	position: absolute;
-	width: 25%;
 	margin-top: -160px;
-	margin-right: 30px;
+	margin-right: 250px;
+	width: 260px; /* Adjust width to make the image smaller */
+	height: 320px; /* Maintains the aspect ratio */
 }
 
 .student-hero h1 {

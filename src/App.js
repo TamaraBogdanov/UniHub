@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPage from "./Login/LoginPage";
 import HomePage from "./Pages/HomePage";
 import SelfServicePage from "./Pages/SelfServicePage";
@@ -13,7 +13,7 @@ function App() {
 
 	return (
 		<TodoProvider>
-			<Router>
+			<BrowserRouter basename="/UniHub">
 				<Routes>
 					<Route path="/" element={<LoginPage setUserRole={setUserRole} />} />
 					<Route
@@ -26,7 +26,7 @@ function App() {
 					<Route path="/courses/:courseId" element={<CourseDetailPage />} />
 					<Route path="/messages" element={<ChatPage />} />
 				</Routes>
-			</Router>
+			</BrowserRouter>
 		</TodoProvider>
 	);
 }

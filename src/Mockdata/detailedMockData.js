@@ -22,7 +22,7 @@ export const enhancedMockNewsData = [
 			"The university has announced the opening of a state-of-the-art AI research center...",
 		icon: <BookOpen color="#1e40af" />,
 		featured: true,
-		image: "./images/online-learning.png",
+		image: "./images/center.jpg",
 	},
 	{
 		id: 2,
@@ -36,7 +36,7 @@ export const enhancedMockNewsData = [
 			"A group of dedicated students has put our university on the map with their innovative climate change project...",
 		icon: <Newspaper color="#047857" />,
 		featured: true,
-		image: "/images/online-learning.png",
+		image: "./images/change.jpg",
 	},
 	{
 		id: 3,
@@ -50,7 +50,7 @@ export const enhancedMockNewsData = [
 			"A new student club focusing on using technology for social impact has been formed...",
 		icon: <Users color="#7c3aed" />,
 		featured: false,
-		image: "/images/online-learning.png",
+		image: "./images/club.jpg",
 	},
 	{
 		id: 4,
@@ -64,7 +64,7 @@ export const enhancedMockNewsData = [
 			"The annual Mental Health Awareness Week begins with a series of workshops and events...",
 		icon: <Heart color="#be123c" />,
 		featured: true,
-		image: "/images/online-learning.png",
+		image: "./images/mental.jpg",
 	},
 	{
 		id: 5,
@@ -78,7 +78,7 @@ export const enhancedMockNewsData = [
 			"Renowned tech entrepreneur and alumnus, Jane Doe, is set to deliver a guest lecture...",
 		icon: <MessageCircle color="#ea580c" />,
 		featured: false,
-		image: "/images/online-learning.png",
+		image: "./images/guest.jpg",
 	},
 	{
 		id: 6,
@@ -92,7 +92,7 @@ export const enhancedMockNewsData = [
 			"In a recent global assessment of universities' sustainability initiatives...",
 		icon: <Award color="#0369a1" />,
 		featured: false,
-		image: "/images/online-learning.png",
+		image: "./images/wits.jpg",
 	},
 	{
 		id: 7,
@@ -106,7 +106,7 @@ export const enhancedMockNewsData = [
 			"The university's popular international exchange program has added five new partner institutions...",
 		icon: <Globe color="#0891b2" />,
 		featured: false,
-		image: "/images/online-learning.png",
+		image: "./images/exchange.jpg",
 	},
 	// Add more news items as needed...
 ];
