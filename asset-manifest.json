@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/UniHub/static/css/main.fee14f9b.css",
-    "main.js": "/UniHub/static/js/main.1b678337.js",
+    "main.js": "/UniHub/static/js/main.ba8d68be.js",
     "static/media/fa-solid-900.ttf": "/UniHub/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
     "static/media/fa-brands-400.ttf": "/UniHub/static/media/fa-brands-400.0ff70dcbf135d859ebf3.ttf",
     "static/media/fa-solid-900.woff2": "/UniHub/static/media/fa-solid-900.93f719f4d62bfa3e748c.woff2",
@@ -13,10 +13,10 @@
     "static/media/fa-v4compatibility.woff2": "/UniHub/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
     "index.html": "/UniHub/index.html",
     "main.fee14f9b.css.map": "/UniHub/static/css/main.fee14f9b.css.map",
-    "main.1b678337.js.map": "/UniHub/static/js/main.1b678337.js.map"
+    "main.ba8d68be.js.map": "/UniHub/static/js/main.ba8d68be.js.map"
   },
   "entrypoints": [
     "static/css/main.fee14f9b.css",
-    "static/js/main.1b678337.js"
+    "static/js/main.ba8d68be.js"
   ]
 }
